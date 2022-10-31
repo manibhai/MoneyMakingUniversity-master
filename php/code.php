@@ -28,14 +28,17 @@ if(isset($_POST['create_btn'])) {
         $_SESSION['status'] = "User ID Already Taken. Please Try Another one.";
         $_SESSION['status_code'] = "error";
         header('Location: ..//navigations/admin/index.php');
+        exit(0);
     }
     else if($query_run) {
         $_SESSION['success'] = "User Profile has been Created";
         header('Location: ../navigations/admin/adminviewUser.php');
+        exit(0);
     }
     else {
         $_SESSION['status'] = "User Profile was not Created";
         header('Location: ../index.php');
+        exit(0);
     }
 }
 
@@ -69,10 +72,12 @@ if(isset($_POST['update_btn'])) {
     if($query_run) {
         $_SESSION['success'] = "User has been Updated";
         header('Location: ../navigations/admin/adminviewUser.php');
+        exit(0);
     }
     else {
         $_SESSION['status'] = "User was not Updated";
         header('Location: ../navigations/admin/adminviewUser.php');
+        exit(0);
     }
 }
 //DELETE A USER
@@ -80,15 +85,18 @@ if(isset($_POST['delete_btn'])) {
     $userid = $_POST['deleteid'];
     $query = "DELETE FROM user WHERE userid='$userid' ";
     $query1 = "DELETE FROM userlogin WHERE userid='$userid' ";
+    $query_run = mysqli_query($connection, $query);
     $query_run = mysqli_query($connection, $query1);
 
     if($query_run) {
         $_SESSION['success'] = "User has been Deleted";
         header('Location: ../navigations/admin/adminviewUser.php');
+        exit(0);
     }
     else {
         $_SESSION['status'] = "User was not Deleted";
         header('Location: ../navigations/admin/adminviewUser.php');
+        exit(0);
     }
 }
 
