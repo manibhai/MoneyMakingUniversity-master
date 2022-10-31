@@ -85,7 +85,7 @@ $_SESSION['email'] = "Loggedin";
 
     <div class="col">
       <!-- Simple link -->
-      <a href="#!">Forgot password?</a>
+      <a href="../php/forgetpassword.php">Forgot password?</a>
     </div>
   </div>
 
