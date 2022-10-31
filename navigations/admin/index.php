@@ -35,10 +35,8 @@ include "../config.php";
           <li><a class="dropdown-item" href="./adminviewDepts.php">Edit Departments</a></li>
         </ul>
       </div>
-      <ul>
-        <a href="editProfile.php" class="btn btn-warning">Profile</a>
       </ul>
-      </ul>
+      <a href="editProfile.php" class="btn btn-warning">Profile</a>
       <a href="../logout.php" class="btn btn-primary">Log Out</a>  
     </div>
   </div>
