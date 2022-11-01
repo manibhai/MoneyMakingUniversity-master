@@ -23,29 +23,43 @@ include "../config.php";
         </div>
     </nav>
 </head>
+
 <body>
-<div class="container rounded bg-white mt-5 mb-5">
-    <div class="row">
-        <div class="col-md-5 border-right">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Profile Settings</h4>
+    <?php
+    $userid = $_SESSION['userid'];
+
+    $query = "SELECT * FROM user WHERE userid = '$userid'";
+    $query_run = mysqli_query($connection, $query);
+
+    foreach ($query_run as $row) {
+    ?>
+        <div class="container rounded bg-white mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-5 border-right">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Profile Settings</h4>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control" placeholder="first name" value="<?php echo $row['fname']; ?>"></div>
+                            <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control" value="<?php echo $row['lname']; ?>" placeholder="last name"></div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" placeholder="enter phone number" value="<?php echo $row['phone']; ?>"></div>
+                            <div class="col-md-12"><label class="labels">Street</label><input type="text" class="form-control" placeholder="enter street address" value="<?php echo $row['street']; ?>"></div>
+                            <div class="col-md-12"><label class="labels">City</label><input type="text" class="form-control" placeholder="enter city" value="<?php echo $row['city']; ?>"></div>
+                            <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter state" value="<?php echo $row['state']; ?>"></div>
+                            <div class="col-md-12"><label class="labels">ZipCode</label><input type="text" class="form-control" placeholder="enter zipcode" value="<?php echo $row['zipcode']; ?>"></div>
+                        </div>
+                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+
+                    </div>
                 </div>
-                <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control" placeholder="first name" value=""></div>
-                    <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control" value="" placeholder="last name"></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
-                    <div class="col-md-12"><label class="labels">Street</label><input type="text" class="form-control" placeholder="enter street address" value=""></div>
-                    <div class="col-md-12"><label class="labels">City</label><input type="text" class="form-control" placeholder="enter city" value=""></div>
-                    <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter state" value=""></div>
-                    <div class="col-md-12"><label class="labels">ZipCode</label><input type="text" class="form-control" placeholder="enter zipcode" value=""></div>
-                </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
             </div>
         </div>
-</div>
-</div>
-</div>
+    <?php
+    }
+    ?>
+    </div>
 </body>
