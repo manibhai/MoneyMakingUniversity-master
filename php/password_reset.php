@@ -1,37 +1,50 @@
 <?php
 session_start();
 include "../navigations/config.php";
-require "phpmailer/PHPMailerAutoload.php";
+
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 
 function  send_password_reset($get_email, $token){
     $mail = new PHPMailer(true);
-    //Server settings
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
 
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-    $mail->Username   = 'moneymakinguniversity.mmu@gmail.com';                     //SMTP username
-    $mail->Password   = 'mmu32100';                               //SMTP password
+    try {
+        //Server settings
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'moneymakinguniversity.mmu@gmail.com';                     //SMTP username
+        $mail->Password   = 'mmu32100';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
-    $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        //Recipients
+        $mail->setFrom('moneymakinguniversity.mmu@gmail.com');
+        $mail->addAddress('moneymakinguniversity.mmu@gmail.com');     //Add a recipient
 
-    //Recipients
-    $mail->setFrom($get_email);
-    $mail->addAddress('moneymakinguniversity.mmu@gmail.com', 'Admin');     //Add a recipient
+        //Content
+        $email_template = "
+            <h2>Hello</h2>
+            <h3>You are receiving this email because $get_email has sent a password reset request. </h3>
+            <br/><br/>
+            <a href='http://ec2-3-88-8-244.compute-1.amazonaws.com/php/forgetpassword.php>token=$token&email=$get_email' Link to Reset </a>
+        ";
 
-    $mail->isHTML(true);
-    $mail->Subject = "Reset Password Notification";
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Reset Password Notification';
+        $mail->Body    = $email_template;
 
-    $email_template = "
-        <h2>Hello</h2>
-        <h3>You are receiving this email because $get_email has sent a password reset request. </h3>
-        <br/><br/>
-        <a href='http://ec2-3-88-8-244.compute-1.amazonaws.com/php/forgetpassword.php>token=$token&email=$get_email' Link to Reset </a>
-    ";
-
-    $mail->Body    = $email_template;
-    $mail->send();
+        $mail->send();
+        echo 'Message has been sent';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
 }
 
 if(isset($_POST['passwordreset'])) {
