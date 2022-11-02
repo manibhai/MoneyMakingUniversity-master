@@ -19,7 +19,7 @@ include "../config.php";
         <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">Admin Homepage</a>
+            <a class="navbar-brand" href="index.php">Student Homepage</a>
         </div>
     </nav>
 </head>
