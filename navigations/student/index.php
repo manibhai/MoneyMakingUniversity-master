@@ -35,7 +35,6 @@ session_start();
               Tools
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="/navigations/undergrad.html">Profile</a></li>
               <li><a class="dropdown-item" href="#">View Schedule</a></li>
               <li><a class="dropdown-item" href="#">View History</a></li>
               <li><a class="dropdown-item" href="#">Registration</a></li>
@@ -45,6 +44,7 @@ session_start();
           </li>
 
           <li class="nav-item">
+            <a href="editProfile.php" class="btn btn-warning but-lg">Profile</a>
             <a href="../logout.php" class="btn btn-primary but-lg">logout</a>
           </li>
         </ul>
