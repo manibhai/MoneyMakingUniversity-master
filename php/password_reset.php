@@ -1,6 +1,11 @@
 <?php
 session_start();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 include "../navigations/config.php";
+require 'path/to/PHPMailer/src/Exception.php';
+require 'path/to/PHPMailer/src/PHPMailer.php';
+require 'path/to/PHPMailer/src/SMTP.php';
 
 function  send_password_reset($get_email, $token){
     $mail = new PHPMailer(true);
