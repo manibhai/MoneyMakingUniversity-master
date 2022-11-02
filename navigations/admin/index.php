@@ -1,6 +1,9 @@
 <?php
 session_start();
 include "../config.php";
+
+$currUser = $_SESSION['id'];
+$sql = "SELECT * FROM user WHERE userid = '$currUser'";
 ?>
 
 <!DOCTYPE html>
