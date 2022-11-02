@@ -11,7 +11,6 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
         return $data;
     }
     
-    $id = test_input($_POST['userid']);
     $email = test_input($_POST['email']);
     $password = test_input($_POST['pass']);
     $type = test_input($_POST['usertype']);
@@ -25,15 +24,15 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
         header("Location: ../navigations/admin/index.php");
     }
     else if($row["usertype"] == "Faculty") {
-        $_SESSION['id'] = $id;
+        $_SESSION['id'] = $row['userid'];
         header("Location: ../navigations/faculty/index.php");
     }
     else if($row["usertype"] == "Research") {
-        $_SESSION['id'] = $id;
+        $_SESSION['id'] = $row['userid'];
         header("Location: ../navigations/research/index.php");
     }
     else if($row["usertype"] == "Student") {
-        $_SESSION['id'] = $id;
+        $_SESSION['id'] = $row['userid'];
         header("Location: ../navigations/student/index.php");
     }
 	else {
