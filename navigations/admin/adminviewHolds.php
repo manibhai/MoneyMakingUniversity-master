@@ -98,7 +98,7 @@ include "../config.php";
                 <td> <?php echo $row['holdtype']; ?> </td>
                 <td> <?php echo $row['holddesc']; ?> </td>
                 <td>
-                  <form action= "../../php/editHolds.php" method = "POST">
+                  <form action= "../../php/Hold_Code.php" method = "POST">
                     <input type= "hidden" name= "editHold" value=" <?php echo $row['deptid']?>">
                     <button type="submit" name="edit_hold_btn" class="btn btn-warning">Edit</button>
                 </form>
