@@ -49,20 +49,20 @@ if(isset($_POST['passwordreset'])) {
         if($update_token_run) {
             send_password_reset($get_email, $token);
             $_SESSION['status'] = "Email Sent for Password Reset";
-            header("Location: forgotpassword.php");
+            header("Location: forgetpassword.php");
             exit(0);
         }
 
         else {
             $_SESSION['status'] = "Something Went Wrong. #1";
-            header("Location: forgotpassword.php");
+            header("Location: ../forgetpassword.php");
             exit(0);
         }
     }
 
     else {
         $_SESSION['status'] = "Invalid Email";
-        header("Location: forgotpassword.php");
+        header("Location: forgetpassword.php");
         exit(0);
     }
 }
