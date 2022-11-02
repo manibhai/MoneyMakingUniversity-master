@@ -1,5 +1,5 @@
-<?php  
-session_start();
+<?php
+session_start();  
 include "../navigations/config.php";
 
 if (isset($_POST['email']) && isset($_POST['pass'])) {
@@ -10,7 +10,8 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
         $data = htmlspecialchars($data);
         return $data;
     }
-  
+    
+    $id = test_input($_POST['userid']);
     $email = test_input($_POST['email']);
     $password = test_input($_POST['pass']);
     $type = test_input($_POST['usertype']);
@@ -20,15 +21,19 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
     $row = mysqli_fetch_array($result);
 
     if($row["usertype"] == "Admin") {
+        $_SESSION['id'] = $row['email'];
         header("Location: ../navigations/admin/index.php");
     }
     else if($row["usertype"] == "Faculty") {
+        $_SESSION['id'] = $id;
         header("Location: ../navigations/faculty/index.php");
     }
     else if($row["usertype"] == "Research") {
+        $_SESSION['id'] = $id;
         header("Location: ../navigations/research/index.php");
     }
     else if($row["usertype"] == "Student") {
+        $_SESSION['id'] = $id;
         header("Location: ../navigations/student/index.php");
     }
 	else {

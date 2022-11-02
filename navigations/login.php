@@ -1,6 +1,5 @@
 <?php
 include "config.php";
-$_SESSION['email'] = "Loggedin";
 ?>
 <!DOCTYPE html>
 <html>
