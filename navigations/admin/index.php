@@ -4,6 +4,8 @@ include "../config.php";
 
 $currUser = $_SESSION['id'];
 $sql = "SELECT * FROM user WHERE userid = '$currUser'";
+$result = mysqli_query($connection,$sql);
+$row = mysqli_fetch_array($result);
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +49,7 @@ $sql = "SELECT * FROM user WHERE userid = '$currUser'";
 </nav>
 <section>
   <div class="d-flex justify-content-center">
-      <h2>Welcome to Admin Page, User: <?php echo $_SESSION['id'] ?> </h2>
+      <h2>Welcome to Admin Page, User: <?php echo $row['fname'] ?> <?php echo $row['lname'] ?> </h2>
   </div>
 </section>
 </body>

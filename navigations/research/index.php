@@ -1,10 +1,10 @@
 <?php
-
 include '../config.php';
-
-
 session_start();
-
+$currUser = $_SESSION['id'];
+$sql = "SELECT * FROM user WHERE userid = '$currUser'";
+$result = mysqli_query($connection,$sql);
+$row = mysqli_fetch_array($result);
 ?>
 
 <!doctype html>
@@ -21,7 +21,7 @@ session_start();
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3">
     <div class="container">
-    <a href="index.php" class="navbar-brand"><h2>Welcome to Research Staff Page, User: <?php echo $_SESSION['id'] ?> </h2></a>
+    <a href="index.php" class="navbar-brand"><h2>Welcome to Research Staff Page, User: <?php echo $row['fname'] ?> <?php echo $row['lname'] ?> </h2></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
         <span class="navbar-toggler-icon"></span>
       </button>

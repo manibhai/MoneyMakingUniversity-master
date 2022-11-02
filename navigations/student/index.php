@@ -1,11 +1,10 @@
 <?php
-
 include '../config.php';
-
-
-
 session_start();
-
+$currUser = $_SESSION['id'];
+$sql = "SELECT * FROM user WHERE userid = '$currUser'";
+$result = mysqli_query($connection,$sql);
+$row = mysqli_fetch_array($result);
 ?>
 
 <!doctype html>
@@ -55,7 +54,7 @@ session_start();
     <div class="container">
       <div class="d-sm-flex align-items-center justify-content-between">
         <div>
-        <h2>Welcome to Student Page, User: <?php echo $_SESSION['id'] ?> </h2>
+        <h2>Welcome to Student Page, User: <?php echo $row['fname'] ?> <?php echo $row['lname'] ?> </h2>
         </div>
   </section>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
