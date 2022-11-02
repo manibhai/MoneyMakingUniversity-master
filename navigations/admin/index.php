@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "../config.php";
-include "../../institution.php";
+include "institution.php";
 
 $currUser = $_SESSION['id'];
 $sql = "SELECT * FROM user WHERE userid = '$currUser'";
@@ -48,31 +48,31 @@ $row = mysqli_fetch_array($result);
   </div>
 </nav>
 
-<div class="container">
+<div class="container text-center">
       <h2 class="mb-3 h2">Welcome to Admin Page, User: <?php echo $row['fname'] ?> <?php echo $row['lname'] ?> </h2>
   </div>
-<<<<<<< HEAD
-
-=======
 </section>
 <section> 
-<?php
-$queryStudentCount = "SELECT COUNT('studentid') AS `stuTotal` FROM student;";
-$studentCount = mysqli_fetch_assoc(mysqli_query($connection, $queryStudentCount));
-$totalStudents = (int)$studentCount['stuTotal'];
+  <div class="row justify-content-center">
 
-?>
-
-  <div class="row">
   <div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Students Attending</h5>
-    <p class="card-text text-center" ><?php echo $studentCount['stuTotal'];?></p>
+  <div class="card-body text-center">
+    <h5 class="card-title" >Students Attending</h5>
+    <h4 class="card-text " ><?php echo $studentCount['stuTotal'];?></h4>
+    <img src="https://thumbs.dreamstime.com/b/student-school-lesson-icon-element-education-pictogram-premium-quality-graphic-design-signs-symbols-collection-websites-147458964.jpg" class="img-fluid" alt="Student Image">
   </div>
 </div>
+
+<div class="card h-25" style="width: 18rem;">
+  <div class="card-body text-center">
+    <h5 class="card-title" >Faculty Count</h5>
+    <h4 class="card-text " ><?php echo $facultyCount['facCount'];?></h4>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNPhZduYYg7IEus7Y2rzbojWPd3Z7S3be5n8cBpEAS&s" class="" alt="Faculty Image">
+  </div>
+</div>
+
   </div>
 </section>
->>>>>>> 63e657391aa02ca3fe7efa2ec2748f5bf5518ebc
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" 
       crossorigin="anonymous"></script>
