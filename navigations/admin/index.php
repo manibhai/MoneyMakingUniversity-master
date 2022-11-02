@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "../config.php";
-include "../index.php";
+include "../../institution.php";
 
 $currUser = $_SESSION['id'];
 $sql = "SELECT * FROM user WHERE userid = '$currUser'";
@@ -11,7 +11,6 @@ $row = mysqli_fetch_array($result);
 
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>Admin</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -54,11 +53,18 @@ $row = mysqli_fetch_array($result);
   </div>
 </section>
 <section> 
+<?php
+$queryStudentCount = "SELECT COUNT('studentid') AS `stuTotal` FROM student;";
+$studentCount = mysqli_fetch_assoc(mysqli_query($connection, $queryStudentCount));
+$totalStudents = (int)$studentCount['stuTotal'];
+
+?>
+
   <div class="row">
   <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">Students Attending</h5>
-    <p class="card-text"><? echo $StudentCount['stuTotal'];?></p>
+    <p class="card-text text-center" ><?php echo $studentCount['stuTotal'];?></p>
   </div>
 </div>
   </div>
