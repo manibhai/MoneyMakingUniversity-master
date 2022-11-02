@@ -38,6 +38,7 @@ $row = mysqli_fetch_array($result);
           <li><a class="dropdown-item" href="../masterscheduler.php">Edit Master Schedule</a></li>
           <li><a class="dropdown-item" href="#">Edit Course Catalog</a></li>
           <li><a class="dropdown-item" href="./adminviewDepts.php">Edit Departments</a></li>
+          <li><a class="dropdown-item" href="./adminviewHolds.php">Edit Holds</a></li>
           <li><a class="dropdown-item" href="./adminviewDepartment.php">Test Departments</a></li>
         </ul>
       </div>
