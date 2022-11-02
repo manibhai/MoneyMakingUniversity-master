@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../config.php";
+include "../index.php";
 
 $currUser = $_SESSION['id'];
 $sql = "SELECT * FROM user WHERE userid = '$currUser'";
@@ -50,6 +51,16 @@ $row = mysqli_fetch_array($result);
 <section>
   <div class="d-flex justify-content-center">
       <h2>Welcome to Admin Page, User: <?php echo $row['fname'] ?> <?php echo $row['lname'] ?> </h2>
+  </div>
+</section>
+<section> 
+  <div class="row">
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Students Attending</h5>
+    <p class="card-text"><? echo $StudentCount['stuTotal'];?></p>
+  </div>
+</div>
   </div>
 </section>
 </body>
