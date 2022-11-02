@@ -47,10 +47,13 @@ $row = mysqli_fetch_array($result);
     </div>
   </div>
 </nav>
-<section>
-  <div class="d-flex justify-content-center">
-      <h2>Welcome to Admin Page, User: <?php echo $row['fname'] ?> <?php echo $row['lname'] ?> </h2>
+
+<div class="container">
+      <h2 class="mb-3 h2">Welcome to Admin Page, User: <?php echo $row['fname'] ?> <?php echo $row['lname'] ?> </h2>
   </div>
+<<<<<<< HEAD
+
+=======
 </section>
 <section> 
 <?php
@@ -69,6 +72,7 @@ $totalStudents = (int)$studentCount['stuTotal'];
 </div>
   </div>
 </section>
+>>>>>>> 63e657391aa02ca3fe7efa2ec2748f5bf5518ebc
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" 
       crossorigin="anonymous"></script>
