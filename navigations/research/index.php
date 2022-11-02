@@ -28,23 +28,6 @@ $row = mysqli_fetch_array($result);
 
       <div class="collapse navbar-collapse" id="navmenu">
         <ul class="navbar-nav ms-auto">
-          
-          <li class="nav-item">
-            <a href="#institution" class="nav-link">institution</a>
-          </li>
-
-          <li class="nav-item">
-            <a href="#gradStats" class="nav-link">Graduation Stats</a>
-          </li>
-
-          <li class="nav-item">
-            <a href="#disciplinary" class="nav-link">Disciplinary</a>
-          </li>
-
-          <li class="nav-item">
-            <a href="#demographics" class="nav-link">Demographics</a>
-          </li>
-
           <li class="nav-item">
           <a href = "editProfile.php" class = "btn btn-warning but-lg">Profile</a>
           <a class="btn btn-primary but-lg" data-toggle="tab" href="../logout.php">logout</a>

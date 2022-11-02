@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../config.php";
+include "../index.php";
 
 $currUser = $_SESSION['id'];
 $sql = "SELECT * FROM user WHERE userid = '$currUser'";
@@ -51,7 +52,21 @@ $row = mysqli_fetch_array($result);
 <div class="container">
       <h2 class="mb-3 h2">Welcome to Admin Page, User: <?php echo $row['fname'] ?> <?php echo $row['lname'] ?> </h2>
   </div>
+<<<<<<< HEAD
 
+=======
+</section>
+<section> 
+  <div class="row">
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Students Attending</h5>
+    <p class="card-text"><? echo $StudentCount['stuTotal'];?></p>
+  </div>
+</div>
+  </div>
+</section>
+>>>>>>> 63e657391aa02ca3fe7efa2ec2748f5bf5518ebc
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" 
       crossorigin="anonymous"></script>
