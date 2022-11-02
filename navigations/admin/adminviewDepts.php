@@ -128,13 +128,13 @@ include "../config.php";
                 <td> <?php echo $row['deptchair'];?> </td>
                 <td> <?php echo $row['deptmg']; ?> </td>
                 <td>
-                  <form action= "../../php/edit-Departments.php" method = "POST">
+                  <form action= "../../php/editDepartments.php" method = "POST">
                     <input type= "hidden" name= "editDept" value=" <?php echo $row['deptid']?>">
                     <button type="submit" name="edit_btn" class="btn btn-warning">Edit</button>
                 </form>
               </td>
               <td>
-                <form action= "../../php/edit-Departments.php" method = "POST">
+                <form action= "../../php/editDepartments.php" method = "POST">
                   <input type= "hidden" name= "editDept" value=" <?php echo $row['deptid']?>">
                   <button type="submit" name="edit_btn" class="btn btn-danger">Delete</button>
                 </form>
