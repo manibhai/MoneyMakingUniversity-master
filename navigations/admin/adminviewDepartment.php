@@ -32,7 +32,7 @@ include "../config.php";
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Create a Department Form</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="../../php/code.php" method="POST">
+                        <form action="../../php/Dept_Code.php" method="POST">
 
                             <div class="modal-body">
                                 <div class="form-group">
@@ -104,8 +104,8 @@ include "../config.php";
                         <td>Department Phone Number</td>
                         <td>Department Chair</td>
                         <td>Department Manager</td>
-                        <td>Edit User</td>
-                        <td>Delete User</td>
+                        <td>Edit Department</td>
+                        <td>Delete Department</td>
                     </tr>
                 </thead>
                 <tbody>

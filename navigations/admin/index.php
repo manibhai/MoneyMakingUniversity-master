@@ -33,6 +33,7 @@ include "../config.php";
           <li><a class="dropdown-item" href="../masterscheduler.php">Edit Master Schedule</a></li>
           <li><a class="dropdown-item" href="#">Edit Course Catalog</a></li>
           <li><a class="dropdown-item" href="./adminviewDepts.php">Edit Departments</a></li>
+          <li><a class="dropdown-item" href="./adminviewDepartment.php">Test Departments</a></li>
         </ul>
       </div>
       </ul>
