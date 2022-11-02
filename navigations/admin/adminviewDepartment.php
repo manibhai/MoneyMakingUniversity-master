@@ -45,7 +45,7 @@ include "../config.php";
                                 </div>
                                 <div class="form-group">
                                     <label>Department Email</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Enter Email">
+                                    <input type="varchar(300)" name="email" class="form-control" placeholder="Enter Email">
                                 </div>
                                 <div class="form-group">
                                     <label>Building</label>

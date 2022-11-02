@@ -14,8 +14,8 @@ if(isset($_POST['create_dept_btn'])){
     $deptchair = $_POST['deptchair'];
     $deptmg = $_POST['deptmg'];
 
-    $query= "INSERT INTO department (deptid, deptname, deptemail, buildingid, roomid, deptphone, deptchair, deptmg)
-    VALUES ('$deptid', '$deptname', '$deptemail', '$buildingid', '$roomid', '$deptphone', '$deptchair', '$deptmg')";
+    $query= "INSERT INTO department (deptid, deptname, deptemail, deptphone)
+    VALUES ('$deptid', '$deptname', '$deptemail', '$deptphone')";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($deptid_query_run) > 0){
