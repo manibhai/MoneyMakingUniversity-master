@@ -2,13 +2,6 @@
 session_start();
 include "../navigations/config.php";
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-//Load Composer's autoloader
-require 'vendor/autoload.php';
-
 function  send_password_reset($get_email, $token){
     $mail = new PHPMailer(true);
     //Server settings
@@ -19,7 +12,7 @@ function  send_password_reset($get_email, $token){
     $mail->Username   = 'moneymakinguniversity.mmu@gmail.com';                     //SMTP username
     $mail->Password   = 'mmu32100';                               //SMTP password
 
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+    $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
     $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
