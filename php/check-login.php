@@ -21,7 +21,7 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
     $row = mysqli_fetch_array($result);
 
     if($row["usertype"] == "Admin") {
-        $_SESSION['userid'] = $row['email'];
+        $_SESSION['id'] = $row['email'];
         header("Location: ../navigations/admin/index.php");
     }
     else if($row["usertype"] == "Faculty") {
