@@ -20,7 +20,7 @@ include "../config.php";
         <a class="navbar-brand" href="index.php">Admin Homepage</a>
     </div>
     <div class="container-fluid">
-    <button type="button" class="btn btn-primary" data-bs-toggle="#editModal">
+    <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
             Create Department
     </button>
     <!--Modal for edit/Delete-->
@@ -33,41 +33,46 @@ include "../config.php";
                 </div>
                 <!--Modal body inside of form-->
                 <!--Connects the for and post to the method that is located in code.php(Server fucntions)-->
-                <form action="../../php/code.php" method="POST">
+                <form action="../../php/code.php" method="post">
                     <div class="modal-body">
+                    <div class="form-group">
+                            <!--Fill in form contents-->
+                            <label> Department ID</label>
+                            <input type="varchar(300)" name="deptid" class="form-control" placeholder="Enter Department ID">                        
+                        </div>
                         <div class="form-group">
                             <!--Fill in form contents-->
                             <label> Department Name</label>
-                            <input type="varchar(300)" name="deptName" class="form-control" placeholder="Enter Department Name">                        
+                            <input type="varchar(300)" name="deptname" class="form-control" placeholder="Enter Department Name">                        
                         </div>
                         <div class="form-group">
                             <label >Department Email</label>
-                            <input type="varchar(300)" name="deptEmail" class="form-control" placeholder="Enter Department Email">
+                            <input type="varchar(300)" name="deptemail" class="form-control" placeholder="Enter Department Email">
                         </div>
                         <div class="form-group">
                             <label>Building</label>
-                            <input type="varchar(300)" name="building" class="form-control" placeholder="Enter Building">
+                            <input type="varchar(300)" name="buildingid" class="form-control" placeholder="Enter Building">
                         </div>
                         <div class="form-group">
                             <label >Room</label>
-                            <input type="varchar(300)" name="room" class="form-control" placeholder="Enter Room">
+                            <input type="varchar(300)" name="roomid" class="form-control" placeholder="Enter Room">
                         </div>
                         <div class="form-group">
                             <label >Department Phone</label>
-                            <input type="varchar(300)" name="deptPhone" class="form-control" placeholder="Enter Department Phone">
+                            <input type="varchar(300)" name="deptphone" class="form-control" placeholder="Enter Department Phone">
                         </div>
                         <div class="form-group">
                             <label >Department chair</label>
-                            <input type="varchar(300)" name="deptChair" class="form-control" placeholder="Enter Department Chair">
+                            <input type="int" name="deptchair" class="form-control" placeholder="Enter Department Chair">
                         </div>
                         <div class="form-group">
                             <label >Department Manager</label>
-                            <input type="varchar(300)" name="deptMan" class="form-control" placeholder="Enter Department Manager">
+                            <input type="int" name="deptmg" class="form-control" placeholder="Enter Department Manager">
                         </div>
                     </div>
                     <!--Footer button goes here-->
                     <div class="modal-footer">
-                        <button type="submit" name="create_btn" class="btn btn-primary">Save</button>
+                        <button type="submit" name="c_btn" class= "btn btn-primary" >Save</button>
                     </div>
                 </form>
             </div>
@@ -114,21 +119,22 @@ include "../config.php";
 
             while($row = mysqli_fetch_array($query_run)) { ?>
               <tr>
+              <td> <?php echo $row['deptid']; ?> </td>
                 <td> <?php echo $row['deptname']; ?> </td>
                 <td> <?php echo $row['deptemail']; ?> </td>
                 <td> <?php echo $row['buildingid']; ?> </td>
                 <td> <?php echo $row['roomid']; ?> </td>
                 <td> <?php echo $row['deptphone']; ?> </td>
-                <td> <?php echo $row['fname']; echo " "; echo $row['lname']; ?> </td>
+                <td> <?php echo $row['deptchair'];?> </td>
                 <td> <?php echo $row['deptmg']; ?> </td>
                 <td>
-                  <form action= "../../php/edit-Departments.php" method = "post">
+                  <form action= "../../php/edit-Departments.php" method = "POST">
                     <input type= "hidden" name= "editDept" value=" <?php echo $row['deptid']?>">
                     <button type="submit" name="edit_btn" class="btn btn-warning">Edit</button>
                 </form>
               </td>
               <td>
-                <form action= "../../php/edit-Departments.php" method = "post">
+                <form action= "../../php/edit-Departments.php" method = "POST">
                   <input type= "hidden" name= "editDept" value=" <?php echo $row['deptid']?>">
                   <button type="submit" name="edit_btn" class="btn btn-danger">Delete</button>
                 </form>
