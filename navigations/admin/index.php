@@ -43,7 +43,7 @@ include "../config.php";
 </nav>
 <section>
   <div class="d-flex justify-content-center">
-      <h2>Welcome to Admin Page User: <?php echo $_SESSION['id'] ?> </h2>
+      <h2>Welcome to Admin Page User: <?php echo $_SESSION['userid'] ?> </h2>
   </div>
 </section>
 </body>
