@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "../navigations/config.php";
 require "phpmailer/PHPMailerAutoload.php";
 
 function  send_password_reset($get_email, $token){
@@ -17,7 +18,7 @@ function  send_password_reset($get_email, $token){
 
     //Recipients
     $mail->setFrom($get_email);
-    $mail->addAddress('msingh27@oldwestbury.edu', 'Admin');     //Add a recipient
+    $mail->addAddress('moneymakinguniversity.mmu@gmail.com', 'Admin');     //Add a recipient
 
     $mail->isHTML(true);
     $mail->Subject = "Reset Password Notification";
