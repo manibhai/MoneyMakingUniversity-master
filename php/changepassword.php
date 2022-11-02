@@ -1,6 +1,9 @@
 <?php
 session_start();
 include "../navigations/config.php";
+if(!isset($_SESSION['userid'])){
+  header("Location: ../login.php");
+}
 ?>
 <!DOCTYPE html>
 <html>

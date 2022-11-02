@@ -3,6 +3,10 @@ session_start();
 include "../config.php";
 include "institution.php";
 
+if(!isset($_SESSION['userid'])){
+  header("Location: ../login.php");
+}
+
 $currUser = $_SESSION['id'];
 $sql = "SELECT * FROM user WHERE userid = '$currUser'";
 $result = mysqli_query($connection,$sql);

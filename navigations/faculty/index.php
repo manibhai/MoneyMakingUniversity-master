@@ -6,7 +6,9 @@ $currUser = $_SESSION['id'];
 $sql = "SELECT * FROM user WHERE userid = '$currUser'";
 $result = mysqli_query($connection,$sql);
 $row = mysqli_fetch_array($result);
-
+if(!isset($_SESSION['userid'])){
+  header("Location: ../login.php");
+}
 ?>
 
 <!doctype html>
