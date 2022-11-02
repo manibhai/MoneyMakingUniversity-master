@@ -71,8 +71,8 @@ include "../navigations/config.php";
               </div>
               <form action="password_reset.php" method="POST">
                 <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <input type="email" id="email" class="form-control" name="email" placeholder="Enter Your Email"
+                  <label>Email</label>
+                  <input type="varchar(300)" class="form-control" name="email" placeholder="Enter Your Email"
                     required="">
                 </div>
                 <div class="mb-3 d-grid">
