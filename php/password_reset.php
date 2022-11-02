@@ -101,6 +101,10 @@ if(isset($_POST['passwordchange'])){
                     $update_password_run = mysqli_query($connection, $update_password);
 
                     if($update_password_run){
+                        $new_token = md5(rand());
+                        $update_token = "UPDATE userlogin SET code='$new_token' WHERE code='$token' LIMIT 1";
+                        $update_token_run = mysqli_query($connection, $update_token);
+
                         $_SESSION['status'] = "Password Changed";
                         header("Location: ../navigations/login.php");
                         exit(0);
