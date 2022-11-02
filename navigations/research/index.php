@@ -46,6 +46,7 @@ session_start();
           </li>
 
           <li class="nav-item">
+          <a href = "editProfile.php" class = "btn btn-warning but-lg">Profile</a>
           <a class="btn btn-primary but-lg" data-toggle="tab" href="../logout.php">logout</a>
           </li>
         </ul>
