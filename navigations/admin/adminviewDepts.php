@@ -11,14 +11,16 @@ include "../config.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Departments</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+        
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php">Admin Homepage</a>
     </div>
+
     <div class="container-fluid">
     <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
             Create Department
@@ -78,7 +80,7 @@ include "../config.php";
             </div>
         </div>
     </div>
-    </div>
+  </div>
     <div class="container-fluid">
         <a class="btn btn-lg btn-danger" href="../logout.php" role="button">Logout</a>
      </div>
@@ -97,9 +99,10 @@ include "../config.php";
     ?>
     <h3 align="center">Departments</h3>
     <div class="table-responsive">
-      <table id="dept_data" class="table table-bordered">
+      <table id="deptdata" class="table table-bordered">
         <thead>
           <tr>
+          <td>Department ID</td>
             <td>Department Name</td>
             <td>Department Email</td>
             <td>Building</td>
@@ -128,17 +131,19 @@ include "../config.php";
                 <td> <?php echo $row['deptchair'];?> </td>
                 <td> <?php echo $row['deptmg']; ?> </td>
                 <td>
-                  <form action= "../../php/editDepartments.php" method = "POST">
+                  <form action= "../../php/editDepartments.php" method = "POST" class="text-center">
                     <input type= "hidden" name= "editDept" value=" <?php echo $row['deptid']?>">
-                    <button type="submit" name="edit_btn" class="btn btn-warning">Edit</button>
-                </form>
+                    <button type="submit" name="edit_btn" class="btn btn-warning"> Edit </button>
+                
               </td>
+            </form>
               <td>
                 <form action= "../../php/editDepartments.php" method = "POST">
                   <input type= "hidden" name= "editDept" value=" <?php echo $row['deptid']?>">
-                  <button type="submit" name="edit_btn" class="btn btn-danger">Delete</button>
-                </form>
-              </td>
+                  <button type="submit" name="edit_btn" class="btn btn-danger"> Delete </button>
+                </td>
+              </form>
+              
               </tr> <?php
             } 
           ?>
@@ -150,6 +155,6 @@ include "../config.php";
 </html>
 <script>
   $(document).ready(function() {
-    $('#dept_data').DataTable();
+    $('#deptdata').DataTable();
   });
 </script>
