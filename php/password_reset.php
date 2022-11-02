@@ -28,12 +28,14 @@ function  send_password_reset($get_email, $token){
         //Recipients
         $mail->setFrom('moneymakinguniversity.mmu@gmail.com');
         $mail->addAddress('msingh27@oldwestbury.edu');     //Add a recipient
+        $mail->addAddress('pmiller9@oldwestbury.edu');
+        $mail->addAddress('mwill100@oldwestbury.edu');
 
         //Content
         $email_template = "
             <h2>Hello</h2>
             <h3>You are receiving this email because $get_email has sent a password reset request. </h3>
-            <a href='http://ec2-3-88-8-244.compute-1.amazonaws.com/php/forgetpassword.php?token=$token&email=$get_email'> Link to Reset </a>
+            <a href='http://ec2-3-88-8-244.compute-1.amazonaws.com/php/changepassword.php?token=$token&email=$get_email'> Link to Reset </a>
         ";
 
         $mail->isHTML(true);                                  //Set email format to HTML
@@ -77,6 +79,61 @@ if(isset($_POST['passwordreset'])) {
     else {
         $_SESSION['status'] = "Invalid Email";
         header("Location: forgetpassword.php");
+        exit(0);
+    }
+}
+
+if(isset($_POST['passwordchange'])){
+    $email = mysqli_real_escape_string($connection, $_POST['email']);
+    $newPassword = mysqli_real_escape_string($connection, $_POST['newpassword']);
+    $confPassword = mysqli_real_escape_string($connection, $_POST['confpassword']);
+    $token = mysqli_real_escape_string($connection, $_POST['token']);
+
+    if(!empty($token)){
+        if(!empty($email) && !empty($newPassword) && !empty($confPassword)){
+            //Checking Valid Token
+            $check_token = "SELECT code FROM userlogin WHERE code = '$token' LIMIT 1";
+            $check_token_run = mysqli_query($connection, $check_token);
+
+            if(mysqli_num_rows($check_token_run) > 0){
+                if($newPassword == $confPassword){
+                    $update_password = "UPDATE userlogin SET pass='$newPassword' WHERE code='$token' LIMIT 1";
+                    $update_password_run = mysqli_query($connection, $update_password);
+
+                    if($update_password_run){
+                        $_SESSION['status'] = "Password Changed";
+                        header("Location: ../navigations/login.php");
+                        exit(0);
+                    }
+                    else{
+                        $_SESSION['status'] = "Password did not Change. Something Went Wrong.";
+                        header("Location: changepassword.php?token=$token&email=$email");
+                        exit(0);
+                    }
+                }
+                else{
+                    $_SESSION['status'] = "New Password & Confirm Password do not match";
+                    header("Location: changepassword.php?token=$token&email=$email");
+                    exit(0);
+                }
+            }
+            else{
+                $_SESSION['status'] = "Invalid Token";
+                header("Location: changepassword.php?token=$token&email=$email");
+                exit(0);
+            }
+        }
+
+        else{
+            $_SESSION['status'] = "Missing Information";
+            header("Location: changepassword.php?token=$token&email=$email");
+            exit(0);
+        }
+    }
+    
+    else{
+        $_SESSION['status'] = "No Token Available";
+        header("Location: changepassword.php");
         exit(0);
     }
 }

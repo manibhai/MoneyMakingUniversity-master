@@ -1,5 +1,6 @@
 <?php
 include "config.php";
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -56,13 +57,28 @@ include "config.php";
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
   <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh">
+  
     <form class="border shadow p-3 rounded" action="../php/check-login.php" method="post" style="width: 450px;">
+    <?php
+  if(isset($_SESSION['status'])) {
+    ?>
+    <div class="alert alert-success">
+      <h5><?= $_SESSION['status']; ?></h5>
+    </div>
+    <?php
+      unset($_SESSION['status']);
+  }
+  ?>
       <h1 class="text-center p-3">LOGIN</h1>
-      <?php if (isset($_GET['error'])) { ?>
-        <div class="alert alert-danger" role="alert">
-          <?= $_GET['error'] ?>
-        </div>
-      <?php } ?>
+      <?php 
+        if (isset($_GET['error'])) { 
+          ?>
+          <div class="alert alert-danger" role="alert">
+            <?= $_GET['error'] ?>
+          </div>
+          <?php 
+        }
+      ?>
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input type="text" class="form-control" name="email" id="email">
