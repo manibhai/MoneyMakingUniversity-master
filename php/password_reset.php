@@ -17,23 +17,23 @@ function  send_password_reset($get_email, $token){
     try {
         //Server settings
         $mail->isSMTP();
+        $mail->SMTPAuth = true;
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username   = 'moneymakinguniversity.mmu@gmail.com';                     //SMTP username
-        $mail->Password   = 'mmu32100';                               //SMTP password
+        $mail->Password   = 'tpuijqmrbgqokbxw';                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
         $mail->setFrom('moneymakinguniversity.mmu@gmail.com');
-        $mail->addAddress('moneymakinguniversity.mmu@gmail.com');     //Add a recipient
+        $mail->addAddress('msingh27@oldwestbury.edu');     //Add a recipient
 
         //Content
         $email_template = "
             <h2>Hello</h2>
             <h3>You are receiving this email because $get_email has sent a password reset request. </h3>
-            <br/><br/>
-            <a href='http://ec2-3-88-8-244.compute-1.amazonaws.com/php/forgetpassword.php>token=$token&email=$get_email' Link to Reset </a>
+            <a href='http://ec2-3-88-8-244.compute-1.amazonaws.com/php/forgetpassword.php?token=$token&email=$get_email'> Link to Reset </a>
         ";
 
         $mail->isHTML(true);                                  //Set email format to HTML
