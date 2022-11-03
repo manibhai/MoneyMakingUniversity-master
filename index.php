@@ -57,23 +57,25 @@
         <div class="d-sm-flex align-items-center justify-content-between">
           <div>
             <h1>Become a <span class="text-warning">Student</span></h1>
-            <p class="lead my-4">
-              Get your degree and get out!
-            </p>
+            <br/><br/><br/>
+            <h3>GET YOUR</h3>
+            <h1><span class="text-danger">DEGREE</span></h1>
+            <h3>AND GET OUT!</h3>
           </div>
           <img src="/img/websitelogo.jpg" class="img-fluid w-25 d-none d-sm-block" alt="...">
         </div>
       </div>
     </section>
-    <div class="bg-image p-5 text-center shadow-1-strong rounded mb-5 text-white"
+    <div class="bg-image p-5 text-center shadow-1-strong rounded mb-5 text-warning"
         style="background-image: url('https://i0.wp.com/www.michigandaily.com/wp-content/uploads/2021/11/USvsEuropeanDegrees_Illustration_MellisaLee.png?resize=1200%2C800&ssl=1');"
           height: 100vh;>
           <h1 class="h2"><img src="/img/mmu.gif" class="img-fluid" alt="..."></h1>
-          <p>
+          <p><br/>
           <h2>About Us</h2>
-            <p>We are here to help you get that Money! We build greatness!
+          <br/><br/>
+            <p><h2>We are here to help you get that Money! We build greatness!
               <br> We can be found at 100 VSC RD, Old Westbury, NY 11568.
-              <br> NO. 1-800 - GET - PAID !
+              <br> NO. 1-800 - GET - PAID !</h2>
             </p>
           </p>
     </div>
