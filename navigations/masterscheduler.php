@@ -31,9 +31,9 @@ include "config.php";
         <thead>
           <tr>
             <td>CRN</td>
-            <td>CourseID</td>
+            <td>Course</td>
             <td>Section</td>
-            <td>Faculty</td>
+            <td>Faculty Name</td>
             <td>Time Slot</td>
             <td>Room</td>
             <td>Semester Year</td>
