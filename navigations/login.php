@@ -52,7 +52,7 @@ session_start();
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-md-9 col-lg-6 col-xl-5">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+        <img src="https://img.freepik.com/free-vector/account-concept-illustration_114360-399.jpg?w=826&t=st=1667441527~exp=1667442127~hmac=c7db324f172be7287670fa13013add4ac90036ae17e583e64d8fbc9b21851d0f"
           class="img-fluid" alt="Sample image">
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
