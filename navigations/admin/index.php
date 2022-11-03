@@ -3,7 +3,7 @@ session_start();
 include "../config.php";
 include "institution.php";
 
-if(!isset($_SESSION['userid'])){
+if(!isset($_SESSION['id'])){
   header("Location: ../login.php");
 }
 
