@@ -13,7 +13,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3">
       <div class="container">
-        <a href="index.php" class="navbar-brand">Money Making University</a>
+        <a href="index.php" class="navbar-brand">HOME</a>
 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
             <span class="navbar-toggler-icon"></span>
@@ -65,20 +65,18 @@
         </div>
       </div>
     </section>
-    <!-- About Us -->
-    <section class="bg-light text-dark p-5 text-center text-sm-start">
-      <div class="container">
-        <div class="d-sm-flex align-items-center justify-content-between">
-          <div>
-            <h2>About Us</h2>
+    <div class="bg-image p-5 text-center shadow-1-strong rounded mb-5 text-white"
+        style="background-image: url('https://i0.wp.com/www.michigandaily.com/wp-content/uploads/2021/11/USvsEuropeanDegrees_Illustration_MellisaLee.png?resize=1200%2C800&ssl=1');"
+          height: 100vh;>
+          <h1 class="h2"><img src="/img/mmu.gif" class="img-fluid" alt="..."></h1>
+          <p>
+          <h2>About Us</h2>
             <p>We are here to help you get that Money! We build greatness!
               <br> We can be found at 100 VSC RD, Old Westbury, NY 11568.
               <br> NO. 1-800 - GET - PAID !
             </p>
-          </div>
-        </div>
-      </div>
-    </section>
+          </p>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   </body>
 </html>
