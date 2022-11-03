@@ -26,7 +26,7 @@ function  send_password_reset($get_email, $token){
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('moneymakinguniversity.mmu@gmail.com');
+        $mail->setFrom('moneymakinguniversity.mmu@gmail.com' , 'MMU Admin');
         $mail->addAddress('msingh27@oldwestbury.edu');     //Add a recipient
         $mail->addAddress('pmiller9@oldwestbury.edu');
         $mail->addAddress('mwill100@oldwestbury.edu');
