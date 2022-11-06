@@ -97,6 +97,8 @@ if (isset($_POST['passwordchange'])) {
                 if ($newPassword == $confPassword) {
                     $update_password = "UPDATE userlogin SET pass='$newPassword' WHERE code='$token' LIMIT 1";
                     $update_password_run = mysqli_query($connection, $update_password);
+                    $attempt = "UPDATE userlogin SET attempts = 0 WHERE code='$token' LIMIT 1";
+                    $update_attempts = mysqli_query($connection, $attempt);
 
                     if ($update_password_run) {
                         $new_token = md5(rand());

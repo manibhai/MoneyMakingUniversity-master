@@ -14,25 +14,38 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
 
     $email = test_input($_POST['email']);
     $password = test_input($_POST['pass']);
-    $type = test_input($_POST['usertype']);
 
-    $sql = "SELECT * FROM userlogin WHERE email='" . $email . "' AND pass='" . $password . "' ";
+    $sql = "SELECT * FROM userlogin WHERE email='" . $email . "'";
     $result = mysqli_query($connection, $sql);
-    $row = mysqli_fetch_array($result);
+    $row = mysqli_fetch_assoc($result);
 
-    if ($row["usertype"] == "Admin") {
-        $_SESSION['id'] = $row['userid'];
-        header("Location: ../navigations/admin/index.php");
-    } else if ($row["usertype"] == "Faculty") {
-        $_SESSION['id'] = $row['userid'];
-        header("Location: ../navigations/faculty/index.php");
-    } else if ($row["usertype"] == "Research") {
-        $_SESSION['id'] = $row['userid'];
-        header("Location: ../navigations/research/index.php");
-    } else if ($row["usertype"] == "Student") {
-        $_SESSION['id'] = $row['userid'];
-        header("Location: ../navigations/student/index.php");
-    } else {
-        header("Location: ../navigations/login.php?error=Email or Password is Incorrect");
+    if ($row['pass'] != $password) {
+        $attempt = "UPDATE userlogin SET attempts = attempts + 1 WHERE email='" . $email . "'";
+        $update_attempts = mysqli_query($connection, $attempt);
+        header("Location: ../navigations/login.php?error=Password is Incorrect");
+    } else if ($row['pass'] == $password) {
+        if ($row['attempts'] > 2) {
+            header("Location: ../navigations/login.php?error=Account Locked, Please Reset Password");
+        } else if ($row["usertype"] == "Admin") {
+            $attempt = "UPDATE userlogin SET attempts = 0 WHERE email='" . $email . "'";
+            $update_attempts = mysqli_query($connection, $attempt);
+            $_SESSION['id'] = $row['userid'];
+            header("Location: ../navigations/admin/index.php");
+        } else if ($row["usertype"] == "Faculty") {
+            $attempt = "UPDATE userlogin SET attempts = 0 WHERE email='" . $email . "'";
+            $update_attempts = mysqli_query($connection, $attempt);
+            $_SESSION['id'] = $row['userid'];
+            header("Location: ../navigations/faculty/index.php");
+        } else if ($row["usertype"] == "Research") {
+            $attempt = "UPDATE userlogin SET attempts = 0 WHERE email='" . $email . "'";
+            $update_attempts = mysqli_query($connection, $attempt);
+            $_SESSION['id'] = $row['userid'];
+            header("Location: ../navigations/research/index.php");
+        } else if ($row["usertype"] == "Student") {
+            $attempt = "UPDATE userlogin SET attempts = 0 WHERE email='" . $email . "'";
+            $update_attempts = mysqli_query($connection, $attempt);
+            $_SESSION['id'] = $row['userid'];
+            header("Location: ../navigations/student/index.php");
+        }
     }
 }
