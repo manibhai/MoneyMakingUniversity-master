@@ -1,9 +1,9 @@
 <?php
 session_start();
 include "../config.php";
-if(!isset($_SESSION['id'])){
+if (!isset($_SESSION['id'])) {
     header("Location: ../login.php");
-  }
+}
 ?>
 
 <!doctype html>
@@ -23,7 +23,7 @@ if(!isset($_SESSION['id'])){
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">Admin Homepage</a>
         </div>
-    
+
         <div class="container-fluid">
             <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Create a User
@@ -165,7 +165,7 @@ if(!isset($_SESSION['id'])){
                             </form>
                         </tr> <?php
                             }
-                          ?>
+                                ?>
                 </tbody>
             </table>
         </div>

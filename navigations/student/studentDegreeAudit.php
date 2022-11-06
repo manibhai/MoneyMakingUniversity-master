@@ -2,13 +2,13 @@
 
 include '../config.php';
 
-if(!isset($_SESSION['id'])){
+if (!isset($_SESSION['id'])) {
   header("Location: ../login.php");
 }
-  
+
 $studentId = $_SESSION['userid'];
 
-    echo $studentId;
+echo $studentId;
 ?>
 <!doctype html>
 <html lang="en">
@@ -28,9 +28,10 @@ $studentId = $_SESSION['userid'];
     </div>
   </nav>
 </head>
+
 <body>
-<br /><br />
+  <br /><br />
   <div class="container">
     <h3 align="center">Student Degree Aduit</h3>
     <br />
-</body> 
+</body>

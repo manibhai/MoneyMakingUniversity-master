@@ -42,28 +42,31 @@ include "config.php";
         </thead>
         <tbody>
           <?php
-            $query = "SELECT * FROM section INNER JOIN faculty ON section.facultyid=faculty.facultyid  
+          $query = "SELECT * FROM section INNER JOIN faculty ON section.facultyid=faculty.facultyid  
               INNER JOIN user ON faculty.facultyid=user.userid WHERE semyear='S2023'";
-            $query_run = mysqli_query($connection, $query);
+          $query_run = mysqli_query($connection, $query);
 
-            while($row = mysqli_fetch_array($query_run)) { ?>
-              <tr>
-                <td> <?php echo $row['crn']; ?> </td>
-                <td> <?php echo $row['courseid']; ?> </td>
-                <td> <?php echo $row['sectionnum']; ?> </td>
-                <td> <?php echo $row['fname']; echo " ";  echo $row['lname']; ?> </td>
-                <td> <?php echo $row['timeslotid']; ?>  </td>
-                <td> <?php echo $row['roomid']; ?> </td>
-                <td> <?php echo $row['semyear']; ?> </td>
-                <td> <?php echo $row['numofseats']; ?> </td>
-              </tr> <?php
-            } 
-          ?>
+          while ($row = mysqli_fetch_array($query_run)) { ?>
+            <tr>
+              <td> <?php echo $row['crn']; ?> </td>
+              <td> <?php echo $row['courseid']; ?> </td>
+              <td> <?php echo $row['sectionnum']; ?> </td>
+              <td> <?php echo $row['fname'];
+                    echo " ";
+                    echo $row['lname']; ?> </td>
+              <td> <?php echo $row['timeslotid']; ?> </td>
+              <td> <?php echo $row['roomid']; ?> </td>
+              <td> <?php echo $row['semyear']; ?> </td>
+              <td> <?php echo $row['numofseats']; ?> </td>
+            </tr> <?php
+                }
+                  ?>
         </tbody>
       </table>
     </div>
   </div>
 </body>
+
 </html>
 <script>
   $(document).ready(function() {

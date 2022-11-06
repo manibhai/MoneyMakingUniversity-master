@@ -42,4 +42,3 @@
     $queyPassHistories = "SELECT COUNT('grade') AS `allpassinggrades` FROM studenthistory 
     WHERE grade LIKE 'A%' OR grade LIKE 'B%' OR grade LIKE 'C%' ";
     $gradeCountPass = mysqli_fetch_assoc( mysqli_query($connection, $queyPassHistories))['allpassinggrades'];
-?>
