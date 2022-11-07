@@ -76,6 +76,7 @@ session_start();
                   <?= $_GET['error'] ?>
                 </div>
               <?php
+                unset($_SESSION['error']);
               }
               ?>
               <div class="mb-3">
@@ -92,7 +93,7 @@ session_start();
                   <div class="col d-flex justify-content-center">
                     <!-- Checkbox -->
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                      <input class="form-check-input" type="checkbox" value="" id="form2Example31" unchecked />
                       <label class="form-check-label" for="form2Example31"> Remember me </label>
                     </div>
                   </div>

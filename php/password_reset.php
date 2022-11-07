@@ -34,10 +34,18 @@ function  send_password_reset($get_email, $token)
 
         //Content
         $email_template = "
-            <h2>Hello</h2>
-            <h3>You are receiving this email because $get_email has sent a password reset request.
-                <a href='http://ec2-3-88-8-244.compute-1.amazonaws.com/php/changepassword.php?token=$token&email=$get_email'> Reset Password </a>
-            </h3>
+        <h2>Hello,</h2>
+
+        <h2>Somebody requested a new password for the account associated with $get_email.</h2>
+        
+        <h2>No changes have been made to your account yet.</h2>
+        
+        <h2>You can reset your password by clicking the link below:</h2>
+
+        <a href='http://ec2-3-88-8-244.compute-1.amazonaws.com/php/changepassword.php?token=$token&email=$get_email'> Reset Password </a>
+        
+        <h2>If you did not make this request then please ignore this email.</h2>
+        
         ";
 
         $mail->isHTML(true);                                  //Set email format to HTML

@@ -55,23 +55,26 @@ session_start();
 
   <!-- Showcase -->
   <section class="bg-dark text-light p-5 text-center text-sm-start">
+    <h1 class="h2"><img src="/img/mmu.gif" class="img-fluid mx-auto d-block" alt="..."></h1>
     <div class="container">
+      </br></br>
       <div class="d-sm-flex align-items-center justify-content-between">
         <div>
+          </br></br>
           <h1>Become a <span class="text-warning">Student</span></h1>
           <br /><br /><br />
           <h3>GET YOUR</h3>
           <h1><span class="text-danger">DEGREE</span></h1>
           <h3>AND GET OUT!</h3>
         </div>
+        </br></br>
         <img src="/img/websitelogo.jpg" class="img-fluid w-25 d-none d-sm-block" alt="...">
       </div>
     </div>
   </section>
-  <div class="bg-image p-5 text-center shadow-1-strong rounded mb-5 text-warning" style="background-image: url('https://i0.wp.com/www.michigandaily.com/wp-content/uploads/2021/11/USvsEuropeanDegrees_Illustration_MellisaLee.png?resize=1200%2C800&ssl=1');" height: 100vh;>
-    <h1 class="h2"><img src="/img/mmu.gif" class="img-fluid" alt="..."></h1>
-    <p><br />
-    <h2>About Us</h2>
+  <div class="bg-image p-5 text-center shadow-1-strong rounded mb-5 text-primary">
+    <p>
+    <h2>ABOUT US</h2>
     <br /><br />
     <p>
     <h2>We are here to help you get that Money! We build greatness!
