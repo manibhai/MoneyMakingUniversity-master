@@ -65,7 +65,7 @@ $row = mysqli_fetch_array($result);
         <div class="card-body text-center">
           <h5 class="card-title">Students Attending</h5>
           <h4 class="card-text "><?php echo $studentCount['stuTotal']; ?></h4>
-          <img src="https://thumbs.dreamstime.com/b/student-school-lesson-icon-element-education-pictogram-premium-quality-graphic-design-signs-symbols-collection-websites-147458964.jpg" class="img-thumbnail" alt="Student Image">
+          <img src="https://thumbs.dreamstime.com/b/student-school-lesson-icon-element-education-pictogram-premium-quality-graphic-design-signs-symbols-collection-websites-147458964.jpg" class=" max-width: 25;" alt="Student Image">
         </div>
       </div>
 
