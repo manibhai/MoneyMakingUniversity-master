@@ -58,16 +58,6 @@ session_start();
           <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh">
 
             <form class="border shadow p-3 rounded" action="../php/check-login.php" method="post" style="width: 450px;">
-              <?php
-              if (isset($_SESSION['status'])) {
-              ?>
-                <div class="alert alert-success">
-                  <h5><?= $_SESSION['status']; ?></h5>
-                </div>
-              <?php
-                unset($_SESSION['status']);
-              }
-              ?>
               <h1 class="text-center p-3">LOGIN</h1>
               <?php
               if (isset($_GET['error'])) {
