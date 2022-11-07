@@ -108,9 +108,14 @@ if (!isset($_SESSION['id'])) {
         <?php
         if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
             echo '<h2> ' . $_SESSION['success'] . '</h2>';
-            unset($_SESSION['sucess']);
+            unset($_SESSION['success']);
         }
+        if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+            echo '<h2>' . $_SESSION['status'] . '</h2>';
+            unset($_SESSION['status']);
+          }
         ?>
+
         <div class="table-responsive">
             <table id="usersdata" class="table table-bordered">
                 <thead>

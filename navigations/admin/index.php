@@ -65,7 +65,7 @@ $row = mysqli_fetch_array($result);
         <div class="card-body text-center">
           <h5 class="card-title">Students Attending</h5>
           <h4 class="card-text "><?php echo $studentCount['stuTotal']; ?></h4>
-          <img src="https://thumbs.dreamstime.com/b/student-school-lesson-icon-element-education-pictogram-premium-quality-graphic-design-signs-symbols-collection-websites-147458964.jpg" class="img-fluid" alt="Student Image">
+          <img src="https://thumbs.dreamstime.com/b/student-school-lesson-icon-element-education-pictogram-premium-quality-graphic-design-signs-symbols-collection-websites-147458964.jpg" class="img-thumbnail" alt="Student Image">
         </div>
       </div>
 
@@ -73,7 +73,7 @@ $row = mysqli_fetch_array($result);
         <div class="card-body text-center">
           <h5 class="card-title">Faculty Count</h5>
           <h4 class="card-text "><?php echo $facultyCount['facCount']; ?></h4>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNPhZduYYg7IEus7Y2rzbojWPd3Z7S3be5n8cBpEAS&s" class="" alt="Faculty Image">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNPhZduYYg7IEus7Y2rzbojWPd3Z7S3be5n8cBpEAS&s" class="img-thumbnail" alt="Faculty Image">
         </div>
       </div>
 

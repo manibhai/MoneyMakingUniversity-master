@@ -38,7 +38,7 @@ if (!isset($_SESSION['id'])) {
             </div>
             <!--Modal body inside of form-->
             <!--Connects the for and post to the method that is located in code.php(Server fucntions)-->
-            <form action="../../php/code.php" method="post">
+            <form action="../../php/Dept_Code.php" method="post">
               <div class="modal-body">
                 <div class="form-group">
                   <!--Fill in form contents-->
@@ -99,6 +99,10 @@ if (!isset($_SESSION['id'])) {
     if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
       echo '<h2>' . $_SESSION['success'] . '</h2>';
       unset($_SESSION['success']);
+    }
+    if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+      echo '<h2>' . $_SESSION['status'] . '</h2>';
+      unset($_SESSION['status']);
     }
     ?>
     <h3 align="center">Departments</h3>
