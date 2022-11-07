@@ -58,16 +58,6 @@ session_start();
           <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh">
 
             <form class="border shadow p-3 rounded" action="../php/check-login.php" method="post" style="width: 450px;">
-              <?php
-              if (isset($_SESSION['status'])) {
-              ?>
-                <div class="alert alert-success">
-                  <h5><?= $_SESSION['status']; ?></h5>
-                </div>
-              <?php
-                unset($_SESSION['status']);
-              }
-              ?>
               <h1 class="text-center p-3">LOGIN</h1>
               <?php
               if (isset($_GET['error'])) {
@@ -76,6 +66,7 @@ session_start();
                   <?= $_GET['error'] ?>
                 </div>
               <?php
+                unset($_SESSION['error']);
               }
               ?>
               <div class="mb-3">
@@ -92,7 +83,7 @@ session_start();
                   <div class="col d-flex justify-content-center">
                     <!-- Checkbox -->
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                      <input class="form-check-input" type="checkbox" value="" id="form2Example31" unchecked />
                       <label class="form-check-label" for="form2Example31"> Remember me </label>
                     </div>
                   </div>

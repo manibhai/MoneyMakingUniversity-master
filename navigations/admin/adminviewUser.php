@@ -111,9 +111,15 @@ if (!isset($_SESSION['id'])) {
             unset($_SESSION['success']);
         }
         if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+<<<<<<< HEAD
             echo '<h2>' . $_SESSION['status'] . '</h2>';
             unset($_SESSION['status']);
           }
+=======
+            echo '<h2> ' . $_SESSION['status'] . '</h2>';
+            unset($_SESSION['status']);
+        }
+>>>>>>> e067bfe8f1d7f8570eaa95df1297de622e93e54c
         ?>
 
         <div class="table-responsive">
