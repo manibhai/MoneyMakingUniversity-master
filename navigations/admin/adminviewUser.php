@@ -110,6 +110,10 @@ if (!isset($_SESSION['id'])) {
             echo '<h2> ' . $_SESSION['success'] . '</h2>';
             unset($_SESSION['sucess']);
         }
+        if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+            echo '<h2> ' . $_SESSION['status'] . '</h2>';
+            unset($_SESSION['status']);
+        }
         ?>
         <div class="table-responsive">
             <table id="usersdata" class="table table-bordered">

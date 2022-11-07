@@ -78,6 +78,10 @@ if (!isset($_SESSION['id'])) {
       echo '<h2>' . $_SESSION['success'] . '</h2>';
       unset($_SESSION['success']);
     }
+    if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+      echo '<h2> ' . $_SESSION['status'] . '</h2>';
+      unset($_SESSION['status']);
+    }
     ?>
     <h3 align="center">Holds</h3>
     <div class="table-responsive">
