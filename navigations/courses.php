@@ -30,6 +30,7 @@ include "config.php"
           <tr>
             <td>Course ID</td>
             <td>Course Name</td>
+            <td>Prerequisite</td>
             <td>Credits</td>
             <td>Department</td>
             <td>Description</td>
@@ -37,13 +38,14 @@ include "config.php"
         </thead>
         <tbody>
           <?php
-          $query = "SELECT * FROM course INNER JOIN department WHERE course.deptid = department.deptid";
+          $query = "SELECT * FROM course INNER JOIN department ON course.deptid = department.deptid INNER JOIN prerequisite ON course.courseid = prerequisite.courseid";
           $query_run = mysqli_query($connection, $query);
 
           while ($row = mysqli_fetch_array($query_run)) { ?>
             <tr>
               <td><?php echo $row['courseid']; ?></td>
               <td><?php echo $row['coursename']; ?></td>
+              <td><?php echo $row['prerequisiteid']; ?></td>
               <td><?php echo $row['numofcredits']; ?></td>
               <td><?php echo $row['deptname']; ?></td>
               <td><?php echo $row['coursedesc']; ?></td>
