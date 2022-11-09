@@ -24,7 +24,7 @@ if (!isset($_SESSION['id'])) {
     </div>
     <div class="container-fluid">
       <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
-        Create Hold
+        Assign Student Holds
       </button>
       <!--Modal for edit/Delete-->
       <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -83,7 +83,7 @@ if (!isset($_SESSION['id'])) {
       unset($_SESSION['status']);
     }
     ?>
-    <h3 align="center">Holds</h3>
+    <h3 align="center">Student Holds</h3>
     <div class="table-responsive">
       <table id="usersdata" class="table table-bordered">
         <thead>
