@@ -41,10 +41,10 @@ $row = mysqli_fetch_array($result);
               Tools
             </button>
             <ul ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="../masterscheduler.php">Edit Master Schedule</a></li>
-              <li><a class="dropdown-item" href="#">Edit Course Catalog</a></li>
+              <li><a class="dropdown-item" href="../masterscheduler.php">View Master Schedule</a></li>
+              <li><a class="dropdown-item" href="#">View Course Catalog</a></li>
               <li><a class="dropdown-item" href="./adminviewDepts.php">View Departments</a></li>
-              <li><a class="dropdown-item" href="./adminviewHolds.php">Edit Student Holds</a></li>
+              <li><a class="dropdown-item" href="./adminviewHolds.php">View Student Holds</a></li>
             </ul>
           </div>
         </ul>
@@ -65,7 +65,7 @@ $row = mysqli_fetch_array($result);
         <div class="card-body text-center">
           <h5 class="card-title">Students Attending</h5>
           <h4 class="card-text "><?php echo $studentCount['stuTotal']; ?></h4>
-          <img src="https://thumbs.dreamstime.com/b/student-school-lesson-icon-element-education-pictogram-premium-quality-graphic-design-signs-symbols-collection-websites-147458964.jpg" class=" max-width: 25;" alt="Student Image">
+          <img src="https://www.nicepng.com/png/detail/256-2560632_student-clipart-black-and-white-l-011-student.png" class="img-fluid" alt="Student Image">
         </div>
       </div>
 
@@ -73,10 +73,17 @@ $row = mysqli_fetch_array($result);
         <div class="card-body text-center">
           <h5 class="card-title">Faculty Count</h5>
           <h4 class="card-text "><?php echo $facultyCount['facCount']; ?></h4>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNPhZduYYg7IEus7Y2rzbojWPd3Z7S3be5n8cBpEAS&s" class="img-thumbnail" alt="Faculty Image">
+          <img src="https://cdn.pixabay.com/photo/2014/04/03/09/59/teacher-309533_960_720.png" style=" width: 85%;" alt="Faculty Image">
         </div>
       </div>
 
+      <div class="card h-25" style="width: 18rem;">
+        <div class="card-body text-center">
+          <h5 class="card-title">Researcher Count</h5>
+          <h4 class="card-text "><?php echo $Count['resCount']; ?></h4>
+          <img src="https://e7.pngegg.com/pngimages/973/504/png-clipart-computer-icons-research-chart-data-collection-marketing-graphic-combination-miscellaneous-text-thumbnail.png" style=" width: 99%;" alt="Researcher Image">
+        </div>
+      </div>
     </div>
   </section>
 </body>
