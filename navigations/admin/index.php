@@ -43,8 +43,8 @@ $row = mysqli_fetch_array($result);
             <ul ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="../masterscheduler.php">Edit Master Schedule</a></li>
               <li><a class="dropdown-item" href="#">Edit Course Catalog</a></li>
-              <li><a class="dropdown-item" href="./adminviewDepts.php">Edit Departments</a></li>
-              <li><a class="dropdown-item" href="./adminviewHolds.php">Edit Holds</a></li>
+              <li><a class="dropdown-item" href="./adminviewDepts.php">View Departments</a></li>
+              <li><a class="dropdown-item" href="./adminviewHolds.php">Edit Student Holds</a></li>
             </ul>
           </div>
         </ul>
