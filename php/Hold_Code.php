@@ -2,55 +2,40 @@
 session_start();
 include "../navigations/config.php";
 
-//CREATE HOLD 
+//ASSIGN STUDENT HOLD 
 
 if (isset($_POST['create_hold_btn'])) {
-    $holdname = $_POST['holdname'];
-    $holdtype = $_POST['holdtype'];
-    $holddesc = $_POST['holddesc'];
+    $studentid = $_POST['studentid'];
+    $holdid = $_POST['holdid'];
+    $dategiven = $_POST['dategiven'];
 
-    $query = "INSERT INTO department (holdname, holdtype, holddesc)
-    VALUES ('$holdname', '$holdtype', '$holddesc')";
+    $query = "INSERT INTO studenthold (studentid, holdid, dategiven)
+    VALUES ('$studentid', '$holdid', '$dategiven')";
     $query_run = mysqli_query($connection, $query);
 
-    if (mysqli_num_rows($deptid_query_run) > 0) {
-        $_SESSION['status'] = "Hold Name Already Taken. Please Try Another one.";
-        $_SESSION['status_code'] = "error";
-        header('Location: ..//navigations/admin/index.php');
-        exit(0);
-    } else if ($query_run) {
-        $_SESSION['success'] = "Hold has been Created";
+    if ($query_run) {
+        $_SESSION['success'] = "Hold was Assigned to the Student";
         header('Location: ../navigations/admin/adminviewHolds.php');
         exit(0);
     } else {
-        $_SESSION['status'] = "Hold could not be created";
-        header('Location: ../index.php');
+        $_SESSION['status'] = "Hold was Not Assigned to the Student";
+        header('Location: ../navigations/admin/adminviewHolds.php');
         exit(0);
     }
 }
 
-//EDIT A USER
-
-if (isset($_POST['edit_hold_btn'])) {
-    $holdname = $_POST['holdname'];
-    $query = "SELECT * FROM hold WHERE holdname='$holdname'";
-    $query_run = mysqli_query($connection, $query);
-}
-
-if (isset($_POST['update_hold_btn'])) {
-    $holdname = $_POST['holdname'];
-    $holdtype = $_POST['holdtype'];
-    $holddesc = $_POST['holddesc'];
-
-    $query = "SELECT hold.holdname, hold.holdtype, hold.holddesc FROM hold";
+//DROP A STUDENT HOLD
+if (isset($_POST['delete_hold_btn'])) {
+    $userid = $_POST['deleteid'];
+    $query = "DELETE FROM studenthold WHERE studentid='$studentid' ";
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {
-        $_SESSION['success'] = "Hold has been Updated";
+        $_SESSION['success'] = "Student Hold has been Removed";
         header('Location: ../navigations/admin/adminviewHolds.php');
         exit(0);
     } else {
-        $_SESSION['status'] = "Hold was not Updated";
+        $_SESSION['status'] = "Unable to Remove Student Hold";
         header('Location: ../navigations/admin/adminviewHolds.php');
         exit(0);
     }

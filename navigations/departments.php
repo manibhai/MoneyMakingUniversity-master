@@ -41,11 +41,8 @@ include "config.php";
         </thead>
         <tbody>
           <?php
-          $query = "SELECT * FROM department INNER JOIN faculty ON department.deptchair=faculty.facultyid  INNER JOIN user ON faculty.facultyid=user.userid
-                      UNION 
-                      SELECT * FROM department INNER JOIN faculty ON department.deptmg=faculty.facultyid  INNER JOIN user on faculty.facultyid=user.userid";
+          $query = "SELECT * FROM department INNER JOIN faculty ON department.deptchair=faculty.facultyid  INNER JOIN user ON faculty.facultyid=user.userid";
           $query_run = mysqli_query($connection, $query);
-          //$query_run = mysqli_query($connection, $query1);
 
           while ($row = mysqli_fetch_array($query_run)) { ?>
             <tr>

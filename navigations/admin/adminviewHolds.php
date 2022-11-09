@@ -24,7 +24,7 @@ if (!isset($_SESSION['id'])) {
     </div>
     <div class="container-fluid">
       <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
-        Create Hold
+        Assign Student Holds
       </button>
       <!--Modal for edit/Delete-->
       <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -36,21 +36,21 @@ if (!isset($_SESSION['id'])) {
             </div>
             <!--Modal body inside of form-->
             <!--Connects the for and post to the method that is located in code.php(Server fucntions)-->
-            <form action="../../php/code.php" method="post">
+            <form action="../../php/Hold_Code.php" method="post">
               <div class="modal-body">
                 <div class="form-group">
                   <!--Fill in form contents-->
-                  <label> Hold Name</label>
-                  <input type="varchar(300)" name="holdname" class="form-control" placeholder="Enter Hold Name">
+                  <label>Student ID</label>
+                  <input type="int" name="studentid" class="form-control" placeholder="Enter Student ID">
                 </div>
                 <div class="form-group">
                   <!--Fill in form contents-->
-                  <label> Hold Type</label>
-                  <input type="varchar(300)" name="holdtype" class="form-control" placeholder="Enter Hold Type (Academic, Financial, Health, Property)">
+                  <label> Hold Name</label>
+                  <input type="varchar(300)" name="holdid" class="form-control" placeholder="residential / fees / tuition / health / grades / athletic / registration">
                 </div>
                 <div class="form-group">
-                  <label>Hold Description</label>
-                  <input type="varchar(300)" name="holddesc" class="form-control" placeholder="Enter Hold Description">
+                  <label>Hold Type</label>
+                  <input type="varchar(300)" name="dategiven" class="form-control" placeholder="Enter Date">
                 </div>
               </div>
               <!--Footer button goes here-->
@@ -83,36 +83,28 @@ if (!isset($_SESSION['id'])) {
       unset($_SESSION['status']);
     }
     ?>
-    <h3 align="center">Holds</h3>
+    <h3 align="center">Student Holds</h3>
     <div class="table-responsive">
       <table id="usersdata" class="table table-bordered">
         <thead>
           <tr>
+            <td>Student ID</td>
             <td>Hold Name</td>
-            <td>Hold Type</td>
-            <td>Hold Description</td>
-            <td>Edit Hold</td>
-            <td>Delete Hold</td>
+            <td>Date</td>
           </tr>
         </thead>
         <tbody>
           <?php
-          $query = "SELECT * FROM hold";
+          $query = "SELECT * FROM studenthold INNER JOIN hold WHERE studenthold.holdid = hold.holdname";
           $query_run = mysqli_query($connection, $query);
 
           while ($row = mysqli_fetch_array($query_run)) { ?>
             <tr>
+              <td> <?php echo $row['studentid']; ?> </td>
               <td> <?php echo $row['holdname']; ?> </td>
-              <td> <?php echo $row['holdtype']; ?> </td>
-              <td> <?php echo $row['holddesc']; ?> </td>
+              <td> <?php echo $row['dategiven']; ?> </td>
               <td>
                 <form action="../../php/Hold_Code.php" method="POST">
-                  <input type="hidden" name="editHold" value=" <?php echo $row['deptid'] ?>">
-                  <button type="submit" name="edit_hold_btn" class="btn btn-warning">Edit</button>
-                </form>
-              </td>
-              <td>
-                <form action="../../php/editHolds.php" method="POST">
                   <input type="hidden" name="editDept" value=" <?php echo $row['deptid'] ?>">
                   <button type="submit" name="delete_hold_btn" class="btn btn-danger">Delete</button>
                 </form>

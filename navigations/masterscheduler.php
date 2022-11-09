@@ -34,7 +34,8 @@ include "config.php";
             <td>Course</td>
             <td>Section</td>
             <td>Faculty Name</td>
-            <td>Time Slot</td>
+            <td>Days</td>
+            <td>Time</td>
             <td>Room</td>
             <td>Semester Year</td>
             <td>Available Seats</td>
