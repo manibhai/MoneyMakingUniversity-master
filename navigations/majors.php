@@ -31,16 +31,18 @@ include "config.php";
         <thead>
           <tr>
             <td>Major Name</td>
+            <td>Department Name</td>
           </tr>
         </thead>
         <tbody>
           <?php
-          $query = "SELECT * FROM major";
+          $query = "SELECT * FROM major INNER JOIN department WHERE major.deptid = department.deptid";
           $query_run = mysqli_query($connection, $query);
 
           while ($row = mysqli_fetch_array($query_run)) { ?>
             <tr>
               <td> <?php echo $row['majorname']; ?> </td>
+              <td> <?php echo $row['deptname']; ?> </td>
             </tr> <?php
                 }
                   ?>
