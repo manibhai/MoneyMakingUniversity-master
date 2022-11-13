@@ -45,6 +45,7 @@ $row = mysqli_fetch_array($result);
               <li><a class="dropdown-item" href="./adminviewTimeWindows.php">View Semesters</a></li>
               <li><a class="dropdown-item" href="../viewcourses.php">View Courses</a></li>
               <li><a class="dropdown-item" href="./adminviewDepts.php">View Departments</a></li>
+              <li><a class="dropdown-item" href="./adminviewStudents.php">View Students</a></li>
               <li><a class="dropdown-item" href="./adminviewHolds.php">View Student Holds</a></li>
             </ul>
           </div>
