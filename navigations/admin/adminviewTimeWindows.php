@@ -21,7 +21,7 @@ include "../config.php";
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">Admin Homepage</a>
         </div>
-    
+
         <div class="container-fluid">
             <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Add Semester
@@ -52,9 +52,9 @@ include "../config.php";
                                     <label>Ending Date</label>
                                     <input type="date" name="enddate" class="form-control" placeholder="Enter end date">
                                 </div>
-                            <div class="modal-footer">
-                                <button type="submit" name="create_btn" class="btn btn-primary">Save</button>
-                            </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="create_btn" class="btn btn-primary">Save</button>
+                                </div>
                         </form>
 
                     </div>
@@ -70,7 +70,7 @@ include "../config.php";
 <body>
     <br /><br />
     <div class="card-body">
-        
+
         <?php
         /*
         if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
@@ -83,14 +83,14 @@ include "../config.php";
             <table id="semdata" class="table table-bordered">
                 <thead>
                     <tr>
-                        <td>Semester</td>
                         <td>Year</td>
+                        <td>Semester</td>
                         <td>Start Date</td>
                         <td>End Date</td>
-                        <td>Reg Cut off</td>
-                        <td>Drop Cut off</td>
-                        <td>Grade Cut off</td>
-                        <td>Exam cut off</td>
+                        <td>Add Class Cut Off</td>
+                        <td>Drop Class Cut Off</td>
+                        <td>Exam Cut Off</td>
+                        <td>Grades Cut Off</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,15 +100,15 @@ include "../config.php";
 
                     while ($row = mysqli_fetch_array($query_run)) { ?>
                         <tr>
-                            <td> <?php echo $row['semname']; ?> </td>
                             <td> <?php echo $row['year']; ?> </td>
+                            <td> <?php echo $row['semname']; ?> </td>
                             <td> <?php echo $row['begindate']; ?> </td>
                             <td> <?php echo $row['enddate']; ?> </td>
                             <td> <?php echo $row['regcuoff']; ?> </td>
                             <td> <?php echo $row['dropcutoff']; ?> </td>
-                            <td> <?php echo $row['gradecutoff']; ?> </td>
                             <td> <?php echo $row['examcutoff']; ?> </td>
-                          <!--
+                            <td> <?php echo $row['gradecutoff']; ?> </td>
+                            <!--
                             <td>
                                 <form action="../../php/editUser.php" method="post">
                                     <input type="hidden" name="userid" value="<?php echo $row['userid']; ?>">
@@ -124,7 +124,7 @@ include "../config.php";
                             </form>
                         </tr> <?php
                             }
-                          ?>
+                                ?>
                 </tbody>
             </table>
         </div>
