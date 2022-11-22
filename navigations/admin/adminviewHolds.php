@@ -50,7 +50,7 @@ if (!isset($_SESSION['id'])) {
                 </div>
                 <div class="form-group">
                   <label>Hold Type</label>
-                  <input type="varchar(300)" name="dategiven" class="form-control" placeholder="Enter Date">
+                  <input type="varchar(300)" name="holdtype" class="form-control" placeholder="Enter Hold Type">
                 </div>
               </div>
               <!--Footer button goes here-->
@@ -89,20 +89,27 @@ if (!isset($_SESSION['id'])) {
         <thead>
           <tr>
             <td>Student ID</td>
+            <td>Student Name</td>
             <td>Hold Name</td>
-            <td>Date</td>
+            <td>Hold Type</td>
+            <td>Hold Description</td>
+            <td>Remove Hold</td>
           </tr>
         </thead>
         <tbody>
           <?php
-          $query = "SELECT * FROM studenthold INNER JOIN hold WHERE studenthold.holdid = hold.holdname";
+          $query = "SELECT * FROM user INNER JOIN studenthold ON user.userid=studenthold.studentid INNER JOIN hold WHERE studenthold.holdid = hold.holdname";
           $query_run = mysqli_query($connection, $query);
 
           while ($row = mysqli_fetch_array($query_run)) { ?>
             <tr>
               <td> <?php echo $row['studentid']; ?> </td>
+              <td> <?php echo $row['fname'];
+                    echo " ";
+                    echo $row['lname']; ?> </td>
               <td> <?php echo $row['holdname']; ?> </td>
-              <td> <?php echo $row['dategiven']; ?> </td>
+              <td> <?php echo $row['holdtype']; ?> </td>
+              <td> <?php echo $row['holddesc']; ?> </td>
               <td>
                 <form action="../../php/Hold_Code.php" method="POST">
                   <input type="hidden" name="editDept" value=" <?php echo $row['deptid'] ?>">
