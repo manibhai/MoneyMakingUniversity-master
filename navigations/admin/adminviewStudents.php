@@ -53,6 +53,8 @@ if (!isset($_SESSION['id'])) {
                         <td>Student Type</td>
                         <td>Majors</td>
                         <td>Minors</td>
+                        <td>View Student History</td>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -60,7 +62,7 @@ if (!isset($_SESSION['id'])) {
                     $query = "SELECT * FROM student INNER JOIN studentmajor ON student.studentid = studentmajor.studentid 
                     INNER JOIN major ON studentmajor.majorid = major.majorid
                     INNER JOIN studentminor ON student.studentid = studentminor.studentid 
-                    INNER JOIN minor ON studentminor.minorid = minor.minorid";
+                    INNER JOIN minor ON studentminor.minorid = minor.minorid ";
                     $query_run = mysqli_query($connection, $query);
 
                     while ($row = mysqli_fetch_array($query_run)) { ?>
@@ -69,6 +71,9 @@ if (!isset($_SESSION['id'])) {
                             <td> <?php echo $row['gradlevel']; ?> </td>
                             <td> <?php echo $row['majorname']; ?> </td>
                             <td> <?php echo $row['minorname']; ?> </td>
+                            <td> <a href="adminViewHistory.php?id=<?=$row['studentid'];?>" class="btn btn-primary" >View</a>
+                        </td>
+
                         </tr> <?php
                             }
                                 ?>

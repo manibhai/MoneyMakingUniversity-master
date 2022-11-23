@@ -85,8 +85,8 @@ include "../config.php";
                     <tr>
                         <td>Year</td>
                         <td>Semester</td>
-                        <td>Start Date</td>
-                        <td>End Date</td>
+                        <td>Start of Semester</td>
+                        <td>End of Semester</td>
                         <td>Add Class Cut Off</td>
                         <td>Drop Class Cut Off</td>
                         <td>Exam Cut Off</td>

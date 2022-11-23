@@ -142,7 +142,7 @@ if (!isset($_SESSION['id'])) {
                     user.city, user.state, user.zipcode, userlogin.email, userlogin.pass FROM user INNER JOIN userlogin ON user.userid=userlogin.userid";
                     $query_run = mysqli_query($connection, $query);
 
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
+                   foreach ($query_run as $row ) { ?>
                         <tr>
                             <td> <?php echo $row['userid']; ?> </td>
                             <td> <?php echo $row['email']; ?> </td>
@@ -157,7 +157,7 @@ if (!isset($_SESSION['id'])) {
                             <td> <?php echo $row['zipcode']; ?> </td>
                             <td> <?php echo $row['usertype']; ?> </td>
                             <td>
-                                <form action="../../php/editUser.php" method="post">
+                                <form action="../../php/editUser.php?id=<?=$row['userid'];?>" method="post">
                                     <input type="hidden" name="userid" value="<?php echo $row['userid']; ?>">
                                     <button type="submit" name="edit_btn" class=" btn btn-warning">Edit
                             </td>
