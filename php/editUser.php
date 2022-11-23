@@ -24,7 +24,8 @@ if (!isset($_SESSION['id'])) {
         $userid = $_POST['userid'];
 
         $query = "SELECT user.userid, user.usertype, user.lname, user.fname, user.phone, user.dob, user.street, 
-                    user.city, user.state, user.zipcode, userlogin.email, userlogin.pass FROM user INNER JOIN userlogin ON user.userid=userlogin.userid WHERE user.userID = $userid";
+                    user.city, user.state, user.zipcode, userlogin.email, userlogin.pass FROM user INNER JOIN userlogin 
+                    ON user.userid=userlogin.userid WHERE user.userID AND userlogin.userid = $userid";
         $query_run = mysqli_query($connection, $query);
 
         foreach ($query_run as $row) {

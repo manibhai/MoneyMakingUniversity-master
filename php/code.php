@@ -61,7 +61,8 @@ if (isset($_POST['update_btn'])) {
     $zipCode = $_POST['zipcode'];
 
     $query = "SELECT user.userid, user.usertype, user.lname, user.fname, user.phone, user.dob, user.street, 
-                    user.city, user.state, user.zipcode, userlogin.email, userlogin.pass FROM user INNER JOIN userlogin WHERE user.userid='$userid'";
+                    user.city, user.state, user.zipcode, userlogin.email, userlogin.pass FROM user INNER JOIN userlogin 
+                    ON user.userid = userlogin.userid WHERE user.userid AND userlogin.userid='$userid'";
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {
@@ -77,10 +78,8 @@ if (isset($_POST['update_btn'])) {
 //DELETE A USER
 if (isset($_POST['delete_btn'])) {
     $userid = $_POST['deleteid'];
-    $query = "DELETE FROM user WHERE userid='$userid' ";
-    $query1 = "DELETE FROM userlogin WHERE userid='$userid' ";
+    $query = "DELETE FROM user INNER JOIN userlogin ON user.userid=userlogin.userid WHERE user.userid AND userlogin.userid='$userid' ";
     $query_run = mysqli_query($connection, $query);
-    $query_run = mysqli_query($connection, $query1);
 
     if ($query_run) {
         $_SESSION['success'] = "User has been Deleted";
