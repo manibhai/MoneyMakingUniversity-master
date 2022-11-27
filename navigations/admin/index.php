@@ -44,6 +44,18 @@ $row = mysqli_fetch_array($result);
           </li>
           <div class="dropdown">
             <button class="btn btn-bg-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              View Students
+            </button>
+            <ul ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="./adminviewUnPart.php">View Undergraduate Part-Time Students</a></li>
+              <li><a class="dropdown-item" href="./adminviewUnFull.php">View Undergraduate Full-Time Students</a></li>
+              <li><a class="dropdown-item" href="./adminviewGrPart.php">View Graduate Part-Time Students</a></li>
+              <li><a class="dropdown-item" href="./adminviewGrFull.php">View Graduate Full-Time Students</a></li>
+              <li><a class="dropdown-item" href="./adminviewHolds.php">View Student Holds</a></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-bg-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               Tools
             </button>
             <ul ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton1">
@@ -53,8 +65,6 @@ $row = mysqli_fetch_array($result);
               <li><a class="dropdown-item" href="./adminviewMinors.php">View Minors</a></li>
               <li><a class="dropdown-item" href="./adminviewMinorCourses.php">View Minor Requirements</a></li>
               <li><a class="dropdown-item" href="./adminviewDepts.php">View Departments</a></li>
-              <li><a class="dropdown-item" href="./adminviewStudents.php">View Students</a></li>
-              <li><a class="dropdown-item" href="./adminviewHolds.php">View Student Holds</a></li>
             </ul>
           </div>
         </ul>
