@@ -131,3 +131,31 @@ if (isset($_POST['master_btn'])) {
         exit(0);
     }
 }
+
+//Create a Course
+if (isset($_POST['course_btn'])) {
+    $courseid = $_POST['courseid'];
+    $coursename = $_POST['coursename'];
+    $numofcredits = $_POST['numofcredits'];
+    $deptid = $_POST['deptid'];
+    $coursedesc = $_POST['coursedesc'];
+
+    $query = "INSERT INTO course (courseid, coursename, numofcredits, deptid, coursedesc)
+    VALUES ('$courseid', '$coursename', '$numofcredits', '$deptid', '$coursedesc')";
+    $query_run = mysqli_query($connection, $query);
+
+    if (mysqli_num_rows($courseid_query_run) > 0) {
+        $_SESSION['status'] = "Course ID Already Taken. Please Try Another one.";
+        $_SESSION['status_code'] = "error";
+        header('Location: ../navigations/admin/adminviewMaster.php');
+        exit(0);
+    } else if ($query_run) {
+        $_SESSION['success'] = "Course was Created";
+        header('Location: ../navigations/admin/adminviewCourse.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Course was not Created";
+        header('Location: ../navigations/admin/adminviewCourse.php');
+        exit(0);
+    }
+}

@@ -65,7 +65,7 @@ $row = mysqli_fetch_array($result);
   </nav>
 
   <div class="container text-center">
-    <h2 class="mb-3 h2">Welcome to Admin Page, User: <?php echo $row['fname'] ?> <?php echo $row['lname'] ?> </h2>
+    <h2 class="mb-3 h2">Welcome to Admin Page, <?php echo $row['fname'] ?> <?php echo $row['lname'] ?> </h2>
   </div>
   </section>
   <section>

@@ -24,6 +24,54 @@ if (!isset($_SESSION['id'])) {
             <a class="navbar-brand" href="index.php">Admin Homepage</a>
         </div>
         <div class="container-fluid">
+            <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
+                Create Courses
+            </button>
+            <!--Modal for edit/Delete-->
+            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class=" modal-title fs-5" id="editModal">Create a Course</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <!--Modal body inside of form-->
+                        <!--Connects the for and post to the method that is located in code.php(Server fucntions)-->
+                        <form action="../../php/mm_Code.php" method="post">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <!--Fill in form contents-->
+                                    <label> Course ID</label>
+                                    <input type="varchar(300)" name="courseid" class="form-control" placeholder="Enter Course ID">
+                                </div>
+                                <div class="form-group">
+                                    <!--Fill in form contents-->
+                                    <label>Course Name</label>
+                                    <input type="varchar(300)" name="coursename" class="form-control" placeholder="Enter Course Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Credits</label>
+                                    <input type="varchar(300)" name="numofcredits" class="form-control" placeholder="Enter Number of Credits">
+                                </div>
+                                <div class="form-group">
+                                    <label>Department ID</label>
+                                    <input type="varchar(300)" name="deptid" class="form-control" placeholder="Enter Department ID">
+                                </div>
+                                <div class="form-group">
+                                    <label>Course Description</label>
+                                    <input type="varchar(300)" name="coursedesc" class="form-control" placeholder="Enter Course Description">
+                                </div>
+                            </div>
+                            <!--Footer button goes here-->
+                            <div class="modal-footer">
+                                <button type="submit" name="course_btn" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
             <a class="btn btn-lg btn-danger" href="../logout.php" role="button">Logout</a>
         </div>
     </nav>
@@ -44,7 +92,7 @@ if (!isset($_SESSION['id'])) {
             unset($_SESSION['status']);
         }
         ?>
-        <h3 align="center">Student Information</h3>
+        <h3 align="center">Course Information</h3>
         <div class="table-responsive">
             <table id="usersdata" class="table table-bordered">
                 <thead>
@@ -56,7 +104,6 @@ if (!isset($_SESSION['id'])) {
                         <td>Department</td>
                         <td>Description</td>
                         <td>Edit</td>
-                        <td>Delete</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,19 +120,12 @@ if (!isset($_SESSION['id'])) {
                             <td><?php echo $row['deptname']; ?></td>
                             <td><?php echo $row['coursedesc']; ?></td>
                             <td>
-                                <form action="../../php/editDepartments.php" method="POST" class="text-center">
+                                <form action="../../php/editCourses.php" method="POST" class="text-center">
                                     <input type="hidden" name="editDept" value=" <?php echo $row['deptid'] ?>">
                                     <button type="submit" name="edit_btn" class="btn btn-warning"> Edit </button>
 
                             </td>
                             </form>
-                            <td>
-                                <form action="../../php/editDepartments.php" method="POST">
-                                    <input type="hidden" name="editDept" value=" <?php echo $row['deptid'] ?>">
-                                    <button type="submit" name="edit_btn" class="btn btn-danger"> Delete </button>
-                            </td>
-                            </form>
-
                         </tr> <?php
                             }
                                 ?>
