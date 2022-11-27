@@ -1,14 +1,13 @@
 <?php
-
 include '../config.php';
-
+session_start();
+$currUser = $_SESSION['id'];
+$sql = "SELECT * FROM user WHERE userid = '$currUser'";
+$result = mysqli_query($connection,$sql);
+$row = mysqli_fetch_array($result);
 if(!isset($_SESSION['id'])){
   header("Location: ../login.php");
 }
-  
-$studentId = $_SESSION['userid'];
-
-    echo $studentId;
 ?>
 <!doctype html>
 <html lang="en">
@@ -29,8 +28,50 @@ $studentId = $_SESSION['userid'];
   </nav>
 </head>
 <body>
-<br /><br />
-  <div class="container">
-    <h3 align="center">Student Degree Aduit</h3>
-    <br />
+<section class="bg-dark text-light p-5 text-center text-sm-start">
+    <div class="container">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <div>
+        <h2><?php echo $row['fname'] ?> <?php echo $row['lname'] ?>'s Degree Audit</h2>
+        </div>
+  </section>
+
+    <?php
+    $currUser = $_SESSION['id'];
+    $query = "SELECT * FROM user WHERE userid = '$currUser'";
+    $query_run = mysqli_query($connection, $query);
+
+    foreach ($query_run as $row) {
+    ?>
+        <div class="container rounded bg-white mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-5 border-right">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Profile Settings</h4>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control" placeholder="first name" value="<?php echo $row['fname']; ?>"></div>
+                            <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control" value="<?php echo $row['lname']; ?>" placeholder="last name"></div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" placeholder="enter phone number" value="<?php echo $row['phone']; ?>"></div>
+                            <div class="col-md-12"><label class="labels">Street</label><input type="text" class="form-control" placeholder="enter street address" value="<?php echo $row['street']; ?>"></div>
+                            <div class="col-md-12"><label class="labels">City</label><input type="text" class="form-control" placeholder="enter city" value="<?php echo $row['city']; ?>"></div>
+                            <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter state" value="<?php echo $row['state']; ?>"></div>
+                            <div class="col-md-12"><label class="labels">ZipCode</label><input type="text" class="form-control" placeholder="enter zipcode" value="<?php echo $row['zipcode']; ?>"></div>
+                        </div>
+                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
+    }
+    ?>
+    </div>
+    
+        
 </body> 
