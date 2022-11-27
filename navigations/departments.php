@@ -53,12 +53,12 @@ include "config.php";
               <td> <?php echo $row['buildingid']; ?> </td>
               <td> <?php echo $row['roomid']; ?> </td>
               <td> <?php echo $row['deptphone']; ?> </td>
-              <td> <?php echo $row['fname'];
-                    echo " ";
-                    echo $row['lname']; ?> </td>
               <td> <?php echo $row['fname1'];
                     echo " ";
                     echo $row['lname1']; ?> </td>
+              <td> <?php echo $row['fname'];
+                    echo " ";
+                    echo $row['lname']; ?> </td>
             </tr> <?php
                 }
                   ?>
