@@ -12,7 +12,7 @@ if (!isset($_SESSION['id'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Faculty Information</title>
+    <title>Part Time Faculty Information</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -44,31 +44,32 @@ if (!isset($_SESSION['id'])) {
             unset($_SESSION['status']);
         }
         ?>
-        <h3 align="center">Faculty Information</h3>
+        <h3 align="center">Part Time Faculty Information</h3>
         <div class="table-responsive">
             <table id="usersdata" class="table table-bordered">
                 <thead>
                     <tr>
                         <td>Faculty ID</td>
-                        <td>Student Type</td>
-                        <td>Majors</td>
-                        <td>Minors</td>
+                        <td>Name</td>
+                        <td>Faculty Type</td>
+                        <td>Department</td>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT * FROM student INNER JOIN studentmajor ON student.studentid = studentmajor.studentid 
-                    INNER JOIN major ON studentmajor.majorid = major.majorid
-                    INNER JOIN studentminor ON student.studentid = studentminor.studentid 
-                    INNER JOIN minor ON studentminor.minorid = minor.minorid";
+                    $query = "SELECT * FROM facultyparttime INNER JOIN facultydepartment ON facultyparttime.facultyid=facultydepartment.facultyid
+                                INNER JOIN department ON facultydepartment.deptid=department.deptid
+                                INNER JOIN user ON facultyparttime.facultyid=user.userid";
                     $query_run = mysqli_query($connection, $query);
 
                     while ($row = mysqli_fetch_array($query_run)) { ?>
                         <tr>
-                            <td> <?php echo $row['studentid']; ?> </td>
-                            <td> <?php echo $row['gradlevel']; ?> </td>
-                            <td> <?php echo $row['majorname']; ?> </td>
-                            <td> <?php echo $row['minorname']; ?> </td>
+                            <td> <?php echo $row['facultyid']; ?> </td>
+                            <td> <?php echo $row['fname'];
+                                    echo " ";
+                                    echo $row['lname']; ?> </td>
+                            <td> <?php echo $row['facultytype']; ?> </td>
+                            <td> <?php echo $row['deptname']; ?> </td>
                         </tr> <?php
                             }
                                 ?>
