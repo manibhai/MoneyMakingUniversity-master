@@ -36,13 +36,17 @@ $row = mysqli_fetch_array($result);
           <li class="nav-item">
             <a class="nav-link" href="adminviewUser.php">Users</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./adminviewMaster.php">View Master Schedule</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./adminviewTimeWindows.php">View Semesters</a>
+          </li>
           <div class="dropdown">
             <button class="btn btn-bg-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               Tools
             </button>
             <ul ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="../masterscheduler.php">View Master Schedule</a></li>
-              <li><a class="dropdown-item" href="./adminviewTimeWindows.php">View Semesters</a></li>
               <li><a class="dropdown-item" href="./adminviewCourse.php">View Courses</a></li>
               <li><a class="dropdown-item" href="./adminviewMajors.php">View Majors</a></li>
               <li><a class="dropdown-item" href="./adminviewMajorCourses.php">View Major Requirements</a></li>
