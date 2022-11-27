@@ -41,7 +41,9 @@ include "config.php";
         </thead>
         <tbody>
           <?php
-          $query = "SELECT * FROM department INNER JOIN faculty ON department.deptchair=faculty.facultyid  INNER JOIN user ON faculty.facultyid=user.userid";
+          $query = "SELECT *, user.fname AS fname1, user.lname AS lname1 FROM department 
+                    INNER JOIN user ON department.deptchair=user.userid 
+                    INNER JOIN user u ON department.deptmg=u.userid";
           $query_run = mysqli_query($connection, $query);
 
           while ($row = mysqli_fetch_array($query_run)) { ?>
@@ -54,7 +56,9 @@ include "config.php";
               <td> <?php echo $row['fname'];
                     echo " ";
                     echo $row['lname']; ?> </td>
-              <td> <?php echo $row['deptmg']; ?> </td>
+              <td> <?php echo $row['fname1'];
+                    echo " ";
+                    echo $row['lname1']; ?> </td>
             </tr> <?php
                 }
                   ?>

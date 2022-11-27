@@ -124,7 +124,9 @@ if (!isset($_SESSION['id'])) {
         </thead>
         <tbody>
           <?php
-          $query = "SELECT * FROM department";
+          $query = "SELECT *, user.fname AS fname1, user.lname AS lname1 FROM department 
+          INNER JOIN user ON department.deptchair=user.userid 
+          INNER JOIN user u ON department.deptmg=u.userid";
           $query_run = mysqli_query($connection, $query);
           //$query_run = mysqli_query($connection, $query1);
 
@@ -136,8 +138,12 @@ if (!isset($_SESSION['id'])) {
               <td> <?php echo $row['buildingid']; ?> </td>
               <td> <?php echo $row['roomid']; ?> </td>
               <td> <?php echo $row['deptphone']; ?> </td>
-              <td> <?php echo $row['deptchair']; ?> </td>
-              <td> <?php echo $row['deptmg']; ?> </td>
+              <td> <?php echo $row['fname'];
+                    echo " ";
+                    echo $row['lname']; ?> </td>
+              <td> <?php echo $row['fname1'];
+                    echo " ";
+                    echo $row['lname1']; ?> </td>
               <td>
                 <form action="../../php/editDepartments.php" method="POST" class="text-center">
                   <input type="hidden" name="editDept" value=" <?php echo $row['deptid'] ?>">
