@@ -52,7 +52,7 @@ include "../config.php";
             unset($_SESSION['status']);
         }
         ?>
-        <h3 align="center">Student Holds</h3>
+        <h3 align="center">Student History</h3>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -71,7 +71,6 @@ include "../config.php";
                         $studentid = $_POST['studentid'];
                         $query = "SELECT * FROM studenthistory INNER JOIN user ON studenthistory.studentid = user.userid WHERE user.userid = $studentid";
                         $query_run = mysqli_query($connection, $query);
-
                         while ($row = mysqli_fetch_array($query_run)) { ?>
                             <tr>
                                 <td> <?php echo $row['studentid']; ?> </td>
