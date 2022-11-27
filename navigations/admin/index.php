@@ -44,6 +44,10 @@ $row = mysqli_fetch_array($result);
               <li><a class="dropdown-item" href="../masterscheduler.php">View Master Schedule</a></li>
               <li><a class="dropdown-item" href="./adminviewTimeWindows.php">View Semesters</a></li>
               <li><a class="dropdown-item" href="./adminviewCourse.php">View Courses</a></li>
+              <li><a class="dropdown-item" href="./adminviewMajors.php">View Majors</a></li>
+              <li><a class="dropdown-item" href="./adminviewMajorCourses.php">View Major Requirements</a></li>
+              <li><a class="dropdown-item" href="./adminviewMinors.php">View Minors</a></li>
+              <li><a class="dropdown-item" href="./adminviewMinorCourses.php">View Minor Requirements</a></li>
               <li><a class="dropdown-item" href="./adminviewDepts.php">View Departments</a></li>
               <li><a class="dropdown-item" href="./adminviewStudents.php">View Students</a></li>
               <li><a class="dropdown-item" href="./adminviewHolds.php">View Student Holds</a></li>
