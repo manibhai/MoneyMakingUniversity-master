@@ -115,13 +115,6 @@ if (!isset($_SESSION['id'])) {
               INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
               INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
               INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid";
-
-                    $query2 = "SELECT s.crn, c.courseid, c.coursename, s.sectionnum, u.fname, u.lastname, 
-                    d.weekday AS sweek, d.weekday AS eweek, p.pstart, p.pend, s.roomid, s.numofseats, s.semyear 
-                    FROM course c INNER JOIN section s ON c.courseid=s.courseid INNER JOIN faculty ON s.facultyid=faculty.facultyid 
-                    INNER JOIN user u ON faculty.facultyid=u.userid INNER JOIN timeslotperiod ON s.timeslotid=timeslotperiod.timeslotid
-                    INNER JOIN period p ON timeslotperiod.periodid=p.periodid INNER JOIN timeslotday ON s.timeslotid=timeslotday.timeslotid
-                    INNER JOIN day d ON timeslotday.dayoid=d.dayid";
                     $query_run = mysqli_query($connection, $query);
 
                     while ($row = mysqli_fetch_array($query_run)) { ?>
