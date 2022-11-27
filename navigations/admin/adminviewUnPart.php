@@ -54,7 +54,6 @@ if (!isset($_SESSION['id'])) {
                         <td>Student Type</td>
                         <td>Majors</td>
                         <td>Minors</td>
-                        <td>View Student History</td>
 
                     </tr>
                 </thead>
@@ -77,8 +76,6 @@ if (!isset($_SESSION['id'])) {
                             <td> <?php echo $row['gradlevel']; ?> </td>
                             <td> <?php echo $row['majorname']; ?> </td>
                             <td> <?php echo $row['minorname']; ?> </td>
-                            <td> <a href="adminViewHistory.php?id=<?= $row['studentid']; ?>" class="btn btn-primary">View</a>
-                            </td>
 
                         </tr> <?php
                             }

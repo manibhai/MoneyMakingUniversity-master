@@ -51,6 +51,7 @@ $row = mysqli_fetch_array($result);
               <li><a class="dropdown-item" href="./adminviewUnFull.php">View Undergraduate Full-Time Students</a></li>
               <li><a class="dropdown-item" href="./adminviewGrPart.php">View Graduate Part-Time Students</a></li>
               <li><a class="dropdown-item" href="./adminviewGrFull.php">View Graduate Full-Time Students</a></li>
+              <li><a class="dropdown-item" href="./adminviewStudentHistory.php">View Student History</a></li>
               <li><a class="dropdown-item" href="./adminviewHolds.php">View Student Holds</a></li>
             </ul>
           </div>
