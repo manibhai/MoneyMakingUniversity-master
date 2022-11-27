@@ -24,6 +24,54 @@ if (!isset($_SESSION['id'])) {
             <a class="navbar-brand" href="index.php">Admin Homepage</a>
         </div>
         <div class="container-fluid">
+            <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
+                Add To Master Schedule
+            </button>
+            <!--Modal for edit/Delete-->
+            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class=" modal-title fs-5" id="editModal">Info</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <!--Modal body inside of form-->
+                        <!--Connects the for and post to the method that is located in code.php(Server fucntions)-->
+                        <form action="../../php/mm_Code.php" method="post">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <!--Fill in form contents-->
+                                    <label> Course ID</label>
+                                    <input type="varchar(300)" name="courseid" class="form-control" placeholder="Enter Course ID">
+                                </div>
+                                <div class="form-group">
+                                    <!--Fill in form contents-->
+                                    <label> Faculty ID</label>
+                                    <input type="varchar(300)" name="facultyid" class="form-control" placeholder="Enter Faculty ID">
+                                </div>
+                                <div class="form-group">
+                                    <label>Time Slot ID</label>
+                                    <input type="varchar(300)" name="timeslotid" class="form-control" placeholder="Enter Time Slot ID">
+                                </div>
+                                <div class="form-group">
+                                    <label>Room ID</label>
+                                    <input type="varchar(300)" name="roomid" class="form-control" placeholder="Enter Room ID">
+                                </div>
+                                <div class="form-group">
+                                    <label>Semester</label>
+                                    <input type="varchar(300)" name="semyear" class="form-control" placeholder="Enter Semester Year">
+                                </div>
+                            </div>
+                            <!--Footer button goes here-->
+                            <div class="modal-footer">
+                                <button type="submit" name="master_btn" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
             <a class="btn btn-lg btn-danger" href="../logout.php" role="button">Logout</a>
         </div>
     </nav>

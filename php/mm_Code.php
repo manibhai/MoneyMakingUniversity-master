@@ -103,3 +103,31 @@ if (isset($_POST['minorreq_btn'])) {
         exit(0);
     }
 }
+
+//Add to Master
+if (isset($_POST['master_btn'])) {
+    $courseid = $_POST['courseid'];
+    $facultyid = $_POST['facultyid'];
+    $timeslotid = $_POST['timeslotid'];
+    $roomid = $_POST['roomid'];
+    $semyear = $_POST['semyear'];
+
+    $query = "INSERT INTO section (courseid, facultyid, timeslotid, roomid, semyear)
+    VALUES ('$courseid', '$facultyid', '$timeslotid', '$roomid', '$semyear')";
+    $query_run = mysqli_query($connection, $query);
+
+    if (mysqli_num_rows($courseid_query_run) > 0) {
+        $_SESSION['status'] = "Course ID Already Taken. Please Try Another one.";
+        $_SESSION['status_code'] = "error";
+        header('Location: ../navigations/admin/adminviewMaster.php');
+        exit(0);
+    } else if ($query_run) {
+        $_SESSION['success'] = "Added to Master Schedule";
+        header('Location: ../navigations/admin/adminviewMaster.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = " NOT Added to Master Schedule";
+        header('Location: ../navigations/admin/adminviewMaster.php');
+        exit(0);
+    }
+}
