@@ -99,7 +99,6 @@ if (!isset($_SESSION['id'])) {
                     <tr>
                         <td>Course ID</td>
                         <td>Course Name</td>
-                        <td>Prerequisite</td>
                         <td>Credits</td>
                         <td>Department</td>
                         <td>Description</td>
@@ -108,21 +107,20 @@ if (!isset($_SESSION['id'])) {
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT * FROM course INNER JOIN department ON course.deptid = department.deptid INNER JOIN prerequisite ON course.courseid = prerequisite.courseid";
+                    $query = "SELECT * FROM course INNER JOIN department WHERE course.deptid = department.deptid";
                     $query_run = mysqli_query($connection, $query);
 
                     while ($row = mysqli_fetch_array($query_run)) { ?>
                         <tr>
                             <td><?php echo $row['courseid']; ?></td>
                             <td><?php echo $row['coursename']; ?></td>
-                            <td><?php echo $row['prerequisiteid']; ?></td>
                             <td><?php echo $row['numofcredits']; ?></td>
                             <td><?php echo $row['deptname']; ?></td>
                             <td><?php echo $row['coursedesc']; ?></td>
                             <td>
                                 <form action="../../php/editCourses.php" method="POST" class="text-center">
-                                    <input type="hidden" name="editDept" value=" <?php echo $row['deptid'] ?>">
-                                    <button type="submit" name="edit_btn" class="btn btn-warning"> Edit </button>
+                                    <input type="hidden" name="editCourse" value="<?php echo $row['courseid']; ?>">
+                                    <button type="submit" name="editCourse_btn" class="btn btn-warning"> Edit </button>
 
                             </td>
                             </form>
