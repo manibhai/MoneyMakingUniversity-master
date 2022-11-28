@@ -25,7 +25,7 @@ if (!isset($_SESSION['id'])) {
         </div>
         <div class="container-fluid">
             <button type="button" class="btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
-                ADD/DROP Course For a Student
+                ADD/DROP Course
             </button>
             <!--Modal for edit/Delete-->
             <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
