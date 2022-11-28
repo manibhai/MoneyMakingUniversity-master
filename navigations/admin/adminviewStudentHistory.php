@@ -63,6 +63,7 @@ include "../config.php";
                         <td>Course ID</td>
                         <td>Semester</td>
                         <td>Grade</td>
+                        <td>Edit Grades</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,6 +82,12 @@ include "../config.php";
                                 <td> <?php echo $row['courseid']; ?> </td>
                                 <td> <?php echo $row['semyear']; ?> </td>
                                 <td> <?php echo $row['grade']; ?> </td>
+                                <td>
+                                    <form action="../../php/editGrades.php?id=<?= $row['studentid']; ?>&crn=<?= $row['crn']; ?>" method="post">
+                                        <input type="hidden" name="userid" value="<?php echo $row['studentid']; ?>">
+                                        <button type="submit" name="editGrade_btn" class=" btn btn-warning">Edit
+                                </td>
+                                </form>
                             </tr> <?php
                                 }
                             }
