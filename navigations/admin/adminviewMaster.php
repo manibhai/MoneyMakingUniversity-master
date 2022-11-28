@@ -92,7 +92,7 @@ if (!isset($_SESSION['id'])) {
             unset($_SESSION['status']);
         }
         ?>
-        <h3 align="center">Master Scheduler</h3>
+        <h3 align="center">Master Schedule</h3>
         <div class="table-responsive">
             <table id="master" class="table table-bordered">
                 <thead>
