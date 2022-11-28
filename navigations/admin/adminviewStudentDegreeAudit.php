@@ -59,6 +59,7 @@ include "../config.php";
                     <tr>
                         <td>Student ID</td>
                         <td>Student Name</td>
+                        <td>Student Type</td>
                         <td>Major</td>
                         <td>Minor</td>
                     </tr>
@@ -80,6 +81,7 @@ include "../config.php";
                                 <td> <?php echo $row['fname'];
                                         echo " ";
                                         echo $row['lname']; ?> </td>
+                                <td> <?php echo $row['gradlevel']; ?> </td>
                                 <td> <?php echo $row['majorname']; ?> </td>
                                 <td> <?php echo $row['minorname']; ?> </td>
 
