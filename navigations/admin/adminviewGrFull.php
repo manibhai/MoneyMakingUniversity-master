@@ -54,6 +54,7 @@ if (!isset($_SESSION['id'])) {
                         <td>Student Type</td>
                         <td>Majors</td>
                         <td>Minors</td>
+                        <td>Department</td>
 
                     </tr>
                 </thead>
@@ -63,6 +64,7 @@ if (!isset($_SESSION['id'])) {
                     INNER JOIN graduatestudentfulltime ON student.studentid=graduatestudentfulltime.studentid 
                     INNER JOIN studentmajor ON graduatestudentfulltime.studentid = studentmajor.studentid 
                     INNER JOIN major ON studentmajor.majorid = major.majorid
+                    INNER JOIN department ON major.deptid = department.deptid
                     INNER JOIN studentminor ON graduatestudentfulltime.studentid = studentminor.studentid 
                     INNER JOIN minor ON studentminor.minorid = minor.minorid
                     INNER JOIN user ON student.studentid=user.userid";
@@ -77,7 +79,7 @@ if (!isset($_SESSION['id'])) {
                             <td> <?php echo $row['studenttype']; ?> </td>
                             <td> <?php echo $row['majorname']; ?> </td>
                             <td> <?php echo $row['minorname']; ?> </td>
-
+                            <td> <?php echo $row['deptname']; ?> </td>
                         </tr> <?php
                             }
                                 ?>
