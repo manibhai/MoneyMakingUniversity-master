@@ -31,13 +31,16 @@ $row = mysqli_fetch_array($result);
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="admin.php">Admin Home</a>
+            <a class="nav-link active" aria-current="page" href="index.php">Admin Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="adminviewUser.php">Users</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./adminviewMaster.php">View Master Schedule</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./adminviewEnrollment.php">Enrollment</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./adminviewTimeWindows.php">View Semesters</a>

@@ -159,3 +159,27 @@ if (isset($_POST['course_btn'])) {
         exit(0);
     }
 }
+
+//Enrollment
+if (isset($_POST['enroll_btn'])) {
+    $studentid = $_POST['studentid'];
+    $crn = $_POST['crn'];
+    $courseid = $_POST['courseid'];
+    $dateenrolled = $_POST['dateenrolled'];
+    $semyear = $_POST['semyear'];
+    $grade = $_POST['grade'];
+
+    $query = "INSERT INTO enrollment (studentid, crn, courseid, dateenrolled, semyear, grade)
+    VALUES ('$studentid', '$crn', '$courseid', '$dateenrolled', '$semyear', '$grade')";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Student was Enrolled";
+        header('Location: ../navigations/admin/adminviewEnrollment.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Student was Not Enrolled";
+        header('Location: ../navigations/admin/adminviewEnrollment.php');
+        exit(0);
+    }
+}

@@ -22,14 +22,14 @@ include "../config.php";
             <a class="navbar-brand" href="index.php">Admin Homepage</a>
         </div>
         <div class="container-fluid">
-            <a class="btn btn-lg btn-warning" href="adminviewStudentHistory.php" role="button">Reset</a>
+            <a class="btn btn-lg btn-warning" href="adminviewStudentDegreeAudit.php" role="button">Reset</a>
         </div>
         <div class="container-fluid">
             <a class="btn btn-lg btn-danger" href="../logout.php" role="button">Logout</a>
         </div>
     </nav>
 </head>
-<form action="adminviewStudentHistory.php" method="POST">
+<form action="adminviewStudentDegreeAudit.php" method="POST">
     <div class="input-group">
         <input type="search" name="studentid" class="form-control rounded" placeholder="Enter Student ID" aria-label="Search" aria-describedby="search-addon" />
         <button type="submit" name="searchStudent" class="btn btn-outline-primary">Search</button>
@@ -59,18 +59,20 @@ include "../config.php";
                     <tr>
                         <td>Student ID</td>
                         <td>Student Name</td>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Semester</td>
-                        <td>Grade</td>
-                        <td>Edit Grades</td>
+                        <td>Major</td>
+                        <td>Minor</td>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     if (isset($_POST['searchStudent'])) {
                         $studentid = $_POST['studentid'];
-                        $query = "SELECT * FROM studenthistory INNER JOIN user ON studenthistory.studentid = user.userid WHERE user.userid = $studentid";
+                        $query = "SELECT * FROM student
+                                    INNER JOIN studentmajor ON student.studentid=studentmajor.studentid
+                                    INNER JOIN major ON studentmajor.majorid=major.majorid
+                                    INNER JOIN studentminor ON student.studentid=studentminor.studentid
+                                    INNER JOIN minor ON studentminor.minorid=minor.minorid
+                                    INNER JOIN user ON student.studentid = user.userid WHERE user.userid = $studentid";
                         $query_run = mysqli_query($connection, $query);
                         while ($row = mysqli_fetch_array($query_run)) { ?>
                             <tr>
@@ -78,16 +80,42 @@ include "../config.php";
                                 <td> <?php echo $row['fname'];
                                         echo " ";
                                         echo $row['lname']; ?> </td>
-                                <td> <?php echo $row['crn']; ?> </td>
+                                <td> <?php echo $row['majorname']; ?> </td>
+                                <td> <?php echo $row['minorname']; ?> </td>
+
+                            </tr> <?php
+                                }
+                            }
+                                    ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>Course ID</td>
+                        <td>Course Name</td>
+                        <td>Credits</td>
+                        <td>Grade Earned</td>
+                        <td>Semester</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if (isset($_POST['searchStudent'])) {
+                        $studentid = $_POST['studentid'];
+                        $query = $query = "SELECT * FROM studenthistory 
+                                    INNER JOIN course ON studenthistory.courseid = course.courseid
+                                    INNER JOIN user ON studenthistory.studentid = user.userid WHERE user.userid = $studentid";
+                        $query_run = mysqli_query($connection, $query);
+                        while ($row = mysqli_fetch_array($query_run)) { ?>
+                            <tr>
                                 <td> <?php echo $row['courseid']; ?> </td>
-                                <td> <?php echo $row['semyear']; ?> </td>
+                                <td> <?php echo $row['coursename']; ?></td>
+                                <td> <?php echo $row['numofcredits']; ?> </td>
                                 <td> <?php echo $row['grade']; ?> </td>
-                                <td>
-                                    <form action="../../php/editGrades.php?id=<?= $row['studentid']; ?>&crn=<?= $row['crn']; ?>" method="post">
-                                        <input type="hidden" name="userid" value="<?php echo $row['studentid']; ?>">
-                                        <button type="submit" name="editGrade_btn" class=" btn btn-warning">Edit
-                                </td>
-                                </form>
+                                <td> <?php echo $row['semyear']; ?> </td>
                             </tr> <?php
                                 }
                             }
