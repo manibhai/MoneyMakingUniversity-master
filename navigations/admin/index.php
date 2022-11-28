@@ -62,6 +62,7 @@ $row = mysqli_fetch_array($result);
             <ul ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="./adminviewFacultyPart.php">View Part-Time Faculty</a></li>
               <li><a class="dropdown-item" href="./adminviewFacultyFull.php">View Full-Time Faculty</a></li>
+              <li><a class="dropdown-item" href="./adminviewFacultyHistory.php">View Faculty History</a></li>
             </ul>
           </div>
           <div class="dropdown">
