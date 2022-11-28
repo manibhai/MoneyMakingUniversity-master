@@ -96,6 +96,42 @@ include "../config.php";
             <table class="table table-bordered">
                 <thead>
                     <tr>
+                        <td>Total Credits Needed To Graduate</td>
+                        <td>Credits Earned</td>
+                        <td>Credits Needed</td>
+                        <td>GPA</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if (isset($_POST['searchStudent'])) {
+                        $studentid = $_POST['studentid'];
+                        $query = "SELECT major.creditsreq + minor.creditsreq AS totalcredits FROM major INNER JOIN studentmajor ON major.majorid=studentmajor.majorid
+                                    INNER JOIN studentminor ON studentmajor.studentid=studentminor.studentid
+                                    INNER JOIN minor ON studentminor.minorid=minor.minorid
+                                    WHERE studentmajor.studentid=$studentid";
+
+                        $query_run = mysqli_query($connection, $query);
+
+                        while ($row = mysqli_fetch_array($query_run)) { ?>
+                            <tr>
+                                <td> <?php echo $row['totalcredits']; ?> </td>
+                                <td> <?php echo " "; ?> </td>
+                                <td> <?php echo " "; ?> </td>
+                                <td> <?php echo " "; ?> </td>
+                                <td> <?php echo " "; ?> </td>
+
+                            </tr> <?php
+                                }
+                            }
+                                    ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
                         <td>Course ID</td>
                         <td>Course Name</td>
                         <td>Credits</td>
