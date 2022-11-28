@@ -160,25 +160,40 @@ if (isset($_POST['course_btn'])) {
     }
 }
 
-//Enrollment
+//Add
 if (isset($_POST['enroll_btn'])) {
     $studentid = $_POST['studentid'];
     $crn = $_POST['crn'];
-    $courseid = $_POST['courseid'];
-    $dateenrolled = $_POST['dateenrolled'];
-    $semyear = $_POST['semyear'];
-    $grade = $_POST['grade'];
 
-    $query = "INSERT INTO enrollment (studentid, crn, courseid, dateenrolled, semyear, grade)
-    VALUES ('$studentid', '$crn', '$courseid', '$dateenrolled', '$semyear', '$grade')";
+    $query = "INSERT INTO enrollment (studentid, crn)
+    VALUES ('$studentid', '$crn')";
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {
-        $_SESSION['success'] = "Student was Enrolled";
+        $_SESSION['success'] = "Course was Added successfully";
         header('Location: ../navigations/admin/adminviewEnrollment.php');
         exit(0);
     } else {
-        $_SESSION['status'] = "Student was Not Enrolled";
+        $_SESSION['status'] = "Course was not Added";
+        header('Location: ../navigations/admin/adminviewEnrollment.php');
+        exit(0);
+    }
+}
+
+//Drop
+if (isset($_POST['drop_btn'])) {
+    $studentid = $_POST['studentid'];
+    $crn = $_POST['crn'];
+
+    $query = "DELETE FROM enrollment WHERE studentid = '$studentid' AND crn = '$crn";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Course was Dropped successfully";
+        header('Location: ../navigations/admin/adminviewEnrollment.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Course was not Dropped";
         header('Location: ../navigations/admin/adminviewEnrollment.php');
         exit(0);
     }

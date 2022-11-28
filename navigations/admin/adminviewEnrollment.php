@@ -24,8 +24,8 @@ if (!isset($_SESSION['id'])) {
             <a class="navbar-brand" href="index.php">Admin Homepage</a>
         </div>
         <div class="container-fluid">
-            <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
-                Enroll A Student
+            <button type="button" class="btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
+                ADD/DROP Course For a Student
             </button>
             <!--Modal for edit/Delete-->
             <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -49,26 +49,11 @@ if (!isset($_SESSION['id'])) {
                                     <label>CRN</label>
                                     <input type="varchar(300)" name="crn" class="form-control" placeholder="Enter CRN">
                                 </div>
-                                <div class="form-group">
-                                    <label>Course ID</label>
-                                    <input type="varchar(300)" name="courseid" class="form-control" placeholder="Enter Course ID">
-                                </div>
-                                <div class="form-group">
-                                    <label>Date Enrolled</label>
-                                    <input type="varchar(300)" name="dateenrolled" class="form-control" placeholder="Enter Today's Date">
-                                </div>
-                                <div class="form-group">
-                                    <label>Semester</label>
-                                    <input type="varchar(300)" name="semyear" class="form-control" placeholder="Enter Semester Year">
-                                </div>
-                                <div class="form-group">
-                                    <label>Grade</label>
-                                    <input type="varchar(300)" name="grade" class="form-control" placeholder="Enter Grade">
-                                </div>
                             </div>
                             <!--Footer button goes here-->
                             <div class="modal-footer">
-                                <button type="submit" name="enroll_btn" class="btn btn-primary">Save</button>
+                                <button type="submit" name="enroll_btn" class="btn btn-primary">Add Course</button>
+                                <button type="submit" name="drop_btn" class="btn btn-danger">Drop Course</button>
                             </div>
                         </form>
                     </div>
