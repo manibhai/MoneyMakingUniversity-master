@@ -198,3 +198,22 @@ if (isset($_POST['drop_btn'])) {
         exit(0);
     }
 }
+
+//Attendance
+if (isset($_POST['attendance_btn'])) {
+    $studentid = $_POST['studentid'];
+
+    $query = "INSERT INTO attendance (studentid, crn, ispresent, date)
+    VALUES ('$studentid', '$crn', '$ispresent', '$date')";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Attendance Taken successfully";
+        header('Location: ../navigations/admin/adminviewAttendance.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Attendance was not Taken";
+        header('Location: ../navigations/admin/adminviewAttendance.php');
+        exit(0);
+    }
+}
