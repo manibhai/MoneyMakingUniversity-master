@@ -1,6 +1,9 @@
 <?php
 session_start();
 include "../config.php";
+if (!isset($_SESSION['id'])) {
+    header("Location: ../login.php");
+}
 ?>
 
 <!doctype html>
@@ -9,7 +12,7 @@ include "../config.php";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Course History</title>
+    <title>Part Time Undergraduate Student Information</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -26,7 +29,6 @@ include "../config.php";
     </nav>
 </head>
 
-
 <body>
     <br /><br />
     <!--Php to connect to show if changes were successful-->
@@ -38,35 +40,45 @@ include "../config.php";
             unset($_SESSION['success']);
         }
         if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-            echo '<h2> ' . $_SESSION['status'] . '</h2>';
+            echo '<h2>' . $_SESSION['status'] . '</h2>';
             unset($_SESSION['status']);
         }
         ?>
-        <h3 align="center">Course History</h3>
+        <h3 align="center">Part Time Undergraduate Student Information</h3>
         <div class="table-responsive">
             <table id="usersdata" class="table table-bordered">
                 <thead>
                     <tr>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Semester</td>
+                        <td>Student ID</td>
+                        <td>Name</td>
+                        <td>Student Type</td>
+                        <td>Majors</td>
+                        <td>Minors</td>
+
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $currUser = $_SESSION['id'];
-                    $query = "SELECT * FROM course INNER JOIN facultyhistory ON course.courseid=facultyhistory.courseid INNER JOIN user ON facultyhistory.facultyid = user.userid WHERE user.userid = '$currUser'";
+                    $query = "SELECT * FROM student INNER JOIN undergraduatestudentparttime ON student.studentid=undergraduatestudentparttime.studentid 
+                    INNER JOIN studentmajor ON undergraduatestudentparttime.studentid = studentmajor.studentid 
+                    INNER JOIN major ON studentmajor.majorid = major.majorid
+                    INNER JOIN studentminor ON undergraduatestudentparttime.studentid = studentminor.studentid 
+                    INNER JOIN minor ON studentminor.minorid = minor.minorid
+                    INNER JOIN user ON student.studentid=user.userid";
                     $query_run = mysqli_query($connection, $query);
+
                     while ($row = mysqli_fetch_array($query_run)) { ?>
                         <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
+                            <td> <?php echo $row['studentid']; ?> </td>
+                            <td> <?php echo $row['fname'];
+                                    echo " ";
+                                    echo $row['lname']; ?> </td>
+                            <td> <?php echo $row['gradlevel']; ?> </td>
+                            <td> <?php echo $row['majorname']; ?> </td>
+                            <td> <?php echo $row['minorname']; ?> </td>
+
                         </tr> <?php
                             }
-
                                 ?>
                 </tbody>
             </table>
@@ -75,7 +87,6 @@ include "../config.php";
 </body>
 
 </html>
-
 <script>
     $(document).ready(function() {
         $('#usersdata').DataTable();

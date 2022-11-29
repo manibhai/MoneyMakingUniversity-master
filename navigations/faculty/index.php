@@ -50,6 +50,7 @@ $row = mysqli_fetch_array($result);
               <li><a class="dropdown-item" href="./facultyviewGrFull.php">View Graduate Full-Time Students</a></li>
               <li><a class="dropdown-item" href="./facultyviewStudentDegreeAudit.php">View Student Degree Audit</a></li>
               <li><a class="dropdown-item" href="./facultyviewStudentTranscript.php">View Student Transcript</a></li>
+              <li><a class="dropdown-item" href="./facultyviewAttendance.php">Attendance</a></li>
             </ul>
           </div>
         </ul>
