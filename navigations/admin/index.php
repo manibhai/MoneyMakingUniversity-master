@@ -31,7 +31,7 @@ $row = mysqli_fetch_array($result);
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="admin.php">Admin Home</a>
+            <a class="nav-link active" aria-current="page" href="index.php">Admin Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="adminviewUser.php">Users</a>
@@ -40,8 +40,37 @@ $row = mysqli_fetch_array($result);
             <a class="nav-link" href="./adminviewMaster.php">View Master Schedule</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="./adminviewEnrollment.php">Enrollment</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="./adminviewTimeWindows.php">View Semesters</a>
           </li>
+          <div class="dropdown">
+            <button class="btn btn-bg-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              View Students
+            </button>
+            <ul ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="./adminviewUnPart.php">View Undergraduate Part-Time Students</a></li>
+              <li><a class="dropdown-item" href="./adminviewUnFull.php">View Undergraduate Full-Time Students</a></li>
+              <li><a class="dropdown-item" href="./adminviewGrPart.php">View Graduate Part-Time Students</a></li>
+              <li><a class="dropdown-item" href="./adminviewGrFull.php">View Graduate Full-Time Students</a></li>
+              <li><a class="dropdown-item" href="./adminviewStudentHistory.php">View Student History</a></li>
+              <li><a class="dropdown-item" href="./adminviewStudentDegreeAudit.php">View Student Degree Audit</a></li>
+              <li><a class="dropdown-item" href="./adminviewStudentTranscript.php">View Student Transcript</a></li>
+              <li><a class="dropdown-item" href="./adminviewAttendance.php">View Student Attendance</a></li>
+              <li><a class="dropdown-item" href="./adminviewHolds.php">View Student Holds</a></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-bg-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              View Faculty
+            </button>
+            <ul ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="./adminviewFacultyPart.php">View Part-Time Faculty</a></li>
+              <li><a class="dropdown-item" href="./adminviewFacultyFull.php">View Full-Time Faculty</a></li>
+              <li><a class="dropdown-item" href="./adminviewFacultyHistory.php">View Faculty History</a></li>
+            </ul>
+          </div>
           <div class="dropdown">
             <button class="btn btn-bg-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               Tools
@@ -53,8 +82,6 @@ $row = mysqli_fetch_array($result);
               <li><a class="dropdown-item" href="./adminviewMinors.php">View Minors</a></li>
               <li><a class="dropdown-item" href="./adminviewMinorCourses.php">View Minor Requirements</a></li>
               <li><a class="dropdown-item" href="./adminviewDepts.php">View Departments</a></li>
-              <li><a class="dropdown-item" href="./adminviewStudents.php">View Students</a></li>
-              <li><a class="dropdown-item" href="./adminviewHolds.php">View Student Holds</a></li>
             </ul>
           </div>
         </ul>

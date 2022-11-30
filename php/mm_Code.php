@@ -159,3 +159,61 @@ if (isset($_POST['course_btn'])) {
         exit(0);
     }
 }
+
+//Add
+if (isset($_POST['enroll_btn'])) {
+    $studentid = $_POST['studentid'];
+    $crn = $_POST['crn'];
+
+    $query = "INSERT INTO enrollment (studentid, crn)
+    VALUES ('$studentid', '$crn')";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Course was Added successfully";
+        header('Location: ../navigations/admin/adminviewEnrollment.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Course was not Added";
+        header('Location: ../navigations/admin/adminviewEnrollment.php');
+        exit(0);
+    }
+}
+
+//Drop
+if (isset($_POST['drop_btn'])) {
+    $studentid = $_POST['studentid'];
+    $crn = $_POST['crn'];
+
+    $query = "DELETE FROM enrollment WHERE studentid = '$studentid' AND crn = '$crn";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Course was Dropped successfully";
+        header('Location: ../navigations/admin/adminviewEnrollment.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Course was not Dropped";
+        header('Location: ../navigations/admin/adminviewEnrollment.php');
+        exit(0);
+    }
+}
+
+//Attendance
+if (isset($_POST['attendance_btn'])) {
+    $studentid = $_POST['studentid'];
+
+    $query = "INSERT INTO attendance (studentid, crn, ispresent, date)
+    VALUES ('$studentid', '$crn', '$ispresent', '$date')";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Attendance Taken successfully";
+        header('Location: ../navigations/admin/adminviewAttendance.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Attendance was not Taken";
+        header('Location: ../navigations/admin/adminviewAttendance.php');
+        exit(0);
+    }
+}

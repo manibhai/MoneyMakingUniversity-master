@@ -1,65 +1,66 @@
 <?php
-include '../config.php';
 session_start();
+include "../config.php";
+include "institution.php";
+
+if (!isset($_SESSION['id'])) {
+  header("Location: ../login.php");
+}
+
 $currUser = $_SESSION['id'];
 $sql = "SELECT * FROM user WHERE userid = '$currUser'";
 $result = mysqli_query($connection, $sql);
 $row = mysqli_fetch_array($result);
-if (!isset($_SESSION['id'])) {
-  header("Location: ../login.php");
-}
 ?>
 
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Student</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3">
-    <div class="container">
-      <a href="index.php" class="navbar-brand">Money Making University</a>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../../index.php">MMU</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <div class="collapse navbar-collapse" id="navmenu">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Tools
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">View Schedule</a></li>
-              <li><a class="dropdown-item" href="#">View History</a></li>
-              <li><a class="dropdown-item" href="#">Registration</a></li>
-              <li><a class="dropdown-item" href="#">Drop Course(s)</a></li>
-              <li><a class="dropdown-item" href="studentDegreeAudit.php">View Degree Audit</a></li>
-            </ul>
-          </li>
-
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a href="editProfile.php" class="btn btn-warning but-lg">Profile</a>
-            <a href="../logout.php" class="btn btn-primary but-lg">logout</a>
+            <a class="nav-link active" aria-current="page" href="index.php">Student Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./studentviewHistory.php">View History</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./studentviewSchedule.php">View Schedule</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./studentviewDegreeAudit.php">View Degree Audit</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./studentviewTranscript.php">View Transcript</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./studentviewRegistration.php">Registration</a>
           </li>
         </ul>
+        <a href="editProfile.php" class="btn btn-warning">Profile</a>
+        <a href="../logout.php" class="btn btn-primary">Log Out</a>
       </div>
     </div>
   </nav>
-  <section class="bg-dark text-light p-5 text-center text-sm-start">
-    <div class="container">
-      <div class="d-sm-flex align-items-center justify-content-between">
-        <div>
-          <h2>Welcome to Student Page, User: <?php echo $row['fname'] ?> <?php echo $row['lname'] ?> </h2>
-        </div>
+
+  <div class="container text-center">
+    <h2 class="mb-3 h2">Welcome to Student Page, <?php echo $row['fname'] ?> <?php echo $row['lname'] ?> </h2>
+  </div>
   </section>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
 
 </html>

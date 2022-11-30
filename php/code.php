@@ -91,3 +91,33 @@ if (isset($_POST['delete_btn'])) {
         exit(0);
     }
 }
+
+//EDIT A COURSE
+if (isset($_POST['editCourse_btn'])) {
+    $courseid = $_POST['courseid'];
+    $query = "SELECT * FROM course WHERE courseid='$courseid'";
+    $query_run = mysqli_query($connection, $query);
+}
+
+if (isset($_POST['updateCourse_btn'])) {
+    $courseid = $_POST['courseid'];
+    $coursename = $_POST['coursename'];
+    $numofcredits = $_POST['numofcredits'];
+    $deptid = $_POST['deptid'];
+    $coursedesc = $_POST['coursedesc'];
+
+    $query = "UPDATE course SET courseid = '$courseid', coursename = '$coursename', 
+                numofcredits = '$numofcredits', deptid = '$deptid', coursedesc = 'coursedesc' 
+                WHERE course.courseid ='$courseid'";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Course has been Updated";
+        header('Location: ../navigations/admin/adminviewCourse.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Course was not Updated";
+        header('Location: ../navigations/admin/adminviewCourse.php');
+        exit(0);
+    }
+}

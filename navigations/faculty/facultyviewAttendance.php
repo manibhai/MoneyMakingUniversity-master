@@ -4,6 +4,7 @@ include "../config.php";
 if (!isset($_SESSION['id'])) {
     header("Location: ../login.php");
 }
+$currUser = $_SESSION['id'];
 ?>
 
 <!doctype html>
@@ -12,7 +13,7 @@ if (!isset($_SESSION['id'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Master Scheduler</title>
+    <title>Student Attendance</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -21,18 +22,21 @@ if (!isset($_SESSION['id'])) {
         <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">Admin Homepage</a>
+            <a class="navbar-brand" href="index.php">Faculty Homepage</a>
+        </div>
+        <div class="container-fluid">
+            <a class="btn btn-lg btn-warning" href="facultyviewAttendance.php" role="button">Reset</a>
         </div>
         <div class="container-fluid">
             <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
-                Add To Master Schedule
+                Take Attendance
             </button>
             <!--Modal for edit/Delete-->
             <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class=" modal-title fs-5" id="editModal">Info</h1>
+                            <h1 class=" modal-title fs-5" id="editModal">Attendance</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <!--Modal body inside of form-->
@@ -41,30 +45,26 @@ if (!isset($_SESSION['id'])) {
                             <div class="modal-body">
                                 <div class="form-group">
                                     <!--Fill in form contents-->
-                                    <label> Course ID</label>
-                                    <input type="varchar(300)" name="courseid" class="form-control" placeholder="Enter Course ID">
+                                    <label>Student ID</label>
+                                    <input type="varchar(300)" name="studentid" class="form-control" placeholder="Enter Student ID">
                                 </div>
                                 <div class="form-group">
                                     <!--Fill in form contents-->
-                                    <label> Faculty ID</label>
-                                    <input type="varchar(300)" name="facultyid" class="form-control" placeholder="Enter Faculty ID">
+                                    <label>CRN</label>
+                                    <input type="varchar(300)" name="crn" class="form-control" placeholder="Enter CRN">
                                 </div>
                                 <div class="form-group">
-                                    <label>Time Slot ID</label>
-                                    <input type="varchar(300)" name="timeslotid" class="form-control" placeholder="Enter Time Slot ID">
+                                    <label>Present</label>
+                                    <input type="varchar(300)" name="ispresent" class="form-control" placeholder="Enter Y or N">
                                 </div>
                                 <div class="form-group">
-                                    <label>Room ID</label>
-                                    <input type="varchar(300)" name="roomid" class="form-control" placeholder="Enter Room ID">
-                                </div>
-                                <div class="form-group">
-                                    <label>Semester</label>
-                                    <input type="varchar(300)" name="semyear" class="form-control" placeholder="Enter Semester Year">
+                                    <label>Date</label>
+                                    <input type="varchar(300)" name="date" class="form-control" placeholder="Enter Date FORMAT(yyyy-mm-dd)">
                                 </div>
                             </div>
                             <!--Footer button goes here-->
                             <div class="modal-footer">
-                                <button type="submit" name="master_btn" class="btn btn-primary">Save</button>
+                                <button type="submit" name="attendance_btn" class="btn btn-primary">Save</button>
                             </div>
                         </form>
                     </div>
@@ -76,6 +76,12 @@ if (!isset($_SESSION['id'])) {
         </div>
     </nav>
 </head>
+<form action="facultyviewAttendance.php" method="POST">
+    <div class="input-group">
+        <input type="search" name="studentid" class="form-control rounded" placeholder="Enter Student ID" aria-label="Search" aria-describedby="search-addon" />
+        <button type="submit" name="searchStudent" class="btn btn-outline-primary">Search</button>
+    </div>
+</form>
 
 <body>
     <br /><br />
@@ -92,52 +98,38 @@ if (!isset($_SESSION['id'])) {
             unset($_SESSION['status']);
         }
         ?>
-        <h3 align="center">Master Schedule</h3>
+        <h3 align="center">Student Attendance</h3>
         <div class="table-responsive">
-            <table id="master" class="table table-bordered">
+            <table id="usersdata" class="table table-bordered">
                 <thead>
                     <tr>
+                        <td>Student ID</td>
                         <td>CRN</td>
                         <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Section</td>
-                        <td>Instructor</td>
-                        <td>Days</td>
-                        <td>Time</td>
-                        <td>Room</td>
-                        <td>Seats Available</td>
-                        <td>Semester</td>
+                        <td>Present?</td>
+                        <td>Date</td>
+
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
-                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid";
-                    $query_run = mysqli_query($connection, $query);
+                    if (isset($_POST['searchStudent'])) {
+                        $studentid = $_POST['studentid'];
+                        $query = "SELECT * FROM attendance WHERE attendance.studentid = $studentid";
+                        $query_run = mysqli_query($connection, $query);
 
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
+                        while ($row = mysqli_fetch_array($query_run)) { ?>
+                            <tr>
+                                <td> <?php echo $row['studentid']; ?> </td>
+                                <td> <?php echo $row['crn']; ?> </td>
+                                <td> <?php echo $row['couseid']; ?> </td>
+                                <td> <?php echo $row['ispresent']; ?> </td>
+                                <td> <?php echo $row['date']; ?> </td>
+
+                            </tr> <?php
+                                }
                             }
-                                ?>
+                                    ?>
                 </tbody>
             </table>
         </div>
@@ -147,6 +139,6 @@ if (!isset($_SESSION['id'])) {
 </html>
 <script>
     $(document).ready(function() {
-        $('#master').DataTable();
+        $('#usersdata').DataTable();
     });
 </script>
