@@ -41,29 +41,33 @@ include "config.php";
         </thead>
         <tbody>
           <?php
-            $query = "SELECT * FROM department INNER JOIN faculty ON department.deptchair=faculty.facultyid  INNER JOIN user ON faculty.facultyid=user.userid
-                      UNION 
-                      SELECT * FROM department INNER JOIN faculty ON department.deptmg=faculty.facultyid  INNER JOIN user on faculty.facultyid=user.userid";
-            $query_run = mysqli_query($connection, $query);
-            //$query_run = mysqli_query($connection, $query1);
+          $query = "SELECT *, user.fname AS fname1, user.lname AS lname1 FROM department 
+                    INNER JOIN user ON department.deptchair=user.userid 
+                    INNER JOIN user u ON department.deptmg=u.userid";
+          $query_run = mysqli_query($connection, $query);
 
-            while($row = mysqli_fetch_array($query_run)) { ?>
-              <tr>
-                <td> <?php echo $row['deptname']; ?> </td>
-                <td> <?php echo $row['deptemail']; ?> </td>
-                <td> <?php echo $row['buildingid']; ?> </td>
-                <td> <?php echo $row['roomid']; ?> </td>
-                <td> <?php echo $row['deptphone']; ?> </td>
-                <td> <?php echo $row['fname']; echo " "; echo $row['lname']; ?> </td>
-                <td> <?php echo $row['deptmg']; ?> </td>
-              </tr> <?php
-            } 
-          ?>
+          while ($row = mysqli_fetch_array($query_run)) { ?>
+            <tr>
+              <td> <?php echo $row['deptname']; ?> </td>
+              <td> <?php echo $row['deptemail']; ?> </td>
+              <td> <?php echo $row['buildingid']; ?> </td>
+              <td> <?php echo $row['roomid']; ?> </td>
+              <td> <?php echo $row['deptphone']; ?> </td>
+              <td> <?php echo $row['fname1'];
+                    echo " ";
+                    echo $row['lname1']; ?> </td>
+              <td> <?php echo $row['fname'];
+                    echo " ";
+                    echo $row['lname']; ?> </td>
+            </tr> <?php
+                }
+                  ?>
         </tbody>
       </table>
     </div>
   </div>
 </body>
+
 </html>
 <script>
   $(document).ready(function() {

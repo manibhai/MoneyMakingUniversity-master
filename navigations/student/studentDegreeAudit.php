@@ -27,6 +27,7 @@ if(!isset($_SESSION['id'])){
     </div>
   </nav>
 </head>
+
 <body>
 <section class="bg-dark text-light p-5 text-center text-sm-start">
     <div class="container">
@@ -40,6 +41,10 @@ if(!isset($_SESSION['id'])){
     $currUser = $_SESSION['id'];
     $query = "SELECT * FROM user WHERE userid = '$currUser'";
     $query_run = mysqli_query($connection, $query);
+
+    $query = "SELECT studentid FROM student WHERE studentid = '$currUser'";
+    $query_run = mysqli_query($connection, $query);
+    
 
     foreach ($query_run as $row) {
     ?>

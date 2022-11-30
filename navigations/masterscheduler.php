@@ -31,39 +31,52 @@ include "config.php";
         <thead>
           <tr>
             <td>CRN</td>
-            <td>Course</td>
+            <td>Course ID</td>
+            <td>Course Name</td>
             <td>Section</td>
-            <td>Faculty Name</td>
-            <td>Time Slot</td>
+            <td>Instructor</td>
+            <td>Days</td>
+            <td>Time</td>
             <td>Room</td>
-            <td>Semester Year</td>
-            <td>Available Seats</td>
+            <td>Seats Available</td>
+            <td>Semester</td>
           </tr>
         </thead>
         <tbody>
           <?php
-            $query = "SELECT * FROM section INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-              INNER JOIN user ON faculty.facultyid=user.userid WHERE semyear='S2023'";
-            $query_run = mysqli_query($connection, $query);
+          $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
+                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
+                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
+                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE semyear='S2023'";
+          $query_run = mysqli_query($connection, $query);
 
-            while($row = mysqli_fetch_array($query_run)) { ?>
-              <tr>
-                <td> <?php echo $row['crn']; ?> </td>
-                <td> <?php echo $row['courseid']; ?> </td>
-                <td> <?php echo $row['sectionnum']; ?> </td>
-                <td> <?php echo $row['fname']; echo " ";  echo $row['lname']; ?> </td>
-                <td> <?php echo $row['timeslotid']; ?>  </td>
-                <td> <?php echo $row['roomid']; ?> </td>
-                <td> <?php echo $row['semyear']; ?> </td>
-                <td> <?php echo $row['numofseats']; ?> </td>
-              </tr> <?php
-            } 
-          ?>
+          while ($row = mysqli_fetch_array($query_run)) { ?>
+            <tr>
+              <td> <?php echo $row['crn']; ?> </td>
+              <td> <?php echo $row['courseid']; ?> </td>
+              <td> <?php echo $row['coursename']; ?> </td>
+              <td> <?php echo $row['sectionnum']; ?> </td>
+              <td> <?php echo $row['fname'];
+                    echo " ";
+                    echo $row['lname']; ?> </td>
+              <td> <?php echo $row['weekday1'];
+                    echo "/";
+                    echo $row['weekday']; ?> </td>
+              <td> <?php echo $row['pstart'];
+                    echo " - ";
+                    echo $row['pend']; ?> </td>
+              <td> <?php echo $row['roomid']; ?> </td>
+              <td> <?php echo $row['numofseats']; ?> </td>
+              <td> <?php echo $row['semyear']; ?> </td>
+            </tr> <?php
+                }
+                  ?>
         </tbody>
       </table>
     </div>
   </div>
 </body>
+
 </html>
 <script>
   $(document).ready(function() {

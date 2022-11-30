@@ -31,24 +31,27 @@ include "config.php";
         <thead>
           <tr>
             <td>Minor Name</td>
+            <td>Department Name</td>
           </tr>
         </thead>
         <tbody>
           <?php
-            $query = "SELECT * FROM minor";
-            $query_run = mysqli_query($connection, $query);
+          $query = "SELECT * FROM minor INNER JOIN department WHERE minor.deptid = department.deptid";
+          $query_run = mysqli_query($connection, $query);
 
-            while($row = mysqli_fetch_array($query_run)) { ?>
-              <tr>
-                <td> <?php echo $row['minorname']; ?> </td>
-              </tr> <?php
-            } 
-          ?>
+          while ($row = mysqli_fetch_array($query_run)) { ?>
+            <tr>
+              <td> <?php echo $row['minorname']; ?> </td>
+              <td> <?php echo $row['deptname']; ?> </td>
+            </tr> <?php
+                }
+                  ?>
         </tbody>
       </table>
     </div>
   </div>
 </body>
+
 </html>
 <script>
   $(document).ready(function() {

@@ -1,9 +1,9 @@
 <?php
 session_start();
 include "../config.php";
-if(!isset($_SESSION['id'])){
+if (!isset($_SESSION['id'])) {
     header("Location: ../login.php");
-  }
+}
 ?>
 
 <!doctype html>
@@ -23,7 +23,7 @@ if(!isset($_SESSION['id'])){
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">Admin Homepage</a>
         </div>
-    
+
         <div class="container-fluid">
             <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Create a User
@@ -108,9 +108,14 @@ if(!isset($_SESSION['id'])){
         <?php
         if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
             echo '<h2> ' . $_SESSION['success'] . '</h2>';
-            unset($_SESSION['sucess']);
+            unset($_SESSION['success']);
+        }
+        if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+            echo '<h2> ' . $_SESSION['status'] . '</h2>';
+            unset($_SESSION['status']);
         }
         ?>
+
         <div class="table-responsive">
             <table id="usersdata" class="table table-bordered">
                 <thead>
@@ -137,7 +142,7 @@ if(!isset($_SESSION['id'])){
                     user.city, user.state, user.zipcode, userlogin.email, userlogin.pass FROM user INNER JOIN userlogin ON user.userid=userlogin.userid";
                     $query_run = mysqli_query($connection, $query);
 
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
+                   foreach ($query_run as $row ) { ?>
                         <tr>
                             <td> <?php echo $row['userid']; ?> </td>
                             <td> <?php echo $row['email']; ?> </td>
@@ -152,7 +157,7 @@ if(!isset($_SESSION['id'])){
                             <td> <?php echo $row['zipcode']; ?> </td>
                             <td> <?php echo $row['usertype']; ?> </td>
                             <td>
-                                <form action="../../php/editUser.php" method="post">
+                                <form action="../../php/editUser.php?id=<?=$row['userid'];?>" method="post">
                                     <input type="hidden" name="userid" value="<?php echo $row['userid']; ?>">
                                     <button type="submit" name="edit_btn" class=" btn btn-warning">Edit
                             </td>
@@ -165,7 +170,7 @@ if(!isset($_SESSION['id'])){
                             </form>
                         </tr> <?php
                             }
-                          ?>
+                                ?>
                 </tbody>
             </table>
         </div>

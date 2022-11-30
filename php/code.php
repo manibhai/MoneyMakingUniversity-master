@@ -3,7 +3,7 @@ session_start();
 include "../navigations/config.php";
 
 //CREATE A USER
-if(isset($_POST['create_btn'])) {
+if (isset($_POST['create_btn'])) {
     $userid = $_POST['userid'];
     $usertype = $_POST['usertype'];
     $email = $_POST['email'];
@@ -23,35 +23,30 @@ if(isset($_POST['create_btn'])) {
     $query_run = mysqli_query($connection, $query);
     $query_run = mysqli_query($connection, $query1);
 
-    if(mysqli_num_rows($userid_query_run) > 0)
-    {
+    if (mysqli_num_rows($userid_query_run) > 0) {
         $_SESSION['status'] = "User ID Already Taken. Please Try Another one.";
         $_SESSION['status_code'] = "error";
-        header('Location: ..//navigations/admin/index.php');
+        header('Location: ../navigations/admin/adminviewUser.php');
         exit(0);
-    }
-    else if($query_run) {
+    } else if ($query_run) {
         $_SESSION['success'] = "User Profile has been Created";
         header('Location: ../navigations/admin/adminviewUser.php');
         exit(0);
-    }
-    else {
+    } else {
         $_SESSION['status'] = "User Profile was not Created";
-        header('Location: ../index.php');
+        header('Location: ../navigations/admin/adminviewUser.php');
         exit(0);
     }
 }
 
 //EDIT A USER
-if(isset($_POST['edit_btn'])) {
+if (isset($_POST['edit_btn'])) {
     $userid = $_POST['userid'];
     $query = "SELECT * FROM user WHERE userid='$userid'";
     $query_run = mysqli_query($connection, $query);
-    $query1 = "SELECT * FROM userlogin WHERE userid='$userid'";
-    $query_run = mysqli_query($connection, $query1);
 }
 
-if(isset($_POST['update_btn'])) {
+if (isset($_POST['update_btn'])) {
     $userid = $_POST['userid'];
     $usertype = $_POST['usertype'];
     $email = $_POST['email'];
@@ -64,69 +59,35 @@ if(isset($_POST['update_btn'])) {
     $city = $_POST['city'];
     $state = $_POST['state'];
     $zipCode = $_POST['zipcode'];
-    
+
     $query = "SELECT user.userid, user.usertype, user.lname, user.fname, user.phone, user.dob, user.street, 
-                    user.city, user.state, user.zipcode, userlogin.email, userlogin.pass FROM user INNER JOIN userlogin ON user.userid=userlogin.userid";
+                    user.city, user.state, user.zipcode, userlogin.email, userlogin.pass FROM user INNER JOIN userlogin 
+                    ON user.userid = userlogin.userid WHERE user.userid AND userlogin.userid='$userid'";
     $query_run = mysqli_query($connection, $query);
 
-    if($query_run) {
+    if ($query_run) {
         $_SESSION['success'] = "User has been Updated";
         header('Location: ../navigations/admin/adminviewUser.php');
         exit(0);
-    }
-    else {
+    } else {
         $_SESSION['status'] = "User was not Updated";
         header('Location: ../navigations/admin/adminviewUser.php');
         exit(0);
     }
 }
 //DELETE A USER
-if(isset($_POST['delete_btn'])) {
+if (isset($_POST['delete_btn'])) {
     $userid = $_POST['deleteid'];
-    $query = "DELETE FROM user WHERE userid='$userid' ";
-    $query1 = "DELETE FROM userlogin WHERE userid='$userid' ";
+    $query = "DELETE FROM user INNER JOIN userlogin ON user.userid=userlogin.userid WHERE user.userid AND userlogin.userid='$userid' ";
     $query_run = mysqli_query($connection, $query);
-    $query_run = mysqli_query($connection, $query1);
 
-    if($query_run) {
+    if ($query_run) {
         $_SESSION['success'] = "User has been Deleted";
         header('Location: ../navigations/admin/adminviewUser.php');
         exit(0);
-    }
-    else {
+    } else {
         $_SESSION['status'] = "User was not Deleted";
         header('Location: ../navigations/admin/adminviewUser.php');
         exit(0);
-    }
-}
-//CREATE DEPTARMENT 
-
-if(isset($_POST['c_btn'])){
-    $deptid = $_POST['deptid'];
-    $deptname = $_POST['deptname'];
-    $deptemail = $_POST['deptemail'];
-    $buildingid = $_POST['buildingid'];
-    $roomid = $_POST['roomid'];
-    $deptphone = $_POST['deptphone'];
-    $deptchair = $_POST['deptchair'];
-    $deptmg = $_POST['deptmg'];
-
-    $query= "INSERT INTO department 
-    (deptid , deptname, deptemail, deptphone)
-    VALUES ('$deptid', '$deptname', '$deptemail', '$deptphone')";
-    $query_run = mysqli_query($connection, $query);
-
-    if(mysqli_num_rows($deptid_query_run) > 0){
-        $_SESSION['status'] = "Deptartment ID Already Taken. Please Try Another one.";
-        $_SESSION['status_code'] = "error";
-        header('Location: ../navigations/admin/index.php');
-    }
-    else if($query_run) {
-        $_SESSION['success'] = "Department has been Created";
-        header('Location: ../navigations/admin/adminviewUser.php');
-    }
-    else {
-        $_SESSION['status'] = "Department could not be created";
-        header('Location: ../index.php');
     }
 }
