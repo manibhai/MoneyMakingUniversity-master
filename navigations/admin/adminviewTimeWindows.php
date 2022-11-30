@@ -53,7 +53,7 @@ include "../config.php";
                                     <input type="date" name="enddate" class="form-control" placeholder="Enter end date">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" name="create_btn" class="btn btn-primary">Save</button>
+                                    <button type="submit" name="createsem_btn" class="btn btn-primary">Save</button>
                                 </div>
                         </form>
 
