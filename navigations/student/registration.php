@@ -57,7 +57,7 @@ if (!isset($_SESSION['id'])) {
                             <option value="">Select Semester Year</option>
                             <?php
                             foreach ($query_run as $row) {
-                                echo "<option value=" . $row["semyear"] . ">" . $row["semyear"] . '</option>';
+                                echo "<option value=" . $row["semyear"] . ">" . $row["semname"] . " " . $row["year"] . '</option>';
                             }
                             ?>
                         </select>
