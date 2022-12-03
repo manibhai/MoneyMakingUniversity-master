@@ -85,6 +85,9 @@ if (!isset($_SESSION['id'])) {
                 unset($_SESSION['status']);
             }
             ?>
+            <h2 class="mt-2 mb-3 text-center text-warning"><?php echo $row["semname"];
+                                                            echo " ";
+                                                            echo $row["year"]; ?></h2>
             <div class="table-responsive">
                 <table id="master" class="table table-bordered">
                     <thead>
@@ -133,7 +136,7 @@ if (!isset($_SESSION['id'])) {
                                     <td>
                                         <form action="./registerClass.php?id=<?= $row['crn']; ?>&cid=<?= $row['courseid']; ?>&year=<?= $row['semyear']; ?>" method="post">
                                             <input type="hidden" name="userid" value="<?php echo $row['studentid']; ?>">
-                                            <button type="submit" name="register_btn" class=" btn btn-warning" <?php if ($get_semyear != 'S2023') { ?> disabled <?php   } ?>>Register</button>
+                                            <button type="submit" name="register_btn" class=" btn btn-primary" <?php if ($get_semyear != 'S2023') { ?> disabled <?php   } ?>>Register</button>
                                         </form>
                                     </td>
                                 </tr> <?php
