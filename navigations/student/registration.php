@@ -85,9 +85,6 @@ if (!isset($_SESSION['id'])) {
                 unset($_SESSION['status']);
             }
             ?>
-            <h2 class="mt-2 mb-3 text-center text-warning"><?php echo $row["semname"];
-                                                            echo " ";
-                                                            echo $row["year"]; ?></h2>
             <div class="table-responsive">
                 <table id="master" class="table table-bordered">
                     <thead>
