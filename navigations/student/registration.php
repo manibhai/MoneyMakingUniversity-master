@@ -133,7 +133,7 @@ if (!isset($_SESSION['id'])) {
                                     <td>
                                         <form action="./registerClass.php?id=<?= $row['crn']; ?>&cid=<?= $row['courseid']; ?>&year=<?= $row['semyear']; ?>" method="post">
                                             <input type="hidden" name="userid" value="<?php echo $row['studentid']; ?>">
-                                            <button type="submit" name="register_btn" class=" btn btn-warning">Register</button>
+                                            <button type="submit" name="register_btn" class=" btn btn-warning" <?php if ($get_semyear != 'S2023') { ?> disabled <?php   } ?>>Register</button>
                                         </form>
                                     </td>
                                 </tr> <?php
