@@ -46,7 +46,7 @@ $row = mysqli_fetch_array($result);
             <a class="nav-link" href="./studentviewTranscript.php">View Transcript</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./studentviewRegistration.php">Registration</a>
+            <a class="nav-link" href="./registration.php">Registration</a>
           </li>
         </ul>
         <a href="editProfile.php" class="btn btn-warning">Profile</a>

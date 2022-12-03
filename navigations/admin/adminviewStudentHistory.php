@@ -1,7 +1,9 @@
 <?php
 session_start();
 include "../config.php";
-
+if (!isset($_SESSION['id'])) {
+    header("Location: ../login.php");
+}
 ?>
 
 <!doctype html>
@@ -86,8 +88,8 @@ include "../config.php";
                                     <form action="../../php/editGrades.php?id=<?= $row['studentid']; ?>&crn=<?= $row['crn']; ?>" method="post">
                                         <input type="hidden" name="userid" value="<?php echo $row['studentid']; ?>">
                                         <button type="submit" name="editGrade_btn" class=" btn btn-warning">Edit
+                                    </form>
                                 </td>
-                                </form>
                             </tr> <?php
                                 }
                             }
