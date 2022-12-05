@@ -91,10 +91,6 @@ $row = mysqli_fetch_array($result);
     </div>
   </nav>
 
-  <div class="bg-image text-center">
-    <div style="background-image: url('https://www.coolgenerator.com/Data/Textdesign/202212/1b7f9d7944d14153613a3187731dd543.png'); height: 100vh">
-    </div>
-  </div>
   <section>
     <div class="row justify-content-center">
 
