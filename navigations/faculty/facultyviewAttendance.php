@@ -5,6 +5,11 @@ if (!isset($_SESSION['id'])) {
     header("Location: ../login.php");
 }
 $currUser = $_SESSION['id'];
+
+$tz = 'America/New_York';
+$timestamp = time();
+$dt = new DateTime("now", new DateTimeZone($tz)); //first argument "must" be a string
+$dt->setTimestamp($timestamp); //adjust the object to correct timestamp
 ?>
 
 <!doctype html>
@@ -59,7 +64,7 @@ $currUser = $_SESSION['id'];
                                 </div>
                                 <div class="form-group">
                                     <label>Date</label>
-                                    <input type="varchar(300)" name="date" class="form-control" value="<?php echo date("Y-m-d"); ?>" placeholder="Enter Date FORMAT(yyyy-mm-dd)">
+                                    <input type="varchar(300)" name="date" class="form-control" disabled value="<?php echo $dt->format('Y-m-d'); ?>" placeholder="Enter Date FORMAT(yyyy-mm-dd)">
                                 </div>
                             </div>
                             <!--Footer button goes here-->
