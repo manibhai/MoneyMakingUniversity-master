@@ -60,9 +60,9 @@ if (isset($_POST['update_btn'])) {
     $state = $_POST['state'];
     $zipCode = $_POST['zipcode'];
 
-    $query = "SELECT user.userid, user.usertype, user.lname, user.fname, user.phone, user.dob, user.street, 
-                    user.city, user.state, user.zipcode, userlogin.email, userlogin.pass FROM user INNER JOIN userlogin 
-                    ON user.userid = userlogin.userid WHERE user.userid AND userlogin.userid='$userid'";
+    $query = "UPDATE user, userlogin SET user.userid='$userid', user.usertype='$usertype', user.lname='$lname', user.fname='$fname', user.phone='$phone', 
+                user.dob='$dob', user.street='$street', user.city='$city', 
+                user.state='$state', user.zipcode='$zipCode', userlogin.email='$email', userlogin.pass='$pass' WHERE user.userid = userlogin.userid AND userlogin.userid='$userid'";
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {
@@ -138,7 +138,7 @@ if (isset($_POST['create_sem_btn'])) {
     $query = "SELECT * FROM semesteryear UNION SELECT timewindow.semyear, timewindow.regcuoff, timewindow.dropcutoff, timewindow.examcutoff, timewindow.gradecutoff FROM timewindow";
     $query_run = mysqli_query($connection, $query);
 
-   if ($query_run) {
+    if ($query_run) {
         $_SESSION['success'] = "Semester has been Created";
         header('Location: ../navigations/admin/adminviewTimeWindows.php');
         exit(0);

@@ -77,7 +77,7 @@ if (!isset($_SESSION['id'])) {
                 </div>
                 <div class="form-group">
                     <label>ZipCode</label>
-                    <input type="varchar(300)" name="zipCode" value="<?php echo $row['zipcode'] ?>" class="form-control" placeholder="Enter Zipcode">
+                    <input type="varchar(300)" name="zipcode" value="<?php echo $row['zipcode'] ?>" class="form-control" placeholder="Enter Zipcode">
                 </div>
                 <a href="../navigations/admin/adminviewUser.php" class="btn btn-danger"> Cancel </a>
                 <button type="submit" name="update_btn" class="btn btn-success"> Update </button>
