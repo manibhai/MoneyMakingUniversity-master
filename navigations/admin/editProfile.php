@@ -41,7 +41,7 @@ $currUser = $_SESSION['id'];
         ?>
         <?php
         $currUser = $_SESSION['id'];
-        $query = "SELECT * FROM user WHERE userid = '$currUser'";
+        $query = "SELECT * FROM user INNER JOIN userlogin ON user.userid=userlogin.userid WHERE user.userid = '$currUser'";
         $query_run = mysqli_query($connection, $query);
 
         foreach ($query_run as $row) {
@@ -58,6 +58,10 @@ $currUser = $_SESSION['id'];
                                 <div class="row mt-2">
                                     <div class="col-md-6"><label class="labels">First Name</label><input type="text" name="fname" class="form-control" placeholder="first name" value="<?php echo $row['fname']; ?>"></div>
                                     <div class="col-md-6"><label class="labels">Last Name</label><input type="text" name="lname" class="form-control" value="<?php echo $row['lname']; ?>" placeholder="last name"></div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6"><label class="labels">Email</label><input type="text" name="email" class="form-control" placeholder="email" value="<?php echo $row['email']; ?>"></div>
+                                    <div class="col-md-6"><label class="labels">Password</label><input type="text" name="pass" class="form-control" value="<?php echo $row['pass']; ?>" placeholder="password"></div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" name="phone" class="form-control" placeholder="enter phone number" value="<?php echo $row['phone']; ?>"></div>
@@ -82,14 +86,16 @@ $currUser = $_SESSION['id'];
 if (isset($_POST['btn_upProfile'])) {
     $lname = $_POST['lname'];
     $fname = $_POST['fname'];
+    $email = $_POST['email'];
+    $pass = $_POST['pass'];
     $phone = $_POST['phone'];
     $street = $_POST['street'];
     $city = $_POST['city'];
     $state = $_POST['state'];
     $zipCode = $_POST['zipcode'];
 
-    $query = "UPDATE table user SET user.lname='$lname',user.fname= '$fname', user.phone='$phone', user.street='$street', 
-                    user.city='$city', user.state='$state', user.zipcode='$zipCode' WHERE user.userid ='$currUser'";
+    $query = "UPDATE user, userlogin SET user.lname='$lname',user.fname= '$fname', userlogin.email='$email', userlogin.pass='$pass', user.phone='$phone', user.street='$street', 
+                    user.city='$city', user.state='$state', user.zipcode='$zipCode' WHERE user.userid=userlogin.userid AND userlogin.userid ='$currUser'";
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {
