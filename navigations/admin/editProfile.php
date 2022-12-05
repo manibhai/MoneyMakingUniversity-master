@@ -4,6 +4,7 @@ include "../config.php";
 if (!isset($_SESSION['id'])) {
     header("Location: ../login.php");
 }
+$currUser = $_SESSION['id'];
 ?>
 
 <!doctype html>
@@ -27,40 +28,78 @@ if (!isset($_SESSION['id'])) {
 </head>
 
 <body>
-    <?php
-    $currUser = $_SESSION['id'];
-    $query = "SELECT * FROM user WHERE userid = '$currUser'";
-    $query_run = mysqli_query($connection, $query);
+    <div class="card-body">
+        <?php
+        if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
+            echo '<h2>' . $_SESSION['success'] . '</h2>';
+            unset($_SESSION['success']);
+        }
+        if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+            echo '<h2>' . $_SESSION['status'] . '</h2>';
+            unset($_SESSION['status']);
+        }
+        ?>
+        <?php
+        $currUser = $_SESSION['id'];
+        $query = "SELECT * FROM user WHERE userid = '$currUser'";
+        $query_run = mysqli_query($connection, $query);
 
-    foreach ($query_run as $row) {
-    ?>
-        <div class="container rounded bg-white mt-5 mb-5">
-            <div class="row">
-                <div class="col-md-5 border-right">
-                    <div class="p-3 py-5">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Profile Settings</h4>
-                        </div>
+        foreach ($query_run as $row) {
+        ?>
+            <div class="container rounded bg-white mt-5 mb-5">
+                <div class="row">
+                    <div class="col-md-5 border-right">
+                        <div class="p-3 py-5">
+                            <form action="./editProfile.php" method="post">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="text-right">Profile Settings</h4>
+                                </div>
 
-                        <div class="row mt-2">
-                            <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control" placeholder="first name" value="<?php echo $row['fname']; ?>"></div>
-                            <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control" value="<?php echo $row['lname']; ?>" placeholder="last name"></div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6"><label class="labels">First Name</label><input type="text" name="fname" class="form-control" placeholder="first name" value="<?php echo $row['fname']; ?>"></div>
+                                    <div class="col-md-6"><label class="labels">Last Name</label><input type="text" name="lname" class="form-control" value="<?php echo $row['lname']; ?>" placeholder="last name"></div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" name="phone" class="form-control" placeholder="enter phone number" value="<?php echo $row['phone']; ?>"></div>
+                                    <div class="col-md-12"><label class="labels">Street</label><input type="text" name="street" class="form-control" placeholder="enter street address" value="<?php echo $row['street']; ?>"></div>
+                                    <div class="col-md-12"><label class="labels">City</label><input type="text" name="city" class="form-control" placeholder="enter city" value="<?php echo $row['city']; ?>"></div>
+                                    <div class="col-md-12"><label class="labels">State</label><input type="text" name="state" class="form-control" placeholder="enter state" value="<?php echo $row['state']; ?>"></div>
+                                    <div class="col-md-12"><label class="labels">ZipCode</label><input type="text" name="zipcode" class="form-control" placeholder="enter zipcode" value="<?php echo $row['zipcode']; ?>"></div>
+                                </div>
+                                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" name="btn_upProfile" type="submit">Save Profile</button></div>
+                            </form>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" placeholder="enter phone number" value="<?php echo $row['phone']; ?>"></div>
-                            <div class="col-md-12"><label class="labels">Street</label><input type="text" class="form-control" placeholder="enter street address" value="<?php echo $row['street']; ?>"></div>
-                            <div class="col-md-12"><label class="labels">City</label><input type="text" class="form-control" placeholder="enter city" value="<?php echo $row['city']; ?>"></div>
-                            <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter state" value="<?php echo $row['state']; ?>"></div>
-                            <div class="col-md-12"><label class="labels">ZipCode</label><input type="text" class="form-control" placeholder="enter zipcode" value="<?php echo $row['zipcode']; ?>"></div>
-                        </div>
-                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
-
                     </div>
                 </div>
             </div>
-        </div>
-    <?php
-    }
-    ?>
+        <?php
+        }
+        ?>
     </div>
 </body>
+<?php
+
+if (isset($_POST['btn_upProfile'])) {
+    $lname = $_POST['lname'];
+    $fname = $_POST['fname'];
+    $phone = $_POST['phone'];
+    $street = $_POST['street'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $zipCode = $_POST['zipcode'];
+
+    $query = "UPDATE table user SET user.lname='$lname',user.fname= '$fname', user.phone='$phone', user.street='$street', 
+                    user.city='$city', user.state='$state', user.zipcode='$zipCode' WHERE user.userid ='$currUser'";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Profile has been Updated";
+        header('Location: ./editProfile.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Profile was not Updated";
+        header('Location: ./editProfile.php');
+        exit(0);
+    }
+}
+?>
