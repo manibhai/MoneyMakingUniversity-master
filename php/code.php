@@ -123,3 +123,28 @@ if (isset($_POST['updateCourse_btn'])) {
         exit(0);
     }
 }
+
+//Create a New Semester
+if (isset($_POST['create_sem_btn'])) {
+    $y = $_POST['year'];
+    $sem = $_POST['semname'];
+    $semStart = $_POST['begindate'];
+    $semEnd = $_POST['enddate'];
+    $regEnd = $_POST['regcuoff'];
+    $dropCutOff = $_POST['dropcutoff'];
+    $examCutOff = $_POST['examcutoff'];
+    $gradeCutOff = $_POST['gradecutoff'];
+
+    $query = "SELECT * FROM semesteryear UNION SELECT timewindow.semyear, timewindow.regcuoff, timewindow.dropcutoff, timewindow.examcutoff, timewindow.gradecutoff FROM timewindow";
+    $query_run = mysqli_query($connection, $query);
+
+   if ($query_run) {
+        $_SESSION['success'] = "Semester has been Created";
+        header('Location: ../navigations/admin/adminviewTimeWindows.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Semester was not Created";
+        header('Location: ../navigations/admin/adminviewTimeWindows.php');
+        exit(0);
+    }
+}
