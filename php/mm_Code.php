@@ -203,6 +203,9 @@ if (isset($_POST['drop_btn'])) {
 //Attendance
 if (isset($_POST['attendance_btn'])) {
     $studentid = $_POST['studentid'];
+    $crn = $_POST['crn'];
+    $ispresent = $_POST['ispresent'];
+    $date = $_POST['date'];
 
     $query = "INSERT INTO attendance (studentid, crn, ispresent, date)
     VALUES ('$studentid', '$crn', '$ispresent', '$date')";
@@ -215,6 +218,42 @@ if (isset($_POST['attendance_btn'])) {
     } else {
         $_SESSION['status'] = "Attendance was not Taken";
         header('Location: ../navigations/admin/adminviewAttendance.php');
+        exit(0);
+    }
+}
+
+if (isset($_POST['btn_event'])) {
+    $date = $_POST['date'];
+    $event = $_POST['event'];
+
+    $query = "INSERT INTO accal (date, event)
+    VALUES ('$date', '$event')";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Event Created successfully";
+        header('Location: ../navigations/admin/adminviewCalendar.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Event was not Created";
+        header('Location: ../navigations/admin/adminviewCalendar.php');
+        exit(0);
+    }
+}
+
+if (isset($_POST['btn_delete_event'])) {
+    $date = $_POST['deleteid'];
+    $query = "DELETE FROM accal WHERE accal.date='$date'";
+    $query_run = mysqli_query($connection, $query);
+
+
+    if ($query_run) {
+        $_SESSION['success'] = "Event has been Deleted";
+        header('Location: ../navigations/admin/adminviewCalendar.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Event was not Deleted";
+        header('Location: ../navigations/admin/adminviewCalendar.php');
         exit(0);
     }
 }

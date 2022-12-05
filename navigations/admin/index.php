@@ -82,6 +82,7 @@ $row = mysqli_fetch_array($result);
               <li><a class="dropdown-item" href="./adminviewMinors.php">View Minors</a></li>
               <li><a class="dropdown-item" href="./adminviewMinorCourses.php">View Minor Requirements</a></li>
               <li><a class="dropdown-item" href="./adminviewDepts.php">View Departments</a></li>
+              <li><a class="dropdown-item" href="./adminviewCalendar.php">View Academic Calendar</a></li>
             </ul>
           </div>
         </ul>

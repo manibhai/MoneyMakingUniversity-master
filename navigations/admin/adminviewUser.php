@@ -196,7 +196,7 @@ if (!isset($_SESSION['id'])) {
                 <form action="../../php/code.php" method="post">
                     <div class="modal-body">
                         <div class="form-group">
-                            <p>Are you sure you want to delete this user: <?php echo $row['userid']; ?> </p>
+                            <p>Are you sure you want to delete User: <?php echo $row['userid']; ?> </p>
                         </div>
                     </div>
                     <div class="modal-footer">
