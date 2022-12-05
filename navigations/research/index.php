@@ -25,7 +25,10 @@ if (!isset($_SESSION['id'])) {
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3">
     <div class="container">
       <a href="index.php" class="navbar-brand">
-        <h2>Welcome to Research Staff Page, User: <?php echo $row['fname'] ?> <?php echo $row['lname'] ?> </h2>
+        <div class="bg-image text-center">
+          <div style="background-image: url('https://www.coolgenerator.com/Data/Textdesign/202212/1b7f9d7944d14153613a3187731dd543.png'); height: 100vh">
+          </div>
+        </div>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
         <span class="navbar-toggler-icon"></span>
@@ -51,7 +54,7 @@ if (!isset($_SESSION['id'])) {
           </li>
 
           <li class="nav-item">
-            <a href="editProfile.php" class="btn btn-warning but-lg">Profile</a>
+            <a href="editProfile.php" class="btn btn-warning"><?php echo $row['fname'] ?> <?php echo $row['lname'] ?></a>
             <a class="btn btn-primary but-lg" data-toggle="tab" href="../logout.php">logout</a>
           </li>
         </ul>

@@ -85,16 +85,16 @@ $row = mysqli_fetch_array($result);
             </ul>
           </div>
         </ul>
-        <a href="editProfile.php" class="btn btn-warning">Profile</a>
+        <a href="editProfile.php" class="btn btn-warning"><?php echo $row['fname'] ?> <?php echo $row['lname'] ?></a>
         <a href="../logout.php" class="btn btn-primary">Log Out</a>
       </div>
     </div>
   </nav>
 
-  <div class="container text-center">
-    <h2 class="mb-3 h2">Welcome to Admin Page, <?php echo $row['fname'] ?> <?php echo $row['lname'] ?> </h2>
+  <div class="bg-image text-center">
+    <div style="background-image: url('https://www.coolgenerator.com/Data/Textdesign/202212/1b7f9d7944d14153613a3187731dd543.png'); height: 100vh">
+    </div>
   </div>
-  </section>
   <section>
     <div class="row justify-content-center">
 
