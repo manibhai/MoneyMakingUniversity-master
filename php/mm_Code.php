@@ -106,14 +106,15 @@ if (isset($_POST['minorreq_btn'])) {
 
 //Add to Master
 if (isset($_POST['master_btn'])) {
+    $crn = $_POST['crn'];
     $courseid = $_POST['courseid'];
     $facultyid = $_POST['facultyid'];
     $timeslotid = $_POST['timeslotid'];
     $roomid = $_POST['roomid'];
     $semyear = $_POST['semyear'];
 
-    $query = "INSERT INTO section (courseid, facultyid, timeslotid, roomid, semyear)
-    VALUES ('$courseid', '$facultyid', '$timeslotid', '$roomid', '$semyear')";
+    $query = "INSERT INTO section (crn, courseid, facultyid, timeslotid, roomid, semyear)
+    VALUES ('$crn', '$courseid', '$facultyid', '$timeslotid', '$roomid', '$semyear')";
     $query_run = mysqli_query($connection, $query);
 
     if (mysqli_num_rows($courseid_query_run) > 0) {

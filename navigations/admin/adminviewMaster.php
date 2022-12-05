@@ -41,6 +41,11 @@ if (!isset($_SESSION['id'])) {
                             <div class="modal-body">
                                 <div class="form-group">
                                     <!--Fill in form contents-->
+                                    <label>CRN</label>
+                                    <input type="varchar(300)" name="crn" class="form-control" placeholder="Enter CRN">
+                                </div>
+                                <div class="form-group">
+                                    <!--Fill in form contents-->
                                     <label> Course ID</label>
                                     <input type="varchar(300)" name="courseid" class="form-control" placeholder="Enter Course ID">
                                 </div>
