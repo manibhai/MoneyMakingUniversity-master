@@ -126,19 +126,6 @@ include "../config.php";
                             <td> <?php echo $row['dropcutoff']; ?> </td>
                             <td> <?php echo $row['examcutoff']; ?> </td>
                             <td> <?php echo $row['gradecutoff']; ?> </td>
-                            <!--
-                            <td>
-                                <form action="../../php/editUser.php" method="post">
-                                    <input type="hidden" name="userid" value="<?php echo $row['userid']; ?>">
-                                    <button type="submit" name="edit_btn" class=" btn btn-warning">Edit
-                            </td>
-                            </form>
-                            <td>
-                                <form action="../../php/code.php" method="post">
-                                    <input type="hidden" name="deleteid" value="<?php echo $row['userid']; ?>">
-                                    <button type="submit" name="delete_btn" class=" btn btn-danger">Delete
-                            </td>
-                    -->
                             </form>
                         </tr> <?php
                             }
