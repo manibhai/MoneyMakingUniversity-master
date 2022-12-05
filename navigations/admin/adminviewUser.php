@@ -142,7 +142,7 @@ if (!isset($_SESSION['id'])) {
                     user.city, user.state, user.zipcode, userlogin.email, userlogin.pass FROM user INNER JOIN userlogin ON user.userid=userlogin.userid";
                     $query_run = mysqli_query($connection, $query);
 
-                   foreach ($query_run as $row ) { ?>
+                    foreach ($query_run as $row) { ?>
                         <tr>
                             <td> <?php echo $row['userid']; ?> </td>
                             <td> <?php echo $row['email']; ?> </td>
@@ -157,17 +157,17 @@ if (!isset($_SESSION['id'])) {
                             <td> <?php echo $row['zipcode']; ?> </td>
                             <td> <?php echo $row['usertype']; ?> </td>
                             <td>
-                                <form action="../../php/editUser.php?id=<?=$row['userid'];?>" method="post">
+                                <form action="../../php/editUser.php?id=<?= $row['userid']; ?>" method="post">
                                     <input type="hidden" name="userid" value="<?php echo $row['userid']; ?>">
                                     <button type="submit" name="edit_btn" class=" btn btn-warning">Edit
+
+                                </form>
                             </td>
-                            </form>
                             <td>
-                                <form action="../../php/code.php" method="post">
-                                    <input type="hidden" name="deleteid" value="<?php echo $row['userid']; ?>">
-                                    <button type="submit" name="delete_btn" class=" btn btn-danger">Delete
+                                <button type="button" class="btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                                    Delete
+                                </button>
                             </td>
-                            </form>
                         </tr> <?php
                             }
                                 ?>
@@ -184,3 +184,28 @@ if (!isset($_SESSION['id'])) {
         $('#usersdata').DataTable();
     });
 </script>
+
+<div class="container-fluid">
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel1">Delete Confirmation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="../../php/code.php" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <p>Are you sure you want to delete this user: <?php echo $row['userid']; ?> </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="deleteid" value="<?php echo $row['userid']; ?>">
+                        <button type="submit" name="delete_btn" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
