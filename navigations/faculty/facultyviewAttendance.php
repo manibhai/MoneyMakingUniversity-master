@@ -59,7 +59,7 @@ $currUser = $_SESSION['id'];
                                 </div>
                                 <div class="form-group">
                                     <label>Date</label>
-                                    <input type="varchar(300)" name="date" class="form-control" placeholder="Enter Date FORMAT(yyyy-mm-dd)">
+                                    <input type="varchar(300)" name="date" class="form-control" value="<?php echo date("Y-m-d"); ?>" placeholder="Enter Date FORMAT(yyyy-mm-dd)">
                                 </div>
                             </div>
                             <!--Footer button goes here-->
