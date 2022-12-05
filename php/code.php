@@ -18,10 +18,9 @@ if (isset($_POST['create_btn'])) {
     $zipCode = $_POST['zipCode'];
 
     $query = "INSERT INTO user (userid, usertype, lname, fname, phone, dob, street, city, state, zipCode) 
-    VALUES ('$userid', '$usertype', '$lname', '$fname', '$phone', '$dob', '$street', '$city', '$state', '$zipCode')";
-    $query1 = "INSERT INTO userlogin(userid, usertype, email, pass) VALUES ('$userid', '$usertype', '$email', '$pass')";
+    VALUES ('$userid', '$usertype', '$lname', '$fname', '$phone', '$dob', '$street', '$city', '$state', '$zipCode')
+     INTO userlogin(userid, usertype, email, pass) VALUES ('$userid', '$usertype', '$email', '$pass')";
     $query_run = mysqli_query($connection, $query);
-    $query_run = mysqli_query($connection, $query1);
 
     if (mysqli_num_rows($userid_query_run) > 0) {
         $_SESSION['status'] = "User ID Already Taken. Please Try Another one.";
