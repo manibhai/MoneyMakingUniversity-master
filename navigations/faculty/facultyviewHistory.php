@@ -51,6 +51,7 @@ include "../config.php";
                         <td>Course ID</td>
                         <td>Course Name</td>
                         <td>Semester</td>
+                        <td>Info</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,6 +65,12 @@ include "../config.php";
                             <td> <?php echo $row['courseid']; ?> </td>
                             <td> <?php echo $row['coursename']; ?> </td>
                             <td> <?php echo $row['semyear']; ?> </td>
+                            <td>
+                                <form action="../../php/viewStudents.php?id=<?= $row['crn']; ?>" method="post">
+                                    <input type="hidden" name="crn" value="<?php echo $row['crn']; ?>">
+                                    <button type="submit" name="btn_students" class=" btn btn-primary">View
+                                </form>
+                            </td>
                         </tr> <?php
                             }
 
