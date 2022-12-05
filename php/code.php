@@ -18,16 +18,17 @@ if (isset($_POST['create_btn'])) {
     $zipCode = $_POST['zipCode'];
 
     $query = "INSERT INTO user (userid, usertype, lname, fname, phone, dob, street, city, state, zipCode) 
-    VALUES ('$userid', '$usertype', '$lname', '$fname', '$phone', '$dob', '$street', '$city', '$state', '$zipCode')
-     INTO userlogin(userid, usertype, email, pass) VALUES ('$userid', '$usertype', '$email', '$pass')";
+                VALUES ('$userid', '$usertype', '$lname', '$fname', '$phone', '$dob', '$street', '$city', '$state', '$zipCode')";
+    $query1 = "INSERT INTO userlogin(userid, usertype, email, pass) VALUES ('$userid', '$usertype', '$email', '$pass')";
     $query_run = mysqli_query($connection, $query);
+    $query_run1 = mysqli_query($connection, $query1);
 
     if (mysqli_num_rows($userid_query_run) > 0) {
         $_SESSION['status'] = "User ID Already Taken. Please Try Another one.";
         $_SESSION['status_code'] = "error";
         header('Location: ../navigations/admin/adminviewUser.php');
         exit(0);
-    } else if ($query_run) {
+    } else if ($query_run and $query_run1) {
         $_SESSION['success'] = "User Profile has been Created";
         header('Location: ../navigations/admin/adminviewUser.php');
         exit(0);
@@ -77,10 +78,12 @@ if (isset($_POST['update_btn'])) {
 //DELETE A USER
 if (isset($_POST['delete_btn'])) {
     $userid = $_POST['deleteid'];
-    $query = "DELETE FROM user INNER JOIN userlogin ON user.userid=userlogin.userid WHERE user.userid AND userlogin.userid='$userid' ";
+    $query = "DELETE FROM user WHERE user.userid='$userid' ";
+    $query1 = "DELETE FROM userlogin WHERE userlogin.userid='$userid'";
     $query_run = mysqli_query($connection, $query);
+    $query_run1 = mysqli_query($connection, $query1);
 
-    if ($query_run) {
+    if ($query_run and $query_run1) {
         $_SESSION['success'] = "User has been Deleted";
         header('Location: ../navigations/admin/adminviewUser.php');
         exit(0);
