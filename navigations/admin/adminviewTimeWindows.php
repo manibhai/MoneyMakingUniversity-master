@@ -42,7 +42,7 @@ include "../config.php";
                                 </div>
                                 <div class="form-group">
                                     <label>Year</label>
-                                    <input type="date" name="year" class="form-control" placeholder="Enter year">
+                                    <input type="varchar(300)" name="year" class="form-control" placeholder="Enter year">
                                 </div>
                                 <div class="form-group">
                                     <label>Start Date</label>
@@ -52,8 +52,24 @@ include "../config.php";
                                     <label>Ending Date</label>
                                     <input type="date" name="enddate" class="form-control" placeholder="Enter end date">
                                 </div>
+                                <div class="form-group">
+                                    <label>Add Class Cut Off</label>
+                                    <input type="date" name="enddate" class="form-control" placeholder="Enter end date">
+                                </div>
+                                <div class="form-group">
+                                    <label>Drop Class Cut Off</label>
+                                    <input type="date" name="enddate" class="form-control" placeholder="Enter end date">
+                                </div>
+                                <div class="form-group">
+                                    <label>Exam Cut off </label>
+                                    <input type="date" name="enddate" class="form-control" placeholder="Enter end date">
+                                </div>
+                                <div class="form-group">
+                                    <label>Grades Cut Off</label>
+                                    <input type="date" name="enddate" class="form-control" placeholder="Enter end date">
+                                </div>
                                 <div class="modal-footer">
-                                    <button type="submit" name="createsem_btn" class="btn btn-primary">Save</button>
+                                    <button type="submit" name="create_sem_btn" class="btn btn-primary">Save</button>
                                 </div>
                         </form>
 
@@ -72,12 +88,14 @@ include "../config.php";
     <div class="card-body">
 
         <?php
-        /*
         if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
-            echo '<h2> ' . $_SESSION['success'] . '</h2>';
-            unset($_SESSION['sucess']);
+          echo '<h2>' . $_SESSION['success'] . '</h2>';
+          unset($_SESSION['success']);
         }
-        */
+        if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+          echo '<h2>' . $_SESSION['status'] . '</h2>';
+          unset($_SESSION['status']);
+        }
         ?>
         <div class="table-responsive">
             <table id="semdata" class="table table-bordered">
