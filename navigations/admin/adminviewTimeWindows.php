@@ -54,27 +54,27 @@ include "../config.php";
                                 </div>
                                 <div class="form-group">
                                     <label>Start Date</label>
-                                    <input type="date" name="begindate" class="form-control" placeholder="Enter Start date">
+                                    <input type="varchar(300)" name="begindate" class="form-control" placeholder="Enter Semester Start date">
                                 </div>
                                 <div class="form-group">
                                     <label>Ending Date</label>
-                                    <input type="date" name="enddate" class="form-control" placeholder="Enter End date">
+                                    <input type="varchar(300)" name="enddate" class="form-control" placeholder="Enter Semester End date">
                                 </div>
                                 <div class="form-group">
                                     <label>Add Class Cut Off</label>
-                                    <input type="date" name="regcutoff" class="form-control" placeholder="">
+                                    <input type="varchar(300)" name="regcutoff" class="form-control" placeholder="Add Class Cut Off Date">
                                 </div>
                                 <div class="form-group">
                                     <label>Drop Class Cut Off</label>
-                                    <input type="date" name="dropcutoff" class="form-control" placeholder="">
+                                    <input type="varchar(300)" name="dropcutoff" class="form-control" placeholder="Drop Class Cut Off Date">
                                 </div>
                                 <div class="form-group">
                                     <label>Exam Cut off </label>
-                                    <input type="date" name="gradecutoff" class="form-control" placeholder="">
+                                    <input type="varchar(300)" name="gradecutoff" class="form-control" placeholder="Exams Cut Off Date">
                                 </div>
                                 <div class="form-group">
                                     <label>Grades Cut Off</label>
-                                    <input type="date" name="examcutoff" class="form-control" placeholder="">
+                                    <input type="varchar(300)" name="examcutoff" class="form-control" placeholder="Grades Cut Off Date">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" name="create_sem_btn" class="btn btn-primary">Create</button>

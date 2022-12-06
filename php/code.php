@@ -130,17 +130,17 @@ if (isset($_POST['create_sem_btn'])) {
     $semname = $_POST['semname'];
     $semyear = $_POST['semyear'];
     $timewindowid = $_POST['timewindowid'];
-    $semStart = $_POST['begindate'];
-    $semEnd = $_POST['enddate'];
-    $regEnd = $_POST['regcutoff'];
-    $dropCutOff = $_POST['dropcutoff'];
-    $examCutOff = $_POST['examcutoff'];
-    $gradeCutOff = $_POST['gradecutoff'];
+    $begindate = $_POST['begindate'];
+    $enddate = $_POST['enddate'];
+    $regcutoff = $_POST['regcutoff'];
+    $dropcutoff = $_POST['dropcutoff'];
+    $examcutoff = $_POST['examcutoff'];
+    $gradecutoff = $_POST['gradecutoff'];
 
     $query = "INSERT INTO semesteryear (semyear, begindate, enddate, semname, year)
                 VALUES ('$semyear', '$begindate', '$enddate', '$semname', '$year')";
     $query1 = "INSERT INTO timewindow (timewindow, semyear, regcutoff, dropcutoff, gradecutoff, examcutoff)
-                VALUES ('$timewindowid', '$semyear', '$regEnd' '$dropCutOff', '$gradeCutOff', '$examCutOff')";
+                VALUES ('$timewindowid', '$semyear', '$regcutoff' '$dropcutoff', '$gradecutoff', '$examcutoff')";
     $query_run = mysqli_query($connection, $query);
     $query_run1 = mysqli_query($connection, $query1);
 
