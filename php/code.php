@@ -126,8 +126,10 @@ if (isset($_POST['updateCourse_btn'])) {
 
 //Create a New Semester
 if (isset($_POST['create_sem_btn'])) {
-    $y = $_POST['year'];
-    $sem = $_POST['semname'];
+    $year = $_POST['year'];
+    $semname = $_POST['semname'];
+    $semyear = $_POST['semyear'];
+    $timewindowid = $_POST['timewindowid'];
     $semStart = $_POST['begindate'];
     $semEnd = $_POST['enddate'];
     $regEnd = $_POST['regcuoff'];
@@ -135,10 +137,14 @@ if (isset($_POST['create_sem_btn'])) {
     $examCutOff = $_POST['examcutoff'];
     $gradeCutOff = $_POST['gradecutoff'];
 
-    $query = "SELECT * FROM semesteryear UNION SELECT timewindow.semyear, timewindow.regcuoff, timewindow.dropcutoff, timewindow.examcutoff, timewindow.gradecutoff FROM timewindow";
+    $query = "INSERT INTO semesteryear (semyear, begindate, enddate, semname, year)
+                VALUES ('$semyear', '$begindate', '$enddate', '$semname', '$year')";
+    $query1 = "INSERT INTO timewindow (timewindow, semyear, regcuoff, dropcutoff, gradecutoff, examcutoff)
+                VALUES ('$timewindowid', '$semyear', '$regEnd' '$dropCutOff', '$gradeCutOff', '$examCutOff')";
     $query_run = mysqli_query($connection, $query);
+    $query_run1 = mysqli_query($connection, $query1);
 
-    if ($query_run) {
+    if ($query_run and $query_run1) {
         $_SESSION['success'] = "Semester has been Created";
         header('Location: ../navigations/admin/adminviewTimeWindows.php');
         exit(0);

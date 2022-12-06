@@ -37,39 +37,47 @@ include "../config.php";
 
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label> Semester</label>
-                                    <input type="varchar(300)" name="semname" class="form-control" placeholder="Enter Semester">
+                                    <label>Year</label>
+                                    <input type="varchar(300)" name="year" class="form-control" placeholder="Enter Year">
                                 </div>
                                 <div class="form-group">
-                                    <label>Year</label>
-                                    <input type="varchar(300)" name="year" class="form-control" placeholder="Enter year">
+                                    <label>Semester</label>
+                                    <input type="varchar(300)" name="semname" class="form-control" placeholder="Fall , Spring">
+                                </div>
+                                <div class="form-group">
+                                    <label>Semester Year</label>
+                                    <input type="varchar(300)" name="semyear" class="form-control" placeholder="(S2020, F2020, etc)">
+                                </div>
+                                <div class="form-group">
+                                    <label>Time Window ID</label>
+                                    <input type="varchar(300)" name="timewindowid" class="form-control" placeholder="(TW14-..)">
                                 </div>
                                 <div class="form-group">
                                     <label>Start Date</label>
-                                    <input type="date" name="begindate" class="form-control" placeholder="Enter start date">
+                                    <input type="date" name="begindate" class="form-control" placeholder="Enter Start date">
                                 </div>
                                 <div class="form-group">
                                     <label>Ending Date</label>
-                                    <input type="date" name="enddate" class="form-control" placeholder="Enter end date">
+                                    <input type="date" name="enddate" class="form-control" placeholder="Enter End date">
                                 </div>
                                 <div class="form-group">
                                     <label>Add Class Cut Off</label>
-                                    <input type="date" name="enddate" class="form-control" placeholder="Enter end date">
+                                    <input type="date" name="regcuoff" class="form-control" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label>Drop Class Cut Off</label>
-                                    <input type="date" name="enddate" class="form-control" placeholder="Enter end date">
+                                    <input type="date" name="dropcutoff" class="form-control" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label>Exam Cut off </label>
-                                    <input type="date" name="enddate" class="form-control" placeholder="Enter end date">
+                                    <input type="date" name="gradecutoff" class="form-control" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label>Grades Cut Off</label>
-                                    <input type="date" name="enddate" class="form-control" placeholder="Enter end date">
+                                    <input type="date" name="examcutoff" class="form-control" placeholder="">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" name="create_sem_btn" class="btn btn-primary">Save</button>
+                                    <button type="submit" name="create_sem_btn" class="btn btn-primary">Create</button>
                                 </div>
                         </form>
 
@@ -89,20 +97,20 @@ include "../config.php";
 
         <?php
         if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
-          echo '<h2>' . $_SESSION['success'] . '</h2>';
-          unset($_SESSION['success']);
+            echo '<h2>' . $_SESSION['success'] . '</h2>';
+            unset($_SESSION['success']);
         }
         if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-          echo '<h2>' . $_SESSION['status'] . '</h2>';
-          unset($_SESSION['status']);
+            echo '<h2>' . $_SESSION['status'] . '</h2>';
+            unset($_SESSION['status']);
         }
         ?>
         <div class="table-responsive">
             <table id="semdata" class="table table-bordered">
                 <thead>
                     <tr>
-                        <td>Year</td>
                         <td>Semester</td>
+                        <td>Year</td>
                         <td>Start of Semester</td>
                         <td>End of Semester</td>
                         <td>Add Class Cut Off</td>
