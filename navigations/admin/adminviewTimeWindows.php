@@ -62,7 +62,7 @@ include "../config.php";
                                 </div>
                                 <div class="form-group">
                                     <label>Add Class Cut Off</label>
-                                    <input type="date" name="regcuoff" class="form-control" placeholder="">
+                                    <input type="date" name="regcutoff" class="form-control" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label>Drop Class Cut Off</label>
@@ -130,7 +130,7 @@ include "../config.php";
                             <td> <?php echo $row['semname']; ?> </td>
                             <td> <?php echo $row['begindate']; ?> </td>
                             <td> <?php echo $row['enddate']; ?> </td>
-                            <td> <?php echo $row['regcuoff']; ?> </td>
+                            <td> <?php echo $row['regcutoff']; ?> </td>
                             <td> <?php echo $row['dropcutoff']; ?> </td>
                             <td> <?php echo $row['examcutoff']; ?> </td>
                             <td> <?php echo $row['gradecutoff']; ?> </td>
