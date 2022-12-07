@@ -169,12 +169,12 @@ if (!isset($_SESSION['id'])) {
                 $enrollment = mysqli_fetch_array($query_run2);
 
                 $query3 = "SELECT * FROM majorcourse INNER JOIN studentmajor ON majorcourse.majorid=studentmajor.majorid 
-                            WHERE studentmajor.studentid = '$studentid'";
+                            WHERE studentmajor.studentid = '$studentid' AND majorcourse.courseid = '$courseid'";
                 $query_run3 = mysqli_query($connection, $query3);
                 $major = mysqli_fetch_array($query_run3);
 
                 $query4 = "SELECT * FROM minorcourse INNER JOIN studentminor ON minorcourse.minorid=studentminor.minorid 
-                            WHERE studentminor.studentid = '$studentid'";
+                            WHERE studentminor.studentid = '$studentid' AND minorcourse.courseid = '$courseid'";
                 $query_run4 = mysqli_query($connection, $query4);
                 $minor = mysqli_fetch_array($query_run4);
 
@@ -190,11 +190,11 @@ if (!isset($_SESSION['id'])) {
                     $_SESSION['status'] = "Course has already been Taken in the Past";
                     header('Location: ./registration.php');
                     exit(0);
-                } else if ($major['courseid'] != $courseid) {
+                } else if ($major = 0) {
                     $_SESSION['status'] = "This course requires a different major";
                     header('Location: ./registration.php');
                     exit(0);
-                } else if ($minor['courseid'] != $courseid) {
+                } else if ($minor = 0) {
                     $_SESSION['status'] = "This course requires a different minor";
                     header('Location: ./registration.php');
                     exit(0);
