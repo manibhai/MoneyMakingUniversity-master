@@ -178,6 +178,10 @@ if (!isset($_SESSION['id'])) {
                 $query_run4 = mysqli_query($connection, $query4);
                 $minor = mysqli_fetch_array($query_run4);
 
+                $query5 = "SELECT * FROM section WHERE crn = '$crn'";
+                $query_run4 = mysqli_query($connection, $query5);
+                $full = mysqli_fetch_array($query_run5);
+
                 if ($history) {
                     $_SESSION['status'] = "Course has already been Taken in the Past";
                     header('Location: ./registration.php');
@@ -192,6 +196,10 @@ if (!isset($_SESSION['id'])) {
                     exit(0);
                 } else if ($minor['courseid'] != $courseid) {
                     $_SESSION['status'] = "This course requires a different minor";
+                    header('Location: ./registration.php');
+                    exit(0);
+                } else if ($full['numofseats'] == '0') {
+                    $_SESSION['status'] = "This class is Closed";
                     header('Location: ./registration.php');
                     exit(0);
                 } else {
