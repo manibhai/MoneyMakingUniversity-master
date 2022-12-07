@@ -54,7 +54,9 @@ $currUser = $_SESSION['id'];
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h4 class="text-right">Profile Settings</h4>
                                 </div>
-
+                                <div class="row mt-3">
+                                    <div class="col-md-12"><label class="labels">Student ID</label><input type="text" name="userid" class="form-control" placeholder="enter ID" disabled value="<?php echo $row['userid']; ?>"></div>
+                                </div>
                                 <div class="row mt-2">
                                     <div class="col-md-6"><label class="labels">First Name</label><input type="text" name="fname" class="form-control" placeholder="first name" value="<?php echo $row['fname']; ?>"></div>
                                     <div class="col-md-6"><label class="labels">Last Name</label><input type="text" name="lname" class="form-control" value="<?php echo $row['lname']; ?>" placeholder="last name"></div>
