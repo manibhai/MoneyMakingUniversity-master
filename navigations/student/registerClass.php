@@ -17,7 +17,7 @@ if (isset($_POST['register_btn'])) {
     $query = "SELECT * FROM enrollment WHERE enrollment.studentid = $studentid";
     $query_run = mysqli_query($connection, $query);
     $row = mysqli_fetch_array($query_run);
-    if ($row['studentid'] == $studentid && $row['courseid'] == $courseid) {
+    if ($row['studentid'] == $studentid && $row['crn'] == $crn) {
         $_SESSION['status'] = "Cannot Register for a Course that is already registered";
         header('Location: ./registration.php');
         exit(0);
