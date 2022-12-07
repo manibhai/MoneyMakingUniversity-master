@@ -137,6 +137,7 @@ if (!isset($_SESSION['id'])) {
                                             <input type="hidden" name="timeslotid" value="<?php echo $row['timeslotid']; ?>">
                                             <input type="hidden" name="roomid" value="<?php echo $row['roomid']; ?>">
                                             <input type="hidden" name="numofseats" value="<?php echo $row['numofseats']; ?>">
+                                            <input type="hidden" name="semyear" value="<?php echo $row['semyear']; ?>">
                                             <button type="submit" name="register_btn" class=" btn btn-primary" <?php if ($get_semyear != 'S2023') { ?> disabled <?php   } ?>>Register</button>
                                         </form>
                                     </td>
@@ -147,44 +148,67 @@ if (!isset($_SESSION['id'])) {
                     </tbody>
                 </table>
             </div>
-            <div class="container">
-                <h1 class="mt-2 mb-3 text-center text-primary">Test</h1>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <td>Student ID</td>
-                                <td>CRN</td>
-                                <td>Course ID</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            if (isset($_POST['register_btn'])) {
-                                $studentid = $_SESSION['id'];
-                                $crn = $_POST['crn'];
-                                $courseid = $_POST['courseid'];
-                                $timeslotid = $_POST['timeslotid'];
-                                $roomid = $_POST['roomid'];
-                                $dateenrolled = date("Y-m-d");
-                                $grade = 'IP';
-                                $numofseats = $_POST['numofseats'];
+            <?php
+            if (isset($_POST['register_btn'])) {
+                $studentid = $_SESSION['id'];
+                $crn = $_POST['crn'];
+                $courseid = $_POST['courseid'];
+                $timeslotid = $_POST['timeslotid'];
+                $roomid = $_POST['roomid'];
+                $dateenrolled = date("Y-m-d");
+                $grade = 'IP';
+                $semyear = $_POST['semyear'];
+                $numofseats = $_POST['numofseats'];
 
-                                $query = "SELECT * FROM studenthistory WHERE studentid = '$studentid' AND courseid = '$courseid'";
-                                $query_run = mysqli_query($connection, $query);
+                $query1 = "SELECT * FROM studenthistory WHERE studentid = '$studentid' AND courseid = '$courseid'";
+                $query_run1 = mysqli_query($connection, $query1);
+                $history = mysqli_fetch_array($query_run1);
 
-                                while ($row = mysqli_fetch_array($query_run)) { ?>
-                                    <tr>
-                                        <td> <?php echo $row['studentid'] ?> </td>
-                                        <td> <?php echo $row['crn'] ?> </td>
-                                        <td> <?php echo $row['courseid'] ?> </td>
-                                    </tr>
-                            <?php }
-                            } ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                $query2 = "SELECT * FROM enrollment WHERE studentid = '$studentid' AND courseid = '$courseid'";
+                $query_run2 = mysqli_query($connection, $query2);
+                $enrollment = mysqli_fetch_array($query_run2);
+
+                $query3 = "SELECT * FROM majorcourse INNER JOIN studentmajor ON majorcourse.majorid=studentmajor.majorid 
+                            WHERE studentmajor.studentid = '$studentid'";
+                $query_run3 = mysqli_query($connection, $query3);
+                $major = mysqli_fetch_array($query_run3);
+
+                $query4 = "SELECT * FROM minorcourse INNER JOIN studentminor ON minorcourse.minorid=studentminor.minorid 
+                            WHERE studentminor.studentid = '$studentid'";
+                $query_run4 = mysqli_query($connection, $query4);
+                $minor = mysqli_fetch_array($query_run4);
+
+                if ($history) {
+                    $_SESSION['status'] = "Course has already been Taken in the Past";
+                    header('Location: ./registration.php');
+                    exit(0);
+                } else if ($enrollment) {
+                    $_SESSION['status'] = "Course has already been Taken in the Past";
+                    header('Location: ./registration.php');
+                    exit(0);
+                } else if ($major['courseid'] != $courseid) {
+                    $_SESSION['status'] = "This course requires a different major";
+                    header('Location: ./registration.php');
+                    exit(0);
+                } else if ($minor['courseid'] != $courseid) {
+                    $_SESSION['status'] = "This course requires a different minor";
+                    header('Location: ./registration.php');
+                    exit(0);
+                } else {
+                    $query = "INSERT INTO enrollment (studentid, crn, courseid, dateenrolled, semyear, grade) 
+                        VALUES ('$studentid', '$crn', '$courseid', '$dateenrolled', '$semyear', '$grade')";
+                    $query_run = mysqli_query($connection, $query);
+
+                    $query1 = "UPDATE section SET section.numofseats=section.numofseats - 1 WHERE section.crn=$crn";
+                    $query_run1 = mysqli_query($connection, $query1);
+
+                    $_SESSION['success'] = "Sucessfully Registered";
+                    header('Location: ./registration.php');
+                    exit(0);
+                }
+            }
+            ?>
+
 </body>
 
 </html>
