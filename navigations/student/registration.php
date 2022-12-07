@@ -131,8 +131,7 @@ if (!isset($_SESSION['id'])) {
                                     <td> <?php echo $row['numofseats']; ?> </td>
                                     <td> <?php echo $row['semyear']; ?> </td>
                                     <td>
-                                        <form action="./registerClass.php" method="post">
-                                            <input type="hidden" name="studentid" value="<?php echo $_SESSION['id']; ?>">
+                                        <form action="./registration.php" method="post">
                                             <input type="hidden" name="crn" value="<?php echo $row['crn']; ?>">
                                             <input type="hidden" name="courseid" value="<?php echo $row['courseid']; ?>">
                                             <input type="hidden" name="timeslotid" value="<?php echo $row['timeslotid']; ?>">
@@ -147,6 +146,44 @@ if (!isset($_SESSION['id'])) {
                                         ?>
                     </tbody>
                 </table>
+            </div>
+            <div class="container">
+                <h1 class="mt-2 mb-3 text-center text-primary">Test</h1>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>Student ID</td>
+                                <td>CRN</td>
+                                <td>Course ID</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (isset($_POST['register_btn'])) {
+                                $studentid = $_SESSION['id'];
+                                $crn = $_POST['crn'];
+                                $courseid = $_POST['courseid'];
+                                $timeslotid = $_POST['timeslotid'];
+                                $roomid = $_POST['roomid'];
+                                $dateenrolled = date("Y-m-d");
+                                $grade = 'IP';
+                                $numofseats = $_POST['numofseats'];
+
+                                $query = "SELECT * FROM studenthistory WHERE studentid = '$studentid' AND courseid = '$courseid'";
+                                $query_run = mysqli_query($connection, $query);
+
+                                while ($row = mysqli_fetch_array($query_run)) { ?>
+                                    <tr>
+                                        <td> <?php echo $row['studentid'] ?> </td>
+                                        <td> <?php echo $row['crn'] ?> </td>
+                                        <td> <?php echo $row['courseid'] ?> </td>
+                                    </tr>
+                            <?php }
+                            } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 </body>
 
