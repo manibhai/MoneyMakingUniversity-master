@@ -30,26 +30,18 @@ if (isset($_POST['register_btn'])) {
                     <td>Student ID</td>
                     <td>CRN</td>
                     <td>Course ID</td>
-                    <td>Semester</td>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $query = "SELECT * FROM studenthistory INNER JOIN user ON studenthistory.studentid = user.userid WHERE user.userid = '$studentid'";
+                $query = "SELECT * FROM studenthistory WHERE studentid = '$studentid' AND courseid = '$courseid'";
                 $query_run = mysqli_query($connection, $query);
-                while ($row = mysqli_fetch_array($query_run)) { ?>
-                    <tr>
-                        <td> <?php echo $row['studentid']; ?> </td>
-                        <td> <?php echo $row['fname'];
-                                echo " ";
-                                echo $row['lname']; ?> </td>
-                        <td> <?php echo $row['crn']; ?> </td>
-                        <td> <?php echo $row['courseid']; ?> </td>
-                        <td> <?php echo $row['semyear']; ?> </td>
-                    </tr> <?php
-                        }
-
-                            ?>
+                $row = mysqli_fetch_row($query_run); ?>
+                <tr>
+                    <td> <?php echo $row['studentid'] ?> </td>
+                    <td> <?php echo $row['crn'] ?> </td>
+                    <td> <?php echo $row['courseid'] ?> </td>
+                </tr>
             </tbody>
         </table>
     </div>
