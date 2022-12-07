@@ -7,33 +7,24 @@ if (!isset($_SESSION['id'])) {
 
 
 if (isset($_POST['register_btn'])) {
-    $studentid = $_SESSION['id'];
+    $studentid = $_POST['studentid'];
     $crn = $_POST['crn'];
     $courseid = $_POST['courseid'];
-    $dateenrolled = '2022-12-20';
-    $semyear = $_POST['semyear'];
+    $timeslotid = $_POST['timeslotid'];
+    $roomid = $_POST['roomid'];
+    $dateenrolled = date("Y-m-d");
     $grade = 'IP';
+    $numofseats = $_POST['numofseats'];
 
-    $query = "SELECT * FROM enrollment WHERE enrollment.studentid = $studentid";
+    $query = "SELECT * FROM studenthistory WHERE studentid='$studentid' AND crn='$crn'";
     $query_run = mysqli_query($connection, $query);
-    $row = mysqli_fetch_array($query_run);
-    if ($row['studentid'] == $studentid && $row['crn'] == $crn) {
-        $_SESSION['status'] = "Cannot Register for a Course that is already registered";
+    if (($query_run) > 0) {
+        $_SESSION['status'] = "Course has been taken in the Past";
         header('Location: ./registration.php');
         exit(0);
     } else {
-        $query = "INSERT INTO enrollment (studentid, crn, courseid, dateenrolled, semyear, grade)
-    VALUES ('$studentid', '$crn', '$courseid', '$dateenrolled', '$semyear', '$grade')";
-        $query_run = mysqli_query($connection, $query);
-
-        if ($query_run) {
-            $_SESSION['success'] = "Sucessfully Registered for Class";
-            header('Location: ./registration.php');
-            exit(0);
-        } else {
-            $_SESSION['status'] = "Couldn't Register for Class";
-            header('Location: ./registration.php');
-            exit(0);
-        }
+        $_SESSION['success'] = "Registered Successfully";
+        header('Location: ./registration.php');
+        exit(0);
     }
 }
