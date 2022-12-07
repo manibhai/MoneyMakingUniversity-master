@@ -179,8 +179,18 @@ if (!isset($_SESSION['id'])) {
                 $minor = mysqli_fetch_array($query_run4);
 
                 $query5 = "SELECT * FROM section WHERE crn = '$crn'";
-                $query_run4 = mysqli_query($connection, $query5);
+                $query_run5 = mysqli_query($connection, $query5);
                 $full = mysqli_fetch_array($query_run5);
+
+                $query6 = "SELECT * FROM section INNER JOIN enrollment ON section.crn=enrollment.crn WHERE enrollment.studentid = '$studentid' AND section.semyear='$semyear'";
+                $query_run6 = mysqli_query($connection, $query6);
+                $conflict = mysqli_fetch_array($query_run6);
+
+                $query7 = "SELECT *, prerequisite.courseid AS preid, studenthistory.courseid AS cid FROM prerequisite 
+                            INNER JOIN studenthistory ON studenthistory.courseid=prerequisite.prerequisiteid
+                            WHERE studenthistory.studentid = '$studentid'";
+                $query_run7 = mysqli_query($connection, $query7);
+                $pre = mysqli_fetch_array($query_run7);
 
                 if ($history) {
                     $_SESSION['status'] = "Course has already been Taken in the Past";
@@ -190,16 +200,20 @@ if (!isset($_SESSION['id'])) {
                     $_SESSION['status'] = "Course has already been Taken in the Past";
                     header('Location: ./registration.php');
                     exit(0);
-                } else if ($major = 0) {
-                    $_SESSION['status'] = "This course requires a different major";
+                } else if (!($major) || ($minor)) {
+                    $_SESSION['status'] = "This course requires a different major or minor";
                     header('Location: ./registration.php');
                     exit(0);
-                } else if ($minor = 0) {
-                    $_SESSION['status'] = "This course requires a different minor";
+                } else if ($full['numofseats'] <= 0) {
+                    $_SESSION['status'] = "This course is Closed";
                     header('Location: ./registration.php');
                     exit(0);
-                } else if ($full['numofseats'] == '0') {
-                    $_SESSION['status'] = "This class is Closed";
+                } else if ($conflict['timeslotid'] == ($timeslotid)) {
+                    $_SESSION['status'] = "This course conflicts with another course";
+                    header('Location: ./registration.php');
+                    exit(0);
+                } else if ($pre['preid'] == ($courseid) && $pre['cid'] != $pre['prerequisiteid']) {
+                    $_SESSION['status'] = "This course missing a prerequisite course";
                     header('Location: ./registration.php');
                     exit(0);
                 } else {
