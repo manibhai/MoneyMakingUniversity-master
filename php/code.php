@@ -154,3 +154,33 @@ if (isset($_POST['create_sem_btn'])) {
         exit(0);
     }
 }
+
+//EDIT A TIME WINDOW
+if (isset($_POST['edit_window'])) {
+    $timewindowid = $_POST['timewindow'];
+    $query = "SELECT * FROM timewindow WHERE timewindowid='$timewindowid'";
+    $query_run = mysqli_query($connection, $query);
+}
+
+if (isset($_POST['update_window'])) {
+    $timewindowid = $_POST['timewindowid'];
+    $regcutoff = $_POST['regcutoff'];
+    $dropcutoff = $_POST['dropcutoff'];
+    $examcutoff = $_POST['examcutoff'];
+    $gradecutoff = $_POST['gradecutoff'];
+
+    $query = "UPDATE timewindow SET regcutoff = '$regcutoff', 
+                dropcutoff = '$dropcutoff', examcutoff = '$examcutoff', gradecutoff = '$gradecutoff' 
+                WHERE timewindowid ='$timewindowid'";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Time Window has been Updated";
+        header('Location: ../navigations/admin/adminviewTimeWindows.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Time Window was not Updated";
+        header('Location: ../navigations/admin/adminviewTimeWindows.php');
+        exit(0);
+    }
+}

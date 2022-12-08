@@ -145,16 +145,16 @@ if (!isset($_SESSION['id'])) {
                     echo " ";
                     echo $row['lname']; ?> </td>
               <td>
-                <form action="../../php/editDepartments.php" method="POST" class="text-center">
-                  <input type="hidden" name="editDept" value=" <?php echo $row['deptid'] ?>">
-                  <button type="submit" name="edit_btn" class="btn btn-warning"> Edit </button>
+                <form action="../../php/editDepartments.php?id=<?php echo $row['deptid'] ?>" method="POST">
+                  <input type="hidden" name="deptid" value=" <?php echo $row['deptid'] ?>">
+                  <button type="submit" name="edit_dept" class="btn btn-warning"> Edit </button>
 
               </td>
               </form>
               <td>
                 <form action="../../php/editDepartments.php" method="POST">
-                  <input type="hidden" name="editDept" value=" <?php echo $row['deptid'] ?>">
-                  <button type="submit" name="edit_btn" class="btn btn-danger"> Delete </button>
+                  <input type="hidden" name="dept" value=" <?php echo $row['deptid'] ?>">
+                  <button type="submit" name="delete_dept" class="btn btn-danger"> Delete </button>
               </td>
               </form>
 

@@ -23,7 +23,7 @@ if (!isset($_SESSION['id'])) {
     if (isset($_POST['edit_window'])) {
         $timewindowid = $_POST['timewindowid'];
 
-        $query = "SELECT * FROM timewindow WHERE timewindowid = $timewindowid";
+        $query = "SELECT * FROM timewindow WHERE timewindowid = '$timewindowid'";
         $query_run = mysqli_query($connection, $query);
 
         foreach ($query_run as $row) {
