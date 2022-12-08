@@ -41,58 +41,37 @@ $currUser = $_SESSION['id'];
             echo '<h2> ' . $_SESSION['status'] . '</h2>';
             unset($_SESSION['status']);
         }
+
+        $query = "SELECT * FROM semesteryear ORDER BY year DESC";
+        $query_run = mysqli_query($connection, $query);
         ?>
-        <h3 align="center">Schedule For Fall 2016</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Section</td>
-                        <td>Instructor</td>
-                        <td>Days</td>
-                        <td>Time</td>
-                        <td>Room</td>
-                        <td>Seats Available</td>
-                        <td>Semester</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
-                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='F2016'";
-                    $query_run = mysqli_query($connection, $query);
-
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
+        <div class="container">
+            <h1 class="mt-2 mb-3 text-center text-primary">Semester</h1>
+            <form action="facultyviewSchedule.php" method="POST">
+                <div class="row">
+                    <div class="col-md-3">&nbsp;</div>
+                    <div class="col-md-6">
+                        <select name="select_box" class="form-select" id="select_box">
+                            <option value="">Select Semester Year</option>
+                            <?php
+                            foreach ($query_run as $row) {
+                                echo "<option value=" . $row["semyear"] . ">" . $row["semname"] . " " . $row["year"] . '</option>';
                             }
-                                ?>
-                </tbody>
-            </table>
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col-md">
+                        <button type="submit" name="get_semyear" class="btn btn-primary">Submit</button>
+                    </div>
+                    <div class="col-md-3">&nbsp;</div>
+                </div>
+            </form>
+            <br />
+            <br />
         </div>
+        <br /><br />
+        <!--Php to connect to show if changes were successful-->
 
-        <h3 align="center">Schedule For Spring 2017</h3>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -111,633 +90,36 @@ $currUser = $_SESSION['id'];
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
+                    if (isset($_POST['get_semyear'])) {
+                        $get_semyear = $_POST['select_box'];
+                        $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
                                 INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
                                 INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='S2017'";
-                    $query_run = mysqli_query($connection, $query);
+                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='$get_semyear'";
+                        $query_run = mysqli_query($connection, $query);
 
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
+                        while ($row = mysqli_fetch_array($query_run)) { ?>
+                            <tr>
+                                <td> <?php echo $row['crn']; ?> </td>
+                                <td> <?php echo $row['courseid']; ?> </td>
+                                <td> <?php echo $row['coursename']; ?> </td>
+                                <td> <?php echo $row['sectionnum']; ?> </td>
+                                <td> <?php echo $row['fname'];
+                                        echo " ";
+                                        echo $row['lname']; ?> </td>
+                                <td> <?php echo $row['weekday1'];
+                                        echo "/";
+                                        echo $row['weekday']; ?> </td>
+                                <td> <?php echo $row['pstart'];
+                                        echo " - ";
+                                        echo $row['pend']; ?> </td>
+                                <td> <?php echo $row['roomid']; ?> </td>
+                                <td> <?php echo $row['numofseats']; ?> </td>
+                                <td> <?php echo $row['semyear']; ?> </td>
+                            </tr> <?php
+                                }
                             }
-                                ?>
-                </tbody>
-            </table>
-        </div>
-
-        <h3 align="center">Schedule For Fall 2017</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Section</td>
-                        <td>Instructor</td>
-                        <td>Days</td>
-                        <td>Time</td>
-                        <td>Room</td>
-                        <td>Seats Available</td>
-                        <td>Semester</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
-                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='F2017'";
-                    $query_run = mysqli_query($connection, $query);
-
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
-                            }
-                                ?>
-                </tbody>
-            </table>
-        </div>
-
-        <h3 align="center">Schedule For Spring 2018</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Section</td>
-                        <td>Instructor</td>
-                        <td>Days</td>
-                        <td>Time</td>
-                        <td>Room</td>
-                        <td>Seats Available</td>
-                        <td>Semester</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
-                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='S2018'";
-                    $query_run = mysqli_query($connection, $query);
-
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
-                            }
-                                ?>
-                </tbody>
-            </table>
-        </div>
-
-        <h3 align="center">Schedule For Fall 2018</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Section</td>
-                        <td>Instructor</td>
-                        <td>Days</td>
-                        <td>Time</td>
-                        <td>Room</td>
-                        <td>Seats Available</td>
-                        <td>Semester</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
-                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='F2018'";
-                    $query_run = mysqli_query($connection, $query);
-
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
-                            }
-                                ?>
-                </tbody>
-            </table>
-        </div>
-
-        <h3 align="center">Schedule For Spring 2019</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Section</td>
-                        <td>Instructor</td>
-                        <td>Days</td>
-                        <td>Time</td>
-                        <td>Room</td>
-                        <td>Seats Available</td>
-                        <td>Semester</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
-                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='S2019'";
-                    $query_run = mysqli_query($connection, $query);
-
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
-                            }
-                                ?>
-                </tbody>
-            </table>
-        </div>
-
-        <h3 align="center">Schedule For Fall 2019</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Section</td>
-                        <td>Instructor</td>
-                        <td>Days</td>
-                        <td>Time</td>
-                        <td>Room</td>
-                        <td>Seats Available</td>
-                        <td>Semester</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
-                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='F2019'";
-                    $query_run = mysqli_query($connection, $query);
-
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
-                            }
-                                ?>
-                </tbody>
-            </table>
-        </div>
-
-        <h3 align="center">Schedule For Spring 2020</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Section</td>
-                        <td>Instructor</td>
-                        <td>Days</td>
-                        <td>Time</td>
-                        <td>Room</td>
-                        <td>Seats Available</td>
-                        <td>Semester</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
-                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='S2020'";
-                    $query_run = mysqli_query($connection, $query);
-
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
-                            }
-                                ?>
-                </tbody>
-            </table>
-        </div>
-
-        <h3 align="center">Schedule For Fall 2020</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Section</td>
-                        <td>Instructor</td>
-                        <td>Days</td>
-                        <td>Time</td>
-                        <td>Room</td>
-                        <td>Seats Available</td>
-                        <td>Semester</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
-                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='F2020'";
-                    $query_run = mysqli_query($connection, $query);
-
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
-                            }
-                                ?>
-                </tbody>
-            </table>
-        </div>
-
-        <h3 align="center">Schedule For Spring 2021</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Section</td>
-                        <td>Instructor</td>
-                        <td>Days</td>
-                        <td>Time</td>
-                        <td>Room</td>
-                        <td>Seats Available</td>
-                        <td>Semester</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
-                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='S2021'";
-                    $query_run = mysqli_query($connection, $query);
-
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
-                            }
-                                ?>
-                </tbody>
-            </table>
-        </div>
-
-        <h3 align="center">Schedule For Fall 2021</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Section</td>
-                        <td>Instructor</td>
-                        <td>Days</td>
-                        <td>Time</td>
-                        <td>Room</td>
-                        <td>Seats Available</td>
-                        <td>Semester</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
-                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='F2021'";
-                    $query_run = mysqli_query($connection, $query);
-
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
-                            }
-                                ?>
-                </tbody>
-            </table>
-        </div>
-
-        <h3 align="center">Schedule For Spring 2022</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Section</td>
-                        <td>Instructor</td>
-                        <td>Days</td>
-                        <td>Time</td>
-                        <td>Room</td>
-                        <td>Seats Available</td>
-                        <td>Semester</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
-                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='S2022'";
-                    $query_run = mysqli_query($connection, $query);
-
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
-                            }
-                                ?>
-                </tbody>
-            </table>
-        </div>
-
-        <h3 align="center">Schedule For Fall 2022</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Section</td>
-                        <td>Instructor</td>
-                        <td>Days</td>
-                        <td>Time</td>
-                        <td>Room</td>
-                        <td>Seats Available</td>
-                        <td>Semester</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
-                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='F2022'";
-                    $query_run = mysqli_query($connection, $query);
-
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
-                            }
-                                ?>
-                </tbody>
-            </table>
-        </div>
-
-        <h3 align="center">Schedule For Spring 2023</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td>CRN</td>
-                        <td>Course ID</td>
-                        <td>Course Name</td>
-                        <td>Section</td>
-                        <td>Instructor</td>
-                        <td>Days</td>
-                        <td>Time</td>
-                        <td>Room</td>
-                        <td>Seats Available</td>
-                        <td>Semester</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT *, day.weekday AS weekday1 FROM course INNER JOIN section ON course.courseid=section.courseid INNER JOIN faculty ON section.facultyid=faculty.facultyid  
-                                INNER JOIN user ON faculty.facultyid=user.userid INNER JOIN timeslotperiod ON section.timeslotid=timeslotperiod.timeslotid 
-                                INNER JOIN period ON timeslotperiod.periodid=period.periodid INNER JOIN timeslotday ON section.timeslotid = timeslotday.timeslotid 
-                                INNER JOIN day ON timeslotday.dayoid=day.dayid INNER JOIN day s ON timeslotday.daytid=s.dayid WHERE section.facultyid=$currUser AND semyear='S2023'";
-                    $query_run = mysqli_query($connection, $query);
-
-                    while ($row = mysqli_fetch_array($query_run)) { ?>
-                        <tr>
-                            <td> <?php echo $row['crn']; ?> </td>
-                            <td> <?php echo $row['courseid']; ?> </td>
-                            <td> <?php echo $row['coursename']; ?> </td>
-                            <td> <?php echo $row['sectionnum']; ?> </td>
-                            <td> <?php echo $row['fname'];
-                                    echo " ";
-                                    echo $row['lname']; ?> </td>
-                            <td> <?php echo $row['weekday1'];
-                                    echo "/";
-                                    echo $row['weekday']; ?> </td>
-                            <td> <?php echo $row['pstart'];
-                                    echo " - ";
-                                    echo $row['pend']; ?> </td>
-                            <td> <?php echo $row['roomid']; ?> </td>
-                            <td> <?php echo $row['numofseats']; ?> </td>
-                            <td> <?php echo $row['semyear']; ?> </td>
-                        </tr> <?php
-                            }
-                                ?>
+                                    ?>
                 </tbody>
             </table>
         </div>
