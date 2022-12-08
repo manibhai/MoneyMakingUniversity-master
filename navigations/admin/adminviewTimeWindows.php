@@ -113,10 +113,12 @@ include "../config.php";
                         <td>Year</td>
                         <td>Start of Semester</td>
                         <td>End of Semester</td>
+                        <td>Time Window ID</td>
                         <td>Add Class Cut Off</td>
                         <td>Drop Class Cut Off</td>
                         <td>Exam Cut Off</td>
                         <td>Grades Cut Off</td>
+                        <td>Edit</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -130,11 +132,18 @@ include "../config.php";
                             <td> <?php echo $row['semname']; ?> </td>
                             <td> <?php echo $row['begindate']; ?> </td>
                             <td> <?php echo $row['enddate']; ?> </td>
+                            <td> <?php echo $row['timewindowid']; ?> </td>
                             <td> <?php echo $row['regcutoff']; ?> </td>
                             <td> <?php echo $row['dropcutoff']; ?> </td>
                             <td> <?php echo $row['examcutoff']; ?> </td>
                             <td> <?php echo $row['gradecutoff']; ?> </td>
-                            </form>
+                            <td>
+                                <form action="../../php/editTW.php?id=<?= $row['timewindowid']; ?>" method="post">
+                                    <input type="hidden" name="userid" value="<?php echo $row['timewindowid']; ?>">
+                                    <button type="submit" name="edit_window" class=" btn btn-warning">Edit
+
+                                </form>
+                            </td>
                         </tr> <?php
                             }
                                 ?>
