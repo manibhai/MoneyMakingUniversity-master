@@ -226,7 +226,7 @@ if (!isset($_SESSION['id'])) {
                     $_SESSION['status'] = "This course conflicts with another course";
                     header('Location: ./registration.php');
                     exit(0);
-                } else if ($pre['preid'] == ($courseid) && $pre['cid'] != $pre['prerequisiteid']) {
+                } else if ($pre['cid'] != $pre['prerequisiteid'] && $pre['preid'] == ($courseid)) {
                     $_SESSION['status'] = "This course missing a prerequisite course";
                     header('Location: ./registration.php');
                     exit(0);
