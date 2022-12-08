@@ -186,7 +186,7 @@ if (!isset($_SESSION['id'])) {
                 $query_run6 = mysqli_query($connection, $query6);
                 $conflict = mysqli_fetch_array($query_run6);
 
-                $query7 = "SELECT *, prerequisite.courseid AS preid, studenthistory.courseid AS cid FROM prerequisite 
+                $query7 = "SELECT prerequisite.prerequisiteid, prerequisite.courseid AS preid, studenthistory.courseid AS cid FROM prerequisite 
                             INNER JOIN studenthistory ON studenthistory.courseid=prerequisite.prerequisiteid
                             WHERE studenthistory.studentid = '$studentid'";
                 $query_run7 = mysqli_query($connection, $query7);
@@ -222,12 +222,12 @@ if (!isset($_SESSION['id'])) {
                     $_SESSION['status'] = "This course conflicts with another course";
                     header('Location: ./registration.php');
                     exit(0);
-                } else if ($pre['preid'] == ($courseid) && $pre['cid'] != $pre['prerequisiteid']) {
+                } else if ($pre['preid'] != ($courseid) && $pre['cid'] != $pre['prerequisiteid']) {
                     $_SESSION['status'] = "This course missing a prerequisite course";
                     header('Location: ./registration.php');
                     exit(0);
                 } else if ($totalcred['creditstaken'] >= $totalcred['maxcredits']) {
-                    $_SESSION['status'] = "You have reached the maximum credits for this semester";
+                    $_SESSION['status'] = "You have reached the maximum credits to Register";
                     header('Location: ./registration.php');
                     exit(0);
                 } else {
