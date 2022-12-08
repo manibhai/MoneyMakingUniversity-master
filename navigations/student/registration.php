@@ -182,6 +182,30 @@ if (!isset($_SESSION['id'])) {
                 $query_run5 = mysqli_query($connection, $query5);
                 $full = mysqli_fetch_array($query_run5);
 
+                $query6 = "SELECT * FROM section INNER JOIN enrollment ON section.crn=enrollment.crn WHERE enrollment.studentid = '$studentid' AND section.semyear='$semyear'";
+                $query_run6 = mysqli_query($connection, $query6);
+                $conflict = mysqli_fetch_array($query_run6);
+
+                $query7 = "SELECT prerequisite.prerequisiteid, prerequisite.courseid AS preid, studenthistory.courseid AS cid FROM prerequisite 
+                            INNER JOIN studenthistory ON studenthistory.courseid=prerequisite.prerequisiteid
+                            AND studenthistory.studentid = '$studentid'";
+                $query_run7 = mysqli_query($connection, $query7);
+                $pre = mysqli_fetch_array($query_run7);
+
+                $query8 = "SELECT * FROM undergraduatestudentparttime WHERE studentid='$studentid'
+                            UNION
+                            SELECT * FROM undergraduatestudentfulltime WHERE studentid='$studentid'
+                            UNION
+                            SELECT * FROM graduatestudentparttime WHERE studentid='$studentid'
+                            UNION
+                            SELECT * FROM graduatestudentparttime WHERE studentid='$studentid'";
+                $query_run8 = mysqli_query($connection, $query8);
+                $totalcred = mysqli_fetch_array($query_run8);
+
+                $query9 = "SELECT * FROM timewindow WHERE semyear = '$semyear'";
+                $query_run9 = mysqli_query($connection, $query9);
+                $window = mysqli_fetch_array($query_run9);
+
                 if ($history) {
                     $_SESSION['status'] = "Course has already been Taken in the Past";
                     header('Location: ./registration.php');
@@ -190,29 +214,43 @@ if (!isset($_SESSION['id'])) {
                     $_SESSION['status'] = "Course has already been Taken in the Past";
                     header('Location: ./registration.php');
                     exit(0);
-                } else if ($major = 0) {
-                    $_SESSION['status'] = "This course requires a different major";
+                } else if (!($major) || ($minor)) {
+                    $_SESSION['status'] = "This course requires a different major or minor";
                     header('Location: ./registration.php');
                     exit(0);
-                } else if ($minor = 0) {
-                    $_SESSION['status'] = "This course requires a different minor";
+                } else if ($full['numofseats'] <= 0) {
+                    $_SESSION['status'] = "This course is Closed";
                     header('Location: ./registration.php');
                     exit(0);
-                } else if ($full['numofseats'] == '0') {
-                    $_SESSION['status'] = "This class is Closed";
+                } else if ($conflict['timeslotid'] == ($timeslotid)) {
+                    $_SESSION['status'] = "This course conflicts with another course";
+                    header('Location: ./registration.php');
+                    exit(0);
+                } else if ($totalcred['creditstaken'] >= $totalcred['maxcredits']) {
+                    $_SESSION['status'] = "You have reached the maximum credits to Register";
+                    header('Location: ./registration.php');
+                    exit(0);
+                } else if (($dateenrolled) > $window['regcutoff']) {
+                    $_SESSION['status'] = "The Time Window it Register has Closed";
                     header('Location: ./registration.php');
                     exit(0);
                 } else {
-                    $query = "INSERT INTO enrollment (studentid, crn, courseid, dateenrolled, semyear, grade) 
+                    if (($courseid) == $pre['preid'] && $pre['cid'] != $pre['prerequisiteid']) {
+                        $_SESSION['status'] = "This course missing a prerequisite course";
+                        header('Location: ./registration.php');
+                        exit(0);
+                    } else {
+                        $query = "INSERT INTO enrollment (studentid, crn, courseid, dateenrolled, semyear, grade) 
                         VALUES ('$studentid', '$crn', '$courseid', '$dateenrolled', '$semyear', '$grade')";
-                    $query_run = mysqli_query($connection, $query);
+                        $query_run = mysqli_query($connection, $query);
 
-                    $query1 = "UPDATE section SET section.numofseats=section.numofseats - 1 WHERE section.crn=$crn";
-                    $query_run1 = mysqli_query($connection, $query1);
+                        $query1 = "UPDATE section SET section.numofseats=section.numofseats - 1 WHERE section.crn=$crn";
+                        $query_run1 = mysqli_query($connection, $query1);
 
-                    $_SESSION['success'] = "Sucessfully Registered";
-                    header('Location: ./registration.php');
-                    exit(0);
+                        $_SESSION['success'] = "Sucessfully Registered";
+                        header('Location: ./registration.php');
+                        exit(0);
+                    }
                 }
             }
             ?>
