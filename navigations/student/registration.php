@@ -179,7 +179,7 @@ if (!isset($_SESSION['id'])) {
                 $minor = mysqli_fetch_array($query_run4);
 
                 $query5 = "SELECT * FROM section WHERE crn = '$crn'";
-                $query_run4 = mysqli_query($connection, $query5);
+                $query_run5 = mysqli_query($connection, $query5);
                 $full = mysqli_fetch_array($query_run5);
 
                 if ($history) {
