@@ -101,27 +101,22 @@ include "../config.php";
                     if (isset($_POST['searchStudent'])) {
                         $studentid = $_POST['studentid'];
                         $query = "SELECT major.creditsreq + minor.creditsreq AS totalcredits FROM major INNER JOIN studentmajor ON major.majorid=studentmajor.majorid
-                        INNER JOIN studentminor ON studentmajor.studentid=studentminor.studentid
-                        INNER JOIN minor ON studentminor.minorid=minor.minorid
-                         WHERE studentmajor.studentid='$studentid";
-                        
-                         
-
+                                    INNER JOIN studentminor ON studentmajor.studentid=studentminor.studentid
+                                    INNER JOIN minor ON studentminor.minorid=minor.minorid
+                                    WHERE studentmajor.studentid='$studentid'";
                         $query_run = mysqli_query($connection, $query);
-
                         while ($row = mysqli_fetch_array($query_run)) { ?>
                             <tr>
-                           
-                                <td> <?php echo "Credits needed " . $row['totalcredits'];?> </td>
-                                
+                                <td> <?php echo "Total Credits Needed: " . $row['totalcredits']; ?> </td>
                             </tr>
-
-                            <?php
-                                }
-                            }
-                                    ?>
+                    <?php
+                        }
+                    }
+                    ?>
                 </tbody>
             </table>
+        </div>
+        <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
                 </thead>
@@ -130,22 +125,16 @@ include "../config.php";
                     if (isset($_POST['searchStudent'])) {
                         $studentid = $_POST['studentid'];
                         $query1 = "SELECT (COUNT(studenthistory.courseid) * 4) AS creditsearned FROM
-                        studenthistory WHERE studenthistory.studentid='$studentid'";
-                        
-                         
-
+                                    studenthistory WHERE studenthistory.studentid='$studentid'";
                         $query_run1 = mysqli_query($connection, $query1);
-
                         while ($row = mysqli_fetch_array($query_run1)) { ?>
                             <tr>
-                           
-                                <td> <?php echo "Credits earned " . $row['creditsearned'];?> </td>
+                                <td> <?php echo "Total Credits Earned: " . $row['creditsearned']; ?> </td>
                             </tr>
-
-                            <?php
-                                }
-                            }
-                                    ?>
+                    <?php
+                        }
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
