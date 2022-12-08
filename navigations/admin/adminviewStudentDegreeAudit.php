@@ -147,6 +147,7 @@ include "../config.php";
                         <td>Credits</td>
                         <td>Grade Earned</td>
                         <td>Semester</td>
+                        <td>Edit Grade</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -164,6 +165,13 @@ include "../config.php";
                                 <td> <?php echo $row['numofcredits']; ?> </td>
                                 <td> <?php echo $row['grade']; ?> </td>
                                 <td> <?php echo $row['semyear']; ?> </td>
+                                <td>
+                                    <form action="../../php/editGrades.php?id=<?= $row['studentid']; ?>&crn=<?= $row['crn']; ?>" method="post">
+                                        <input type="hidden" name="studentid" value="<?php echo $row['studentid']; ?>">
+                                        <input type="hidden" name="crn" value="<?php echo $row['crn']; ?>">
+                                        <button type="submit" name="edit_grade" class=" btn btn-warning">Edit
+                                    </form>
+                                </td>
                             </tr> <?php
                                 }
                             }

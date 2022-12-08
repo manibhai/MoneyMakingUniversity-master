@@ -212,3 +212,29 @@ if (isset($_POST['update_window'])) {
         exit(0);
     }
 }
+
+//EDIT A GRADE
+if (isset($_POST['edit_grade'])) {
+    $studentid = $_POST['studentid'];
+    $query = "SELECT * FROM studenthistory WHERE studentid='$studentid'";
+    $query_run = mysqli_query($connection, $query);
+}
+
+if (isset($_POST['updateGrade_btn'])) {
+    $studentid = $_POST['studentid'];
+    $crn = $_POST['crn'];
+    $grade = $_POST['grade'];
+
+    $query = "UPDATE studenthistory SET grade = '$grade' WHERE studenthistory.studentid = '$studentid' AND studenthistory.crn = '$crn'";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Grade has been Updated";
+        header('Location: ../navigations/admin/adminviewStudentDegreeAudit.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Grade was not Updated";
+        header('Location: ../navigations/admin/adminviewStudentDegreeAudit.php');
+        exit(0);
+    }
+}
