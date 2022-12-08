@@ -206,6 +206,10 @@ if (!isset($_SESSION['id'])) {
                 $query_run9 = mysqli_query($connection, $query9);
                 $window = mysqli_fetch_array($query_run9);
 
+                $query10 = "SELECT * FROM studenthold WHERE studentid = '$studentid'";
+                $query_run10 = mysqli_query($connection, $query10);
+                $hold = mysqli_fetch_array($query_run10);
+
                 if ($history) {
                     $_SESSION['status'] = "Course has already been Taken in the Past";
                     header('Location: ./registration.php');
@@ -232,6 +236,10 @@ if (!isset($_SESSION['id'])) {
                     exit(0);
                 } else if (($dateenrolled) > $window['regcutoff']) {
                     $_SESSION['status'] = "The Time Window it Register has Closed";
+                    header('Location: ./registration.php');
+                    exit(0);
+                } else if ($hold) {
+                    $_SESSION['status'] = "You have a hold on your account";
                     header('Location: ./registration.php');
                     exit(0);
                 } else {
