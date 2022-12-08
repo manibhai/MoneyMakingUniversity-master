@@ -95,12 +95,6 @@ include "../config.php";
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
-                    <tr>
-                        <td>Total Credits Needed To Graduate</td>
-                        <td>Credits Earned</td>
-                        <td>Credits Needed</td>
-                        <td>GPA</td>
-                    </tr>
                 </thead>
                 <tbody>
                     <?php
@@ -109,22 +103,38 @@ include "../config.php";
                         $query = "SELECT major.creditsreq + minor.creditsreq AS totalcredits FROM major INNER JOIN studentmajor ON major.majorid=studentmajor.majorid
                                     INNER JOIN studentminor ON studentmajor.studentid=studentminor.studentid
                                     INNER JOIN minor ON studentminor.minorid=minor.minorid
-                                    WHERE studentmajor.studentid=$studentid";
-
+                                    WHERE studentmajor.studentid='$studentid'";
                         $query_run = mysqli_query($connection, $query);
-
                         while ($row = mysqli_fetch_array($query_run)) { ?>
                             <tr>
-                                <td> <?php echo $row['totalcredits']; ?> </td>
-                                <td> <?php echo " "; ?> </td>
-                                <td> <?php echo " "; ?> </td>
-                                <td> <?php echo " "; ?> </td>
-                                <td> <?php echo " "; ?> </td>
-
-                            </tr> <?php
-                                }
-                            }
-                                    ?>
+                                <td> <?php echo "Total Credits Needed: " . $row['totalcredits']; ?> </td>
+                            </tr>
+                    <?php
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                </thead>
+                <tbody>
+                    <?php
+                    if (isset($_POST['searchStudent'])) {
+                        $studentid = $_POST['studentid'];
+                        $query1 = "SELECT (COUNT(studenthistory.courseid) * 4) AS creditsearned FROM
+                                    studenthistory WHERE studenthistory.studentid='$studentid'";
+                        $query_run1 = mysqli_query($connection, $query1);
+                        while ($row = mysqli_fetch_array($query_run1)) { ?>
+                            <tr>
+                                <td> <?php echo "Total Credits Earned: " . $row['creditsearned']; ?> </td>
+                            </tr>
+                    <?php
+                        }
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -143,7 +153,7 @@ include "../config.php";
                     <?php
                     if (isset($_POST['searchStudent'])) {
                         $studentid = $_POST['studentid'];
-                        $query = $query = "SELECT * FROM studenthistory 
+                        $query = "SELECT * FROM studenthistory 
                                     INNER JOIN course ON studenthistory.courseid = course.courseid
                                     INNER JOIN user ON studenthistory.studentid = user.userid WHERE user.userid = $studentid";
                         $query_run = mysqli_query($connection, $query);

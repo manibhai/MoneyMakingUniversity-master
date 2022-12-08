@@ -22,14 +22,14 @@ include "../config.php";
             <a class="navbar-brand" href="index.php">Faculty Homepage</a>
         </div>
         <div class="container-fluid">
-            <a class="btn btn-lg btn-warning" href="facultyviewStudentDegreeAudit.php" role="button">Reset</a>
+            <a class="btn btn-lg btn-warning" href="facultyviewStudentTranscript.php" role="button">Reset</a>
         </div>
         <div class="container-fluid">
             <a class="btn btn-lg btn-danger" href="../logout.php" role="button">Logout</a>
         </div>
     </nav>
 </head>
-<form action="facultyviewStudentDegreeAudit.php" method="POST">
+<form action="facultyviewStudentTranscript.php" method="POST">
     <div class="input-group">
         <input type="search" name="studentid" class="form-control rounded" placeholder="Enter Student ID" aria-label="Search" aria-describedby="search-addon" />
         <button type="submit" name="searchStudent" class="btn btn-outline-primary">Search</button>
@@ -52,13 +52,14 @@ include "../config.php";
             unset($_SESSION['status']);
         }
         ?>
-        <h3 align="center">Student Transcript</h3>
+        <h3 align="center">Student Degree Audit</h3>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <td>Student ID</td>
                         <td>Student Name</td>
+                        <td>Student Type</td>
                         <td>Major</td>
                         <td>Minor</td>
                     </tr>
@@ -80,6 +81,7 @@ include "../config.php";
                                 <td> <?php echo $row['fname'];
                                         echo " ";
                                         echo $row['lname']; ?> </td>
+                                <td> <?php echo $row['gradlevel']; ?> </td>
                                 <td> <?php echo $row['majorname']; ?> </td>
                                 <td> <?php echo $row['minorname']; ?> </td>
 
@@ -87,6 +89,52 @@ include "../config.php";
                                 }
                             }
                                     ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                </thead>
+                <tbody>
+                    <?php
+                    if (isset($_POST['searchStudent'])) {
+                        $studentid = $_POST['studentid'];
+                        $query = "SELECT major.creditsreq + minor.creditsreq AS totalcredits FROM major INNER JOIN studentmajor ON major.majorid=studentmajor.majorid
+                                    INNER JOIN studentminor ON studentmajor.studentid=studentminor.studentid
+                                    INNER JOIN minor ON studentminor.minorid=minor.minorid
+                                    WHERE studentmajor.studentid='$studentid'";
+                        $query_run = mysqli_query($connection, $query);
+                        while ($row = mysqli_fetch_array($query_run)) { ?>
+                            <tr>
+                                <td> <?php echo "Total Credits Needed: " . $row['totalcredits']; ?> </td>
+                            </tr>
+                    <?php
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                </thead>
+                <tbody>
+                    <?php
+                    if (isset($_POST['searchStudent'])) {
+                        $studentid = $_POST['studentid'];
+                        $query1 = "SELECT (COUNT(studenthistory.courseid) * 4) AS creditsearned FROM
+                                    studenthistory WHERE studenthistory.studentid='$studentid'";
+                        $query_run1 = mysqli_query($connection, $query1);
+                        while ($row = mysqli_fetch_array($query_run1)) { ?>
+                            <tr>
+                                <td> <?php echo "Total Credits Earned: " . $row['creditsearned']; ?> </td>
+                            </tr>
+                    <?php
+                        }
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -105,7 +153,7 @@ include "../config.php";
                     <?php
                     if (isset($_POST['searchStudent'])) {
                         $studentid = $_POST['studentid'];
-                        $query = $query = "SELECT * FROM studenthistory 
+                        $query = "SELECT * FROM studenthistory 
                                     INNER JOIN course ON studenthistory.courseid = course.courseid
                                     INNER JOIN user ON studenthistory.studentid = user.userid WHERE user.userid = $studentid";
                         $query_run = mysqli_query($connection, $query);
