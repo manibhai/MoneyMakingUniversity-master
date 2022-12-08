@@ -42,7 +42,7 @@ if (!isset($_SESSION['id'])) {
                                 <div class="form-group">
                                     <!--Fill in form contents-->
                                     <label>CRN</label>
-                                    <input type="varchar(300)" name="crn" class="form-control" placeholder="Enter CRN">
+                                    <input type="int" name="crn" class="form-control" placeholder="Enter CRN">
                                 </div>
                                 <div class="form-group">
                                     <!--Fill in form contents-->
@@ -51,8 +51,13 @@ if (!isset($_SESSION['id'])) {
                                 </div>
                                 <div class="form-group">
                                     <!--Fill in form contents-->
+                                    <label>Section</label>
+                                    <input type="int" name="sectionnum" class="form-control" placeholder="Enter Section">
+                                </div>
+                                <div class="form-group">
+                                    <!--Fill in form contents-->
                                     <label> Faculty ID</label>
-                                    <input type="varchar(300)" name="facultyid" class="form-control" placeholder="Enter Faculty ID">
+                                    <input type="int" name="facultyid" class="form-control" placeholder="Enter Faculty ID">
                                 </div>
                                 <div class="form-group">
                                     <label>Time Slot ID</label>
@@ -61,6 +66,10 @@ if (!isset($_SESSION['id'])) {
                                 <div class="form-group">
                                     <label>Room ID</label>
                                     <input type="varchar(300)" name="roomid" class="form-control" placeholder="Enter Room ID">
+                                </div>
+                                <div class="form-group">
+                                    <label>Number of Seats</label>
+                                    <input type="int" name="numofseats" class="form-control" placeholder="Enter Number of Seats">
                                 </div>
                                 <div class="form-group">
                                     <label>Semester</label>

@@ -108,17 +108,19 @@ if (isset($_POST['minorreq_btn'])) {
 if (isset($_POST['master_btn'])) {
     $crn = $_POST['crn'];
     $courseid = $_POST['courseid'];
+    $sectionnum = $_POST['sectionnum'];
     $facultyid = $_POST['facultyid'];
     $timeslotid = $_POST['timeslotid'];
     $roomid = $_POST['roomid'];
+    $numofseats = $_POST['numofseats'];
     $semyear = $_POST['semyear'];
 
-    $query = "INSERT INTO section (crn, courseid, facultyid, timeslotid, roomid, semyear)
-    VALUES ('$crn', '$courseid', '$facultyid', '$timeslotid', '$roomid', '$semyear')";
+    $query = "INSERT INTO section (crn, courseid, sectionnum, facultyid, timeslotid, roomid, numofseats, semyear)
+    VALUES ('$crn', '$courseid', '$sectionnum', '$facultyid', '$timeslotid', '$roomid', '$numofseats', '$semyear')";
     $query_run = mysqli_query($connection, $query);
 
-    if (mysqli_num_rows($courseid_query_run) > 0) {
-        $_SESSION['status'] = "Course ID Already Taken. Please Try Another one.";
+    if ($crn_query_run > 0) {
+        $_SESSION['status'] = "CRN Already Taken. Please Try Another one.";
         $_SESSION['status_code'] = "error";
         header('Location: ../navigations/admin/adminviewMaster.php');
         exit(0);
