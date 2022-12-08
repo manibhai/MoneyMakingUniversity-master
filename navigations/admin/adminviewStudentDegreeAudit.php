@@ -124,10 +124,10 @@ include "../config.php";
                     <?php
                     if (isset($_POST['searchStudent'])) {
                         $studentid = $_POST['studentid'];
-                        $query1 = "SELECT (COUNT(studenthistory.courseid) * 4) AS creditsearned FROM
+                        $query = "SELECT (COUNT(studenthistory.courseid) * 4) AS creditsearned FROM
                                     studenthistory WHERE studenthistory.studentid='$studentid'";
-                        $query_run1 = mysqli_query($connection, $query1);
-                        while ($row = mysqli_fetch_array($query_run1)) { ?>
+                        $query_run = mysqli_query($connection, $query);
+                        while ($row = mysqli_fetch_array($query_run)) { ?>
                             <tr>
                                 <td> <?php echo "Total Credits Earned: " . $row['creditsearned']; ?> </td>
                             </tr>
