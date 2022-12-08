@@ -116,7 +116,7 @@ include "../config.php";
           $query_run1 = mysqli_query($connection, $query1);
           while ($row = mysqli_fetch_array($query_run1)) { ?>
             <tr>
-              <td> <?php echo "Total Credits Earned: " . $row['creditsearned']; ?> </td>
+              <td> <?php echo "Total Credits Earned + In Progress: " . $row['creditsearned']; ?> </td>
             </tr>
           <?php
           }
