@@ -23,58 +23,37 @@ include "../config.php";
         </div>
 
         <div class="container-fluid">
-            <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Add Semester
+            <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#sem">
+                Semester
             </button>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="sem" tabindex="-1" aria-labelledby="example1" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Semester Form</h1>
+                            <h1 class="modal-title fs-5" id="example1">Semester Form</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form action="../../php/code.php" method="POST">
-
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label>Year</label>
-                                    <input type="varchar(300)" name="year" class="form-control" placeholder="Enter Year">
+                                    <label>Semester Year</label>
+                                    <input type="varchar(300)" name="semyear" class="form-control" placeholder="(S2020, F2020, etc)">
+                                </div>
+                                <div class="form-group">
+                                    <label>Start Date</label>
+                                    <input type="date" name="begindate" class="form-control" placeholder="Enter Semester Start date">
+                                </div>
+                                <div class="form-group">
+                                    <label>Ending Date</label>
+                                    <input type="date" name="enddate" class="form-control" placeholder="Enter Semester End date">
                                 </div>
                                 <div class="form-group">
                                     <label>Semester</label>
                                     <input type="varchar(300)" name="semname" class="form-control" placeholder="Fall , Spring">
                                 </div>
                                 <div class="form-group">
-                                    <label>Semester Year</label>
-                                    <input type="varchar(300)" name="semyear" class="form-control" placeholder="(S2020, F2020, etc)">
-                                </div>
-                                <div class="form-group">
-                                    <label>Time Window ID</label>
-                                    <input type="varchar(300)" name="timewindowid" class="form-control" placeholder="(TW14-..)">
-                                </div>
-                                <div class="form-group">
-                                    <label>Start Date</label>
-                                    <input type="varchar(300)" name="begindate" class="form-control" placeholder="Enter Semester Start date">
-                                </div>
-                                <div class="form-group">
-                                    <label>Ending Date</label>
-                                    <input type="varchar(300)" name="enddate" class="form-control" placeholder="Enter Semester End date">
-                                </div>
-                                <div class="form-group">
-                                    <label>Add Class Cut Off</label>
-                                    <input type="varchar(300)" name="regcutoff" class="form-control" placeholder="Add Class Cut Off Date">
-                                </div>
-                                <div class="form-group">
-                                    <label>Drop Class Cut Off</label>
-                                    <input type="varchar(300)" name="dropcutoff" class="form-control" placeholder="Drop Class Cut Off Date">
-                                </div>
-                                <div class="form-group">
-                                    <label>Exam Cut off </label>
-                                    <input type="varchar(300)" name="gradecutoff" class="form-control" placeholder="Exams Cut Off Date">
-                                </div>
-                                <div class="form-group">
-                                    <label>Grades Cut Off</label>
-                                    <input type="varchar(300)" name="examcutoff" class="form-control" placeholder="Grades Cut Off Date">
+                                    <label>Year</label>
+                                    <input type="varchar(300)" name="year" class="form-control" placeholder="Enter Year">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" name="create_sem_btn" class="btn btn-primary">Create</button>
@@ -85,9 +64,57 @@ include "../config.php";
                 </div>
             </div>
         </div>
+
         <div class="container-fluid">
-            <a class="btn btn-lg btn-danger" href="../logout.php" role="button">Logout</a>
+            <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Time Window
+            </button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Time Window Form</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="../../php/code.php" method="POST">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Time Window ID</label>
+                                    <input type="varchar(300)" name="timewindowid" class="form-control" placeholder="(TW14-..))">
+                                </div>
+                                <div class="form-group">
+                                    <label>Semester Year</label>
+                                    <input type="varchar(300)" name="semyear" class="form-control" placeholder="(F2023-..)">
+                                </div>
+                                <div class="form-group">
+                                    <label>Registration Cut Off</label>
+                                    <input type="date" name="regcutoff" class="form-control" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label>Drop Cut Off</label>
+                                    <input type="date" name="dropcutoff" class="form-control" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label>Exam Cut Off</label>
+                                    <input type="date" name="examcutoff" class="form-control" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label>Grades Cut Off</label>
+                                    <input type="date" name="gradecutoff" class="form-control" placeholder="">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="create_window_btn" class="btn btn-primary">Create</button>
+                                </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+        <a class="btn btn-lg btn-danger" href="../logout.php" role="button">Logout</a>
+
     </nav>
 </head>
 
@@ -123,7 +150,7 @@ include "../config.php";
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT * FROM semesteryear INNER JOIN timewindow ON semesteryear.semyear=timewindow.semyear";
+                    $query = "SELECT * FROM semesteryear INNER JOIN timewindow ON semesteryear.semyear=timewindow.semyear ORDER BY timewindow.timewindowid ASC";
                     $query_run = mysqli_query($connection, $query);
 
                     while ($row = mysqli_fetch_array($query_run)) { ?>

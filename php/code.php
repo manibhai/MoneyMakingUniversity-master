@@ -126,30 +126,58 @@ if (isset($_POST['updateCourse_btn'])) {
 
 //Create a New Semester
 if (isset($_POST['create_sem_btn'])) {
-    $year = $_POST['year'];
-    $semname = $_POST['semname'];
     $semyear = $_POST['semyear'];
-    $timewindowid = $_POST['timewindowid'];
     $begindate = $_POST['begindate'];
     $enddate = $_POST['enddate'];
+    $semname = $_POST['semname'];
+    $year = $_POST['year'];
+
+    $query = "INSERT INTO semesteryear (semyear, begindate, enddate, semname, year)
+                VALUES ('$semyear', '$begindate', '$enddate', '$semname', '$year')";
+    $query_run = mysqli_query($connection, $query);
+
+    if (($semyear_query_run) > 0) {
+        $_SESSION['status'] = "Semester Year Already Exist. Please Try Another one.";
+        $_SESSION['status_code'] = "error";
+        header('Location: ../navigations/admin/adminviewTimeWindows.php');
+        exit(0);
+    }
+    if ($query_run) {
+        $_SESSION['success'] = "Semester Year has been Created";
+        header('Location: ../navigations/admin/adminviewTimeWindows.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Semester Year was not Created";
+        header('Location: ../navigations/admin/adminviewTimeWindows.php');
+        exit(0);
+    }
+}
+
+//Create a New Time Window
+if (isset($_POST['create_window_btn'])) {
+    $timewindowid = $_POST['timewindowid'];
+    $semyear = $_POST['semyear'];
     $regcutoff = $_POST['regcutoff'];
     $dropcutoff = $_POST['dropcutoff'];
     $examcutoff = $_POST['examcutoff'];
     $gradecutoff = $_POST['gradecutoff'];
 
-    $query = "INSERT INTO semesteryear (semyear, begindate, enddate, semname, year)
-                VALUES ('$semyear', '$begindate', '$enddate', '$semname', '$year')";
-    $query1 = "INSERT INTO timewindow (timewindow, semyear, regcutoff, dropcutoff, gradecutoff, examcutoff)
-                VALUES ('$timewindowid', '$semyear', '$regcutoff' '$dropcutoff', '$gradecutoff', '$examcutoff')";
+    $query = "INSERT INTO timewindow (timewindowid, semyear, regcutoff, dropcutoff, examcutoff, gradecutoff)
+                VALUES ('$timewindowid', '$semyear', '$regcutoff', '$dropcutoff', '$examcutoff', '$gradecutoff')";
     $query_run = mysqli_query($connection, $query);
-    $query_run1 = mysqli_query($connection, $query1);
 
-    if ($query_run and $query_run1) {
-        $_SESSION['success'] = "Semester has been Created";
+    if (($timewindowid_query_run) > 0) {
+        $_SESSION['status'] = "Time Window Already Exist. Please Try Another one.";
+        $_SESSION['status_code'] = "error";
+        header('Location: ../navigations/admin/adminviewTimeWindows.php');
+        exit(0);
+    }
+    if ($query_run) {
+        $_SESSION['success'] = "Time Window has been Created";
         header('Location: ../navigations/admin/adminviewTimeWindows.php');
         exit(0);
     } else {
-        $_SESSION['status'] = "Semester was not Created";
+        $_SESSION['status'] = "Time Window was not Created";
         header('Location: ../navigations/admin/adminviewTimeWindows.php');
         exit(0);
     }
@@ -169,9 +197,9 @@ if (isset($_POST['update_window'])) {
     $examcutoff = $_POST['examcutoff'];
     $gradecutoff = $_POST['gradecutoff'];
 
-    $query = "UPDATE timewindow SET regcutoff = '$regcutoff', 
-                dropcutoff = '$dropcutoff', examcutoff = '$examcutoff', gradecutoff = '$gradecutoff' 
-                WHERE timewindowid ='$timewindowid'";
+    $query = "UPDATE timewindow SET timewindow.regcutoff = '$regcutoff', 
+                timewindow.dropcutoff = '$dropcutoff', timewindow.examcutoff = '$examcutoff', timewindow.gradecutoff = '$gradecutoff' 
+                WHERE timewindow.timewindowid ='$timewindowid'";
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {
