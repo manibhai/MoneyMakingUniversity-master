@@ -192,6 +192,16 @@ if (!isset($_SESSION['id'])) {
                 $query_run7 = mysqli_query($connection, $query7);
                 $pre = mysqli_fetch_array($query_run7);
 
+                $query8 = "SELECT * FROM undergraduatestudentparttime WHERE studentid='$studentid'
+                            UNION
+                            SELECT * FROM undergraduatestudentfulltime WHERE studentid='$studentid'
+                            UNION
+                            SELECT * FROM graduatestudentparttime WHERE studentid='$studentid'
+                            UNION
+                            SELECT * FROM graduatestudentparttime WHERE studentid='$studentid'";
+                $query_run8 = mysqli_query($connection, $query8);
+                $totalcred = mysqli_fetch_array($query_run8);
+
                 if ($history) {
                     $_SESSION['status'] = "Course has already been Taken in the Past";
                     header('Location: ./registration.php');
@@ -214,6 +224,10 @@ if (!isset($_SESSION['id'])) {
                     exit(0);
                 } else if ($pre['preid'] == ($courseid) && $pre['cid'] != $pre['prerequisiteid']) {
                     $_SESSION['status'] = "This course missing a prerequisite course";
+                    header('Location: ./registration.php');
+                    exit(0);
+                } else if ($totalcred['creditstaken'] >= $totalcred['maxcredits']) {
+                    $_SESSION['status'] = "You have reached the maximum credits for this semester";
                     header('Location: ./registration.php');
                     exit(0);
                 } else {
