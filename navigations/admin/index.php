@@ -69,6 +69,7 @@ $row = mysqli_fetch_array($result);
               <li><a class="dropdown-item" href="./adminviewFacultyPart.php">View Part-Time Faculty</a></li>
               <li><a class="dropdown-item" href="./adminviewFacultyFull.php">View Full-Time Faculty</a></li>
               <li><a class="dropdown-item" href="./adminviewFacultyHistory.php">View Faculty History</a></li>
+              <li><a class="dropdown-item" href="./adminviewAdvisor.php">View Advisor</a></li>
             </ul>
           </div>
           <div class="dropdown">

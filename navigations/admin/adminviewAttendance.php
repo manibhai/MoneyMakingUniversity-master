@@ -25,7 +25,7 @@ $currUser = $_SESSION['id'];
             <a class="navbar-brand" href="index.php">Admin Homepage</a>
         </div>
         <div class="container-fluid">
-            <a class="btn btn-lg btn-warning" href="facultyviewAttendance.php" role="button">Reset</a>
+            <a class="btn btn-lg btn-warning" href="adminviewAttendance.php" role="button">Reset</a>
         </div>
         <div class="container-fluid">
             <a class="btn btn-lg btn-danger" href="../logout.php" role="button">Logout</a>

@@ -224,6 +224,27 @@ if (isset($_POST['attendance_btn'])) {
     }
 }
 
+//Advisor
+if (isset($_POST['advisor_btn'])) {
+    $studentid = $_POST['studentid'];
+    $facultyid = $_POST['facultyid'];
+    $dateassigned = $_POST['dateassigned'];
+
+    $query = "INSERT INTO advisor (studentid, facultyid, dateassigned)
+    VALUES ('$studentid', '$facultyid', '$dateassigned')";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Advisor Assigned successfully";
+        header('Location: ../navigations/admin/adminviewAdvisor.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Advisor was not Assigned";
+        header('Location: ../navigations/admin/adminviewAdvisor.php');
+        exit(0);
+    }
+}
+
 if (isset($_POST['btn_event'])) {
     $date = $_POST['date'];
     $event = $_POST['event'];
