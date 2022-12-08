@@ -202,6 +202,10 @@ if (!isset($_SESSION['id'])) {
                 $query_run8 = mysqli_query($connection, $query8);
                 $totalcred = mysqli_fetch_array($query_run8);
 
+                $query9 = "SELECT * FROM timewindow WHERE semyear = '$semyear'";
+                $query_run9 = mysqli_query($connection, $query9);
+                $window = mysqli_fetch_array($query_run9);
+
                 if ($history) {
                     $_SESSION['status'] = "Course has already been Taken in the Past";
                     header('Location: ./registration.php');
@@ -222,12 +226,16 @@ if (!isset($_SESSION['id'])) {
                     $_SESSION['status'] = "This course conflicts with another course";
                     header('Location: ./registration.php');
                     exit(0);
-                } else if ($pre['preid'] != ($courseid) && $pre['cid'] != $pre['prerequisiteid']) {
+                } else if ($pre['preid'] == ($courseid) && $pre['cid'] != $pre['prerequisiteid']) {
                     $_SESSION['status'] = "This course missing a prerequisite course";
                     header('Location: ./registration.php');
                     exit(0);
                 } else if ($totalcred['creditstaken'] >= $totalcred['maxcredits']) {
                     $_SESSION['status'] = "You have reached the maximum credits to Register";
+                    header('Location: ./registration.php');
+                    exit(0);
+                } else if (($dateenrolled) > $window['regcutoff']) {
+                    $_SESSION['status'] = "The Time Window it Register has Closed";
                     header('Location: ./registration.php');
                     exit(0);
                 } else {
