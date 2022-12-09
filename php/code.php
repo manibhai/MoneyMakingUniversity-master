@@ -136,7 +136,7 @@ if (isset($_POST['create_sem_btn'])) {
                 VALUES ('$semyear', '$begindate', '$enddate', '$semname', '$year')";
     $query_run = mysqli_query($connection, $query);
 
-    if (($semyear_query_run) > 0) {
+    if (mysqli_num_rows($semyear_query_run) > 0) {
         $_SESSION['status'] = "Semester Year Already Exist. Please Try Another one.";
         $_SESSION['status_code'] = "error";
         header('Location: ../navigations/admin/adminviewTimeWindows.php');
@@ -166,7 +166,7 @@ if (isset($_POST['create_window_btn'])) {
                 VALUES ('$timewindowid', '$semyear', '$regcutoff', '$dropcutoff', '$examcutoff', '$gradecutoff')";
     $query_run = mysqli_query($connection, $query);
 
-    if (($timewindowid_query_run) > 0) {
+    if (mysqli_num_rows($timewindowid_query_run) > 0) {
         $_SESSION['status'] = "Time Window Already Exist. Please Try Another one.";
         $_SESSION['status_code'] = "error";
         header('Location: ../navigations/admin/adminviewTimeWindows.php');
