@@ -167,8 +167,7 @@ include "../config.php";
                             <td>
                                 <form action="../../php/editTW.php?id=<?= $row['timewindowid']; ?>" method="post">
                                     <input type="hidden" name="timewindowid" value="<?php echo $row['timewindowid']; ?>">
-                                    <button type="submit" name="edit_window" class=" btn btn-warning">Edit
-
+                                    <button type="submit" name="edit_window" class=" btn btn-warning">Edit</button>
                                 </form>
                             </td>
                         </tr> <?php

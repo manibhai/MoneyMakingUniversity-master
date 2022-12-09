@@ -58,9 +58,10 @@ if (isset($_POST['minor_btn'])) {
 if (isset($_POST['majorreq_btn'])) {
     $courseid = $_POST['courseid'];
     $majorid = $_POST['majorid'];
+    $gradereq = $_POST['gradereq'];
 
-    $query = "INSERT INTO majorcourse (courseid, majorid)
-    VALUES ('$courseid', '$majorid')";
+    $query = "INSERT INTO majorcourse (courseid, majorid, gradereq)
+    VALUES ('$courseid', '$majorid', '$gradereq')";
     $query_run = mysqli_query($connection, $query);
 
     if (mysqli_num_rows($minorid_query_run) > 0) {
@@ -83,9 +84,10 @@ if (isset($_POST['majorreq_btn'])) {
 if (isset($_POST['minorreq_btn'])) {
     $courseid = $_POST['courseid'];
     $majorid = $_POST['minorid'];
+    $gradereq = $_POST['gradereq'];
 
-    $query = "INSERT INTO minorcourse (courseid, minorid)
-    VALUES ('$courseid', '$minorid')";
+    $query = "INSERT INTO minorcourse (courseid, minorid, gradereq)
+    VALUES ('$courseid', '$minorid', '$gradereq')";
     $query_run = mysqli_query($connection, $query);
 
     if (mysqli_num_rows($minorid_query_run) > 0) {
@@ -119,7 +121,7 @@ if (isset($_POST['master_btn'])) {
     VALUES ('$crn', '$courseid', '$sectionnum', '$facultyid', '$timeslotid', '$roomid', '$numofseats', '$semyear')";
     $query_run = mysqli_query($connection, $query);
 
-    if ($crn_query_run > 0) {
+    if (mysqli_num_rows($crn_query_run) > 0) {
         $_SESSION['status'] = "CRN Already Taken. Please Try Another one.";
         $_SESSION['status_code'] = "error";
         header('Location: ../navigations/admin/adminviewMaster.php');
@@ -150,10 +152,10 @@ if (isset($_POST['course_btn'])) {
     if (mysqli_num_rows($courseid_query_run) > 0) {
         $_SESSION['status'] = "Course ID Already Taken. Please Try Another one.";
         $_SESSION['status_code'] = "error";
-        header('Location: ../navigations/admin/adminviewMaster.php');
+        header('Location: ../navigations/admin/adminviewCourse.php');
         exit(0);
     } else if ($query_run) {
-        $_SESSION['success'] = "Course was Created";
+        $_SESSION['success'] = "Course has been Created";
         header('Location: ../navigations/admin/adminviewCourse.php');
         exit(0);
     } else {

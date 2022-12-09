@@ -38,7 +38,7 @@ if (!isset($_SESSION['id'])) {
             </div>
             <!--Modal body inside of form-->
             <!--Connects the for and post to the method that is located in code.php(Server fucntions)-->
-            <form action="../../php/Dept_Code.php" method="post">
+            <form action="../../php/dept_code.php" method="post">
               <div class="modal-body">
                 <div class="form-group">
                   <!--Fill in form contents-->
@@ -77,7 +77,7 @@ if (!isset($_SESSION['id'])) {
               </div>
               <!--Footer button goes here-->
               <div class="modal-footer">
-                <button type="submit" name="c_btn" class="btn btn-primary">Save</button>
+                <button type="submit" name="create_dept" class="btn btn-primary">Save</button>
               </div>
             </form>
           </div>
@@ -119,7 +119,6 @@ if (!isset($_SESSION['id'])) {
             <td>Department Chair</td>
             <td>Department Manager</td>
             <td>Edit Department</td>
-            <td>Delete Department</td>
           </tr>
         </thead>
         <tbody>
@@ -145,19 +144,11 @@ if (!isset($_SESSION['id'])) {
                     echo " ";
                     echo $row['lname']; ?> </td>
               <td>
-                <form action="../../php/editDepartments.php?id=<?php echo $row['deptid'] ?>" method="POST">
-                  <input type="hidden" name="deptid" value=" <?php echo $row['deptid'] ?>">
+                <form action="../../php/editDepartments.php?id=<?php echo $row['deptid']; ?>" method="POST">
+                  <input type="hidden" name="deptid" value="<?php echo $row['deptid']; ?>">
                   <button type="submit" name="edit_dept" class="btn btn-warning"> Edit </button>
-
+                </form>
               </td>
-              </form>
-              <td>
-                <form action="../../php/editDepartments.php" method="POST">
-                  <input type="hidden" name="dept" value=" <?php echo $row['deptid'] ?>">
-                  <button type="submit" name="delete_dept" class="btn btn-danger"> Delete </button>
-              </td>
-              </form>
-
             </tr> <?php
                 }
                   ?>
