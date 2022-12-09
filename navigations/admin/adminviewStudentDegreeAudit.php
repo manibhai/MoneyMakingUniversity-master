@@ -179,6 +179,41 @@ include "../config.php";
                 </tbody>
             </table>
         </div>
+
+        <h3 align="center">All Courses For Degree</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>Course ID</td>
+                        <td>Course Name</td>
+                        <td>Credits</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if (isset($_POST['searchStudent'])) {
+                        $studentid = $_POST['studentid'];
+                        $query = "SELECT * FROM course INNER JOIN majorcourse ON course.courseid=majorcourse.courseid
+                                    INNER JOIN studentmajor ON majorcourse.majorid=studentmajor.majorid
+                                    WHERE studentmajor.studentid = $studentid
+                                    UNION 
+                                    SELECT * FROM course INNER JOIN minorcourse ON course.courseid=minorcourse.courseid
+                                    INNER JOIN studentminor ON minorcourse.minorid=studentminor.minorid
+                                    WHERE studentminor.studentid = $studentid";
+                        $query_run = mysqli_query($connection, $query);
+                        while ($row = mysqli_fetch_array($query_run)) { ?>
+                            <tr>
+                                <td> <?php echo $row['courseid']; ?> </td>
+                                <td> <?php echo $row['coursename']; ?></td>
+                                <td> <?php echo $row['numofcredits']; ?> </td>
+                            </tr> <?php
+                                }
+                            }
+                                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 
