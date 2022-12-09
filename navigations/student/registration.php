@@ -187,7 +187,7 @@ if (!isset($_SESSION['id'])) {
                 $conflict = mysqli_fetch_array($query_run6);
 
                 $query7 = "SELECT prerequisite.prerequisiteid, prerequisite.courseid AS preid, studenthistory.courseid AS cid FROM prerequisite 
-                            INNER JOIN studenthistory ON studenthistory.courseid=prerequisite.prerequisiteid
+                            LEFT JOIN studenthistory ON studenthistory.courseid=prerequisite.prerequisiteid
                             AND studenthistory.studentid = '$studentid'";
                 $query_run7 = mysqli_query($connection, $query7);
                 $pre = mysqli_fetch_array($query_run7);
