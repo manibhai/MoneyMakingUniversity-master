@@ -238,3 +238,40 @@ if (isset($_POST['updateGrade_btn'])) {
         exit(0);
     }
 }
+
+//EDIT A GRADE FACULTY
+if (isset($_POST['btn_students'])) {
+    $studentid = $_POST['studentid'];
+    $query = "SELECT * FROM studenthistory WHERE studentid='$studentid'";
+    $query_run = mysqli_query($connection, $query);
+}
+
+if (isset($_POST['updateGrade_faculty'])) {
+    $studentid = $_POST['studentid'];
+    $crn = $_POST['crn'];
+    $semyear = $_POST['semyear'];
+    $grade = $_POST['grade'];
+
+    $query = "SELECT * from timewindow WHERE semyear = '$semyear'";
+    $query_run = mysqli_query($connection, $query);
+    $time = mysqli_fetch_array($query_run);
+    if ($time['gradecutoff'] < $time['examcutoff'] || date("Y-m-d") > $time['gradecutoff']) {
+        $_SESSION['status'] = "Time Window is not active or has expired";
+        header('Location: ../navigations/faculty/facultyviewGrades.php');
+        exit(0);
+    } else {
+
+        $query = "UPDATE studenthistory SET grade = '$grade' WHERE studenthistory.studentid = '$studentid' AND studenthistory.crn = '$crn'";
+        $query_run = mysqli_query($connection, $query);
+
+        if ($query_run) {
+            $_SESSION['success'] = "Grade has been Updated";
+            header('Location: ../navigations/faculty/facultyviewGrades.php');
+            exit(0);
+        } else {
+            $_SESSION['status'] = "Grade was not Updated";
+            header('Location: ../navigations/faculty/facultyviewGrades.php');
+            exit(0);
+        }
+    }
+}
