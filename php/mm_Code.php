@@ -58,9 +58,10 @@ if (isset($_POST['minor_btn'])) {
 if (isset($_POST['majorreq_btn'])) {
     $courseid = $_POST['courseid'];
     $majorid = $_POST['majorid'];
+    $gradereq = $_POST['gradereq'];
 
-    $query = "INSERT INTO majorcourse (courseid, majorid)
-    VALUES ('$courseid', '$majorid')";
+    $query = "INSERT INTO majorcourse (courseid, majorid, gradereq)
+    VALUES ('$courseid', '$majorid', '$gradereq')";
     $query_run = mysqli_query($connection, $query);
 
     if (mysqli_num_rows($minorid_query_run) > 0) {
@@ -83,9 +84,10 @@ if (isset($_POST['majorreq_btn'])) {
 if (isset($_POST['minorreq_btn'])) {
     $courseid = $_POST['courseid'];
     $majorid = $_POST['minorid'];
+    $gradereq = $_POST['gradereq'];
 
-    $query = "INSERT INTO minorcourse (courseid, minorid)
-    VALUES ('$courseid', '$minorid')";
+    $query = "INSERT INTO minorcourse (courseid, minorid, gradereq)
+    VALUES ('$courseid', '$minorid', '$gradereq')";
     $query_run = mysqli_query($connection, $query);
 
     if (mysqli_num_rows($minorid_query_run) > 0) {

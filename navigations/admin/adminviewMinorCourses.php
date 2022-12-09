@@ -50,6 +50,11 @@ if (!isset($_SESSION['id'])) {
                                     <label> Minor ID</label>
                                     <input type="varchar(300)" name="minorid" class="form-control" placeholder="Enter Minor ID">
                                 </div>
+                                <div class="form-group">
+                                    <!--Fill in form contents-->
+                                    <label>Minimum Grade</label>
+                                    <input type="varchar(300)" name="gradereq" class="form-control" placeholder="Enter Minimum Grade Required">
+                                </div>
                             </div>
                             <!--Footer button goes here-->
                             <div class="modal-footer">
