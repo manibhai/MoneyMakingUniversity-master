@@ -1,12 +1,7 @@
-ADMIN
-
-email: msingh27@oldwestbury.edu
-password: Black2017Jeep
-
 FACULTY
 
-email: kyu587@moneymaking.edu
-password: Khaki26244GMC
+email: rhamilton128@moneymaking.edu
+password: Maroon4Buick
 
 STUDENT
 
