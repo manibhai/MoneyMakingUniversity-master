@@ -39,6 +39,9 @@ $row = mysqli_fetch_array($result);
           <li class="nav-item">
             <a class="nav-link" href="./facultyviewSchedule.php">View Schedule</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./facultyviewGrades.php">Assign Grades</a>
+          </li>
           <div class="dropdown">
             <button class="btn btn-bg-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               View Students
