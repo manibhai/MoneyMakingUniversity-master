@@ -204,6 +204,37 @@ if (isset($_POST['drop_btn'])) {
     }
 }
 
+//Drop_Student
+if (isset($_POST['drop_course'])) {
+    $studentid = $_POST['studentid'];
+    $crn = $_POST['crn'];
+    $semyear = $_POST['semyear'];
+    $currDate = date("Y-m-d");
+
+    $query = "SELECT * FROM timewindow WHERE semyear = '$semyear'";
+    $query_run = mysqli_query($connection, $query);
+    $drop = mysqli_fetch_array($query_run);
+    if (($currDate) > $drop['dropcutoff']) {
+        $_SESSION['status'] = "Drop Window has expired";
+        header('Location: ../navigations/student/studentviewSchedule.php');
+        exit(0);
+    } else {
+
+        $query = "DELETE FROM enrollment WHERE studentid = '$studentid' AND crn = '$crn";
+        $query_run = mysqli_query($connection, $query);
+
+        if ($query_run) {
+            $_SESSION['success'] = "Course was Dropped successfully";
+            header('Location: ../navigations/student/studentviewSchedule.php');
+            exit(0);
+        } else {
+            $_SESSION['status'] = "Course was not Dropped";
+            header('Location: ../navigations/student/studentviewSchedule.php');
+            exit(0);
+        }
+    }
+}
+
 //Attendance
 if (isset($_POST['attendance_btn'])) {
     $studentid = $_POST['studentid'];

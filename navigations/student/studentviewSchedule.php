@@ -86,6 +86,7 @@ $currUser = $_SESSION['id'];
                         <td>Room</td>
                         <td>Seats Available</td>
                         <td>Semester</td>
+                        <td>Drop Class</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -117,6 +118,14 @@ $currUser = $_SESSION['id'];
                                 <td> <?php echo $row['roomid']; ?> </td>
                                 <td> <?php echo $row['numofseats']; ?> </td>
                                 <td> <?php echo $row['semyear']; ?> </td>
+                                <td>
+                                    <form action="../../php/mm_Code.php?id=<?= $currUser; ?>&&crn=<?= $row['crn']; ?>" method="post">
+                                        <input type="hidden" name="studentid" value="<?php echo $currUser; ?>">
+                                        <input type="hidden" name="crn" value="<?php echo $row['crn']; ?>">
+                                        <input type="hidden" name="semyear" value="<?php echo $row['semyear']; ?>">
+                                        <button type="submit" name="drop_course" class=" btn btn-primary" <?php if ($row['semyear'] != 'S2023') { ?> disabled <?php   } ?>>Drop
+                                    </form>
+                                </td>
                             </tr> <?php
                                 }
                             }
