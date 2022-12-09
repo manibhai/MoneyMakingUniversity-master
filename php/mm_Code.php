@@ -149,13 +149,13 @@ if (isset($_POST['course_btn'])) {
     VALUES ('$courseid', '$coursename', '$numofcredits', '$deptid', '$coursedesc')";
     $query_run = mysqli_query($connection, $query);
 
-    if (mysqli_num_rows($courseid_query_run) > 0) {
+    if ($courseid_query_run > 0) {
         $_SESSION['status'] = "Course ID Already Taken. Please Try Another one.";
         $_SESSION['status_code'] = "error";
-        header('Location: ../navigations/admin/adminviewMaster.php');
+        header('Location: ../navigations/admin/adminviewCourse.php');
         exit(0);
     } else if ($query_run) {
-        $_SESSION['success'] = "Course was Created";
+        $_SESSION['success'] = "Course has been Created";
         header('Location: ../navigations/admin/adminviewCourse.php');
         exit(0);
     } else {
