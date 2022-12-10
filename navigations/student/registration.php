@@ -253,7 +253,7 @@ if (!isset($_SESSION['id'])) {
 
                     $query2 = "INSERT INTO studenthistory (studentid, crn, courseid, semyear, grade) 
                         VALUES ('$studentid', '$crn', '$courseid', '$semyear', '$grade')";
-                    $query_run2 = mysqli_query($connection, $query);
+                    $query_run2 = mysqli_query($connection, $query2);
 
                     $query1 = "UPDATE section SET section.numofseats=section.numofseats - 1 WHERE section.crn=$crn";
                     $query_run1 = mysqli_query($connection, $query1);
