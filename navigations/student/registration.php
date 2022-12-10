@@ -242,7 +242,7 @@ if (!isset($_SESSION['id'])) {
                     $_SESSION['status'] = "You have a hold on your account";
                     header('Location: ./registration.php');
                     exit(0);
-                } else if (($courseid) == $pre['preid'] && $pre['cid'] != $pre['prerequisiteid']) {
+                } else if (($courseid) == $pre['preid'] && $pre['prerequisiteid'] != $pre['cid']) {
                     $_SESSION['status'] = "This course missing a prerequisite course";
                     header('Location: ./registration.php');
                     exit(0);
