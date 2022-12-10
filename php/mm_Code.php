@@ -193,7 +193,10 @@ if (isset($_POST['drop_btn'])) {
     $query = "DELETE FROM enrollment WHERE studentid = '$studentid' AND crn = '$crn'";
     $query_run = mysqli_query($connection, $query);
 
-    if ($query_run) {
+    $query1 = "DELETE FROM studenthistory WHERE studentid = '$studentid' AND crn = '$crn'";
+    $query_run1 = mysqli_query($connection, $query1);
+
+    if ($query_run and $query_run1) {
         $_SESSION['success'] = "Course was Dropped successfully";
         header('Location: ../navigations/admin/adminviewEnrollment.php');
         exit(0);
@@ -223,7 +226,10 @@ if (isset($_POST['drop_course'])) {
         $query = "DELETE FROM enrollment WHERE studentid = '$studentid' AND crn = '$crn'";
         $query_run = mysqli_query($connection, $query);
 
-        if ($query_run) {
+        $query1 = "DELETE FROM studenthistory WHERE studentid = '$studentid' AND crn = '$crn'";
+        $query_run1 = mysqli_query($connection, $query1);
+
+        if ($query_run and $query_run1) {
             $_SESSION['success'] = "Course was Dropped successfully";
             header('Location: ../navigations/student/studentviewSchedule.php');
             exit(0);
