@@ -210,6 +210,10 @@ if (!isset($_SESSION['id'])) {
                 $query_run10 = mysqli_query($connection, $query10);
                 $hold = mysqli_fetch_array($query_run10);
 
+                $query11 = "SELECT * FROM prerequisite WHERE prerequisite.courseid = '$courseid'";
+                $query_run11 = mysqli_query($connection, $quer11);
+                $prereq = mysqli_fetch_array($query_run11);
+
                 if ($history) {
                     $_SESSION['status'] = "Course has already been Taken in the Past";
                     header('Location: ./registration.php');
@@ -242,32 +246,30 @@ if (!isset($_SESSION['id'])) {
                     $_SESSION['status'] = "You have a hold on your account";
                     header('Location: ./registration.php');
                     exit(0);
-                } else {
+                } else if (($prereq)) {
                     if (($courseid) == $pre['preid'] && $pre['prerequisiteid'] != $pre['cid']) {
-                        $_SESSION['status'] = "This course missing a prerequisite course";
-                        header('Location: ./registration.php');
-                        exit(0);
-                    } else {
-                        $query = "INSERT INTO enrollment (studentid, crn, courseid, dateenrolled, semyear, grade) 
-                        VALUES ('$studentid', '$crn', '$courseid', '$dateenrolled', '$semyear', '$grade')";
-                        $query_run = mysqli_query($connection, $query);
-
-                        $query2 = "INSERT INTO studenthistory (studentid, crn, courseid, semyear, grade) 
-                        VALUES ('$studentid', '$crn', '$courseid', '$semyear', '$grade')";
-                        $query_run2 = mysqli_query($connection, $query2);
-
-                        $query1 = "UPDATE section SET section.numofseats=section.numofseats - 1 WHERE section.crn=$crn";
-                        $query_run1 = mysqli_query($connection, $query1);
-
-                        $_SESSION['success'] = "Sucessfully Registered";
+                        $_SESSION['status'] = "You are missing a prerequisite for this course";
                         header('Location: ./registration.php');
                         exit(0);
                     }
+                } else {
+                    $query = "INSERT INTO enrollment (studentid, crn, courseid, dateenrolled, semyear, grade) 
+                        VALUES ('$studentid', '$crn', '$courseid', '$dateenrolled', '$semyear', '$grade')";
+                    $query_run = mysqli_query($connection, $query);
+
+                    $query2 = "INSERT INTO studenthistory (studentid, crn, courseid, semyear, grade) 
+                        VALUES ('$studentid', '$crn', '$courseid', '$semyear', '$grade')";
+                    $query_run2 = mysqli_query($connection, $query2);
+
+                    $query1 = "UPDATE section SET section.numofseats=section.numofseats - 1 WHERE section.crn=$crn";
+                    $query_run1 = mysqli_query($connection, $query1);
+
+                    $_SESSION['success'] = "Sucessfully Registered";
+                    header('Location: ./registration.php');
+                    exit(0);
                 }
             }
-
             ?>
-
 </body>
 
 </html>
