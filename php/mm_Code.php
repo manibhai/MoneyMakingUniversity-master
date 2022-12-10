@@ -190,7 +190,7 @@ if (isset($_POST['drop_btn'])) {
     $studentid = $_POST['studentid'];
     $crn = $_POST['crn'];
 
-    $query = "DELETE FROM enrollment WHERE studentid = '$studentid' AND crn = '$crn";
+    $query = "DELETE FROM enrollment WHERE studentid = '$studentid' AND crn = '$crn'";
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {
@@ -220,7 +220,7 @@ if (isset($_POST['drop_course'])) {
         exit(0);
     } else {
 
-        $query = "DELETE FROM enrollment WHERE studentid = '$studentid' AND crn = '$crn";
+        $query = "DELETE FROM enrollment WHERE studentid = '$studentid' AND crn = '$crn'";
         $query_run = mysqli_query($connection, $query);
 
         if ($query_run) {
