@@ -55,8 +55,8 @@ $row = mysqli_fetch_array($result);
     </div>
   </nav>
 
-  <div class="has-bg-img bg-purple bg-blend-screen" style="text-align:center">
-    <img class="bg-img" src="https://www.coolgenerator.com/Data/Textdesign/202212/1b7f9d7944d14153613a3187731dd543.png " >
+  <div class="has-bg-img bg-purple bg-blend-screen" style="text-align: center">
+    <img class="bg-img" style="text-align: center;" src="https://www.coolgenerator.com/Data/Textdesign/202212/1b7f9d7944d14153613a3187731dd543.png">
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
