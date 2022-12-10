@@ -243,7 +243,11 @@ if (!isset($_SESSION['id'])) {
                     header('Location: ./registration.php');
                     exit(0);
                 } else {
-                    if (($courseid) == $pre['preid'] && $pre['prerequisiteid'] == $pre['cid']) {
+                    if (($courseid) == $pre['preid'] && $pre['prerequisiteid'] != $pre['cid']) {
+                        $_SESSION['status'] = "This course missing a prerequisite course";
+                        header('Location: ./registration.php');
+                        exit(0);
+                    } else {
                         $query = "INSERT INTO enrollment (studentid, crn, courseid, dateenrolled, semyear, grade) 
                         VALUES ('$studentid', '$crn', '$courseid', '$dateenrolled', '$semyear', '$grade')";
                         $query_run = mysqli_query($connection, $query);
@@ -256,10 +260,6 @@ if (!isset($_SESSION['id'])) {
                         $query_run1 = mysqli_query($connection, $query1);
 
                         $_SESSION['success'] = "Sucessfully Registered";
-                        header('Location: ./registration.php');
-                        exit(0);
-                    } else {
-                        $_SESSION['status'] = "This course missing a prerequisite course";
                         header('Location: ./registration.php');
                         exit(0);
                     }
