@@ -160,11 +160,11 @@ if (!isset($_SESSION['id'])) {
                 $semyear = $_POST['semyear'];
                 $numofseats = $_POST['numofseats'];
 
-                $query1 = "SELECT * FROM studenthistory WHERE studentid = '$studentid' AND courseid = '$courseid'";
+                $query1 = "SELECT * FROM studenthistory WHERE studentid = '$studentid' AND crn = '$crn'";
                 $query_run1 = mysqli_query($connection, $query1);
                 $history = mysqli_fetch_array($query_run1);
 
-                $query2 = "SELECT * FROM enrollment WHERE studentid = '$studentid' AND courseid = '$courseid'";
+                $query2 = "SELECT * FROM enrollment WHERE studentid = '$studentid' AND crn = '$crn'";
                 $query_run2 = mysqli_query($connection, $query2);
                 $enrollment = mysqli_fetch_array($query_run2);
 
@@ -242,25 +242,24 @@ if (!isset($_SESSION['id'])) {
                     $_SESSION['status'] = "You have a hold on your account";
                     header('Location: ./registration.php');
                     exit(0);
+                } else if (($courseid) == $pre['preid'] && $pre['cid'] != $pre['prerequisiteid']) {
+                    $_SESSION['status'] = "This course missing a prerequisite course";
+                    header('Location: ./registration.php');
+                    exit(0);
                 } else {
-                    if (($courseid) == $pre['preid'] && $pre['cid'] != $pre['prerequisiteid']) {
-                        $_SESSION['status'] = "This course missing a prerequisite course";
-                        header('Location: ./registration.php');
-                        exit(0);
-                    } else {
-                        $query = "INSERT INTO enrollment (studentid, crn, courseid, dateenrolled, semyear, grade) 
+                    $query = "INSERT INTO enrollment (studentid, crn, courseid, dateenrolled, semyear, grade) 
                         VALUES ('$studentid', '$crn', '$courseid', '$dateenrolled', '$semyear', '$grade')";
-                        $query_run = mysqli_query($connection, $query);
+                    $query_run = mysqli_query($connection, $query);
 
-                        $query1 = "UPDATE section SET section.numofseats=section.numofseats - 1 WHERE section.crn=$crn";
-                        $query_run1 = mysqli_query($connection, $query1);
+                    $query1 = "UPDATE section SET section.numofseats=section.numofseats - 1 WHERE section.crn=$crn";
+                    $query_run1 = mysqli_query($connection, $query1);
 
-                        $_SESSION['success'] = "Sucessfully Registered";
-                        header('Location: ./registration.php');
-                        exit(0);
-                    }
+                    $_SESSION['success'] = "Sucessfully Registered";
+                    header('Location: ./registration.php');
+                    exit(0);
                 }
             }
+
             ?>
 
 </body>
