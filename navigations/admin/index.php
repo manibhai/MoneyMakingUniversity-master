@@ -50,6 +50,7 @@ $row = mysqli_fetch_array($result);
               View Students
             </button>
             <ul ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="./adminviewStudent.php">View Students</a></li>
               <li><a class="dropdown-item" href="./adminviewUnPart.php">View Undergraduate Part-Time Students</a></li>
               <li><a class="dropdown-item" href="./adminviewUnFull.php">View Undergraduate Full-Time Students</a></li>
               <li><a class="dropdown-item" href="./adminviewGrPart.php">View Graduate Part-Time Students</a></li>
