@@ -210,6 +210,10 @@ if (!isset($_SESSION['id'])) {
                 $query_run10 = mysqli_query($connection, $query10);
                 $hold = mysqli_fetch_array($query_run10);
 
+                $query11 = "SELECT * FROM prerequisite WHERE prerequisite.courseid = '$courseid'";
+                $query_run11 = mysqli_query($connection, $quer11);
+                $prereq = mysqli_fetch_array($query_run11);
+
                 if ($history) {
                     $_SESSION['status'] = "Course has already been Taken in the Past";
                     header('Location: ./registration.php');
@@ -242,10 +246,12 @@ if (!isset($_SESSION['id'])) {
                     $_SESSION['status'] = "You have a hold on your account";
                     header('Location: ./registration.php');
                     exit(0);
-                } else if (($courseid) == $pre['preid'] && $pre['cid'] == NULL) {
-                    $_SESSION['status'] = "This course missing a prerequisite course";
-                    header('Location: ./registration.php');
-                    exit(0);
+                } else if (($prereq)) {
+                    if (($courseid) == $pre['preid'] && $pre['prerequisiteid'] != $pre['cid']) {
+                        $_SESSION['status'] = "You are missing a prerequisite for this course";
+                        header('Location: ./registration.php');
+                        exit(0);
+                    }
                 } else {
                     $query = "INSERT INTO enrollment (studentid, crn, courseid, dateenrolled, semyear, grade) 
                         VALUES ('$studentid', '$crn', '$courseid', '$dateenrolled', '$semyear', '$grade')";
@@ -263,9 +269,7 @@ if (!isset($_SESSION['id'])) {
                     exit(0);
                 }
             }
-
             ?>
-
 </body>
 
 </html>
