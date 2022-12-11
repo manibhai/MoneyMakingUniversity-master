@@ -61,11 +61,11 @@ if (!isset($_SESSION['id'])) {
                 <tbody>
                     <?php
                     $query = "SELECT * FROM student INNER JOIN graduatestudent ON student.studentid=graduatestudent.studentid 
-                    INNER JOIN graduatestudentfulltime ON student.studentid=graduatestudentfulltime.studentid 
-                    INNER JOIN studentmajor ON graduatestudentfulltime.studentid = studentmajor.studentid 
+                    INNER JOIN graduatestudentparttime ON student.studentid=graduatestudentparttime.studentid 
+                    INNER JOIN studentmajor ON graduatestudentparttime.studentid = studentmajor.studentid 
                     INNER JOIN major ON studentmajor.majorid = major.majorid
                     INNER JOIN department ON major.deptid = department.deptid
-                    INNER JOIN studentminor ON graduatestudentfulltime.studentid = studentminor.studentid 
+                    INNER JOIN studentminor ON graduatestudentparttime.studentid = studentminor.studentid 
                     INNER JOIN minor ON studentminor.minorid = minor.minorid
                     INNER JOIN user ON student.studentid=user.userid";
                     $query_run = mysqli_query($connection, $query);
