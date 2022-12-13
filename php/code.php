@@ -185,8 +185,8 @@ if (isset($_POST['create_window_btn'])) {
 
 //EDIT A TIME WINDOW
 if (isset($_POST['edit_window'])) {
-    $timewindowid = $_POST['timewindow'];
-    $query = "SELECT * FROM timewindow WHERE timewindowid='$timewindowid'";
+    $timewindowid = $_POST['timewindowid'];
+    $query = "SELECT * FROM timewindow WHERE timewindowid = '$timewindowid'";
     $query_run = mysqli_query($connection, $query);
 }
 
@@ -197,21 +197,53 @@ if (isset($_POST['update_window'])) {
     $examcutoff = $_POST['examcutoff'];
     $gradecutoff = $_POST['gradecutoff'];
 
-    $query = "UPDATE timewindow SET timewindow.regcutoff = '$regcutoff', 
-                timewindow.dropcutoff = '$dropcutoff', timewindow.examcutoff = '$examcutoff', timewindow.gradecutoff = '$gradecutoff' 
-                WHERE timewindow.timewindowid ='$timewindowid'";
+    $query = "UPDATE timewindow SET timewindow.regcutoff='$regcutoff', timewindow.dropcutoff='$dropcutoff',
+                timewindow.examcutoff='$examcutoff', timewindow.gradecutoff='$gradecutoff' WHERE timewindow.timewindowid='$timewindowid'";
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {
-        $_SESSION['success'] = "Time Window has been Updated";
+        $_SESSION['success'] = "Time Window updated";
         header('Location: ../navigations/admin/adminviewTimeWindows.php');
         exit(0);
     } else {
-        $_SESSION['status'] = "Time Window was not Updated";
+        $_SESSION['status'] = "Time Window was not updated";
         header('Location: ../navigations/admin/adminviewTimeWindows.php');
         exit(0);
     }
 }
+
+//EDIT MASTER SCHEDULER
+if (isset($_POST['edit_master'])) {
+    $crn = $_POST['crn'];
+    $query = "SELECT * FROM section WHERE crn='$crn'";
+    $query_run = mysqli_query($connection, $query);
+}
+
+if (isset($_POST['update_master'])) {
+    $crn = $_POST['crn'];
+    $courseid = $_POST['courseid'];
+    $sectionnum = $_POST['sectionnum'];
+    $facultyid = $_POST['facultyid'];
+    $timeslotid = $_POST['timeslotid'];
+    $roomid = $_POST['roomid'];
+    $numofseats = $_POST['numofseats'];
+    $semyear = $_POST['semyear'];
+
+    $query = "UPDATE section SET section.courseid='$courseid', section.sectionnum='$sectionnum', section.facultyid='$facultyid',
+                section.timeslotid='$timeslotid', section.roomid='$roomid', section.numofseats='$numofseats', section.semyear='$semyear' WHERE section.crn='$crn'";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Master Scheduler updated";
+        header('Location: ../navigations/admin/adminviewMaster.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Master Scheduler was not updated";
+        header('Location: ../navigations/admin/adminviewMaster.php');
+        exit(0);
+    }
+}
+
 
 //EDIT A GRADE
 if (isset($_POST['edit_grade'])) {
@@ -225,7 +257,7 @@ if (isset($_POST['updateGrade_btn'])) {
     $crn = $_POST['crn'];
     $grade = $_POST['grade'];
 
-    $query = "UPDATE studenthistory SET grade = '$grade' WHERE studenthistory.studentid = '$studentid' AND studenthistory.crn = '$crn'";
+    $query = "UPDATE studenthistory SET studenthistory.grade = '$grade' WHERE studenthistory.studentid = '$studentid' AND studenthistory.crn = '$crn'";
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {
