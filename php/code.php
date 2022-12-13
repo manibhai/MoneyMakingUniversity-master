@@ -109,7 +109,7 @@ if (isset($_POST['updateCourse_btn'])) {
     $coursedesc = $_POST['coursedesc'];
 
     $query = "UPDATE course SET courseid = '$courseid', coursename = '$coursename', 
-                numofcredits = '$numofcredits', deptid = '$deptid', coursedesc = 'coursedesc' 
+                numofcredits = '$numofcredits', deptid = '$deptid', coursedesc = '$coursedesc' 
                 WHERE course.courseid ='$courseid'";
     $query_run = mysqli_query($connection, $query);
 
