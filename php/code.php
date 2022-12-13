@@ -261,6 +261,8 @@ if (isset($_POST['updateGrade_btn'])) {
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {
+        $query = "DELETE FROM enrollment WHERE enrollment.studentid = '$studentid' AND enrollment.crn='$crn'";
+        $query_run = mysqli_query($connection, $query);
         $_SESSION['success'] = "Grade has been Updated";
         header('Location: ../navigations/admin/adminviewStudentDegreeAudit.php');
         exit(0);
@@ -287,7 +289,9 @@ if (isset($_POST['updateGrade_faculty'])) {
     $query = "SELECT * from timewindow WHERE semyear = '$semyear'";
     $query_run = mysqli_query($connection, $query);
     $time = mysqli_fetch_array($query_run);
-    if ($time['gradecutoff'] < $time['examcutoff'] || date("Y-m-d") > $time['gradecutoff']) {
+    if (date("Y-m-d") > $time['examcutoff'] || date("Y-m-d") <= $time['gradecutoff']) {
+        $query = "DELETE FROM enrollment WHERE enrollment.studentid = '$studentid' AND enrollment.crn='$crn'";
+        $query_run = mysqli_query($connection, $query);
         $_SESSION['status'] = "Time Window is not active or has expired";
         header('Location: ../navigations/faculty/facultyviewGrades.php');
         exit(0);
