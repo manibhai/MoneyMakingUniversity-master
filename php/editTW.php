@@ -31,7 +31,7 @@ if (!isset($_SESSION['id'])) {
             <form action="code.php" method="POST">
                 <div class="form-group">
                     <label>Time Window ID</label>
-                    <input type="varchar(300)" name="timewindowid" disabled value="<?php echo $row['timewindowid'] ?>" class="form-control" placeholder="Enter Time Window ID">
+                    <input type="hidden" name="timewindowid" value="<?php echo $row['timewindowid'] ?>" class="form-control" placeholder="Enter Time Window ID">
                 </div>
                 <div class="form-group">
                     <label>Register Cut Off</label>
@@ -49,7 +49,7 @@ if (!isset($_SESSION['id'])) {
                     <label>Grade Cut Off</label>
                     <input type="varchar(300)" name="gradecutoff" value="<?php echo $row['gradecutoff'] ?>" class="form-control" placeholder="">
                 </div>
-                <a href="../navigations/admin/adminviewTimeWindows.php" class="btn btn-danger"> Cancel </a>
+                <a href="../navigations/admin/adminviewTimeWindows.php?=<?php echo $row['timewindowid'] ?>" class="btn btn-danger"> Cancel </a>
                 <button type="submit" name="update_window" class="btn btn-success"> Update </button>
             </form>
     <?php

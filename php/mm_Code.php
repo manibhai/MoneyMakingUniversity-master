@@ -165,6 +165,35 @@ if (isset($_POST['course_btn'])) {
     }
 }
 
+//Create a Student
+if (isset($_POST['create_student'])) {
+    $studentid = $_POST['studentid'];
+    $gradlevel = $_POST['gradlevel'];
+    $dateenrolled = date("Y-m-d");
+    $majorid = $_POST['majorid'];
+    $minorid = $_POST['minorid'];
+
+    $query = "INSERT INTO student (studentid, gradlevel)
+                VALUES ('$studentid', '$gradlevel')";
+    $query1 = "INSERT INTO studentmajor (studentid, majorid, datedeclared)
+                VALUES ('$studentid', '$majorid', '$dateenrolled')";
+    $query2 = "INSERT INTO studentminor (studentid, minorid, datedeclared)
+                VALUES ('$studentid', '$minorid', '$dateenrolled')";
+    $query_run = mysqli_query($connection, $query);
+    $query_run1 = mysqli_query($connection, $query1);
+    $query_run2 = mysqli_query($connection, $query2);
+
+    if ($query_run and $query_run1 and $query_run2) {
+        $_SESSION['success'] = "Student has been Created";
+        header('Location: ../navigations/admin/adminviewStudent.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Student was not Created";
+        header('Location: ../navigations/admin/adminviewStudent.php');
+        exit(0);
+    }
+}
+
 //Add
 if (isset($_POST['enroll_btn'])) {
     $studentid = $_POST['studentid'];

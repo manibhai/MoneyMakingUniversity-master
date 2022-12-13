@@ -23,6 +23,57 @@ if (!isset($_SESSION['id'])) {
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">Admin Homepage</a>
         </div>
+
+        <div class="container-fluid">
+            <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
+                New Student
+            </button>
+            <!--Modal for edit/Delete-->
+            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class=" modal-title fs-5" id="editModal">Create A Student</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <!--Modal body inside of form-->
+                        <!--Connects the for and post to the method that is located in code.php(Server fucntions)-->
+                        <form action="../../php/mm_Code.php" method="post">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <!--Fill in form contents-->
+                                    <label>Student ID</label>
+                                    <input type="int" name="studentid" class="form-control" placeholder="Enter Student ID">
+                                </div>
+                                <div class="form-group">
+                                    <!--Fill in form contents-->
+                                    <label>Grad Level</label>
+                                    <input type="varchar(300)" name="gradlevel" class="form-control" placeholder="(Undergrad , Graduate)">
+                                </div>
+                                <div class="form-group">
+                                    <label>Major ID</label>
+                                    <input type="varchar(300)" name="majorid" class="form-control" placeholder="Enter Major ID">
+                                </div>
+                                <div class="form-group">
+                                    <label>Minor ID</label>
+                                    <input type="varchar(300)" name="minorid" class="form-control" placeholder="Enter Minor ID">
+                                </div>
+                                <div class="form-group">
+                                    <label>Full Time or Part Time</label>
+                                    <input type="varchar(300)" name="fullpart" class="form-control" placeholder="(Full Time / Part Time)">
+                                </div>
+                            </div>
+                            <!--Footer button goes here-->
+                            <div class="modal-footer">
+                                <button type="submit" name="create_student" class="btn btn-primary">Create</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="container-fluid">
             <a class="btn btn-lg btn-danger" href="../logout.php" role="button">Logout</a>
         </div>

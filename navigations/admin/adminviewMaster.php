@@ -121,6 +121,7 @@ if (!isset($_SESSION['id'])) {
                         <td>Room</td>
                         <td>Seats Available</td>
                         <td>Semester</td>
+                        <td>Edit</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -149,6 +150,12 @@ if (!isset($_SESSION['id'])) {
                             <td> <?php echo $row['roomid']; ?> </td>
                             <td> <?php echo $row['numofseats']; ?> </td>
                             <td> <?php echo $row['semyear']; ?> </td>
+                            <td>
+                                <form action="../../php/editMaster.php?crn=<?= $row['crn']; ?>" method="post">
+                                    <input type="hidden" name="crn" value="<?php echo $row['crn']; ?>">
+                                    <button type="submit" name="edit_master" class=" btn btn-warning">Edit
+                                </form>
+                            </td>
                         </tr> <?php
                             }
                                 ?>

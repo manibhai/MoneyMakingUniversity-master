@@ -33,7 +33,7 @@ if (!isset($_SESSION['id'])) {
             <form action="code.php" method="POST">
                 <div class="form-group">
                     <label>User ID</label>
-                    <input type="int" name="userid" disabled value="<?php echo $row['userid'] ?>" class="form-control" placeholder="Enter User's ID">
+                    <input type="hidden" name="userid" value="<?php echo $row['userid'] ?>" class="form-control" placeholder="Enter User's ID">
                 </div>
                 <div class="form-group">
                     <label>User Type</label>

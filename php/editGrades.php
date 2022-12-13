@@ -32,19 +32,19 @@ if (!isset($_SESSION['id'])) {
             <form action="code.php" method="POST">
                 <div class="form-group">
                     <label>Student ID</label>
-                    <input type="int" name="studentid" disabled value="<?php echo $row['studentid'] ?>" class="form-control" placeholder="Enter Student's ID">
+                    <input type="int" name="studentid" value="<?php echo $row['studentid'] ?>" class="form-control" placeholder="Enter Student's ID">
                 </div>
                 <div class="form-group">
                     <label>CRN</label>
-                    <input type="int" name="crn" disabled value="<?php echo $row['crn'] ?>" class="form-control" placeholder="Enter CRN">
+                    <input type="int" name="crn" value="<?php echo $row['crn'] ?>" class="form-control" placeholder="Enter CRN">
                 </div>
                 <div class="form-group">
                     <label>Course</label>
-                    <input type="varchar(300)" name="courseid" disabled value="<?php echo $row['courseid'] ?>" class="form-control" placeholder="Enter Course ID">
+                    <input type="varchar(300)" name="courseid" value="<?php echo $row['courseid'] ?>" class="form-control" placeholder="Enter Course ID">
                 </div>
                 <div class="form-group">
                     <label>Semester</label>
-                    <input type="varchar(300)" name="semyear" disabled value="<?php echo $row['semyear'] ?>" class="form-control" placeholder="Enter Semester Year">
+                    <input type="varchar(300)" name="semyear" value="<?php echo $row['semyear'] ?>" class="form-control" placeholder="Enter Semester Year">
                 </div>
                 <div class="form-group">
                     <label>Grade</label>

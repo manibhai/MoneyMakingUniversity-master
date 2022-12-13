@@ -165,7 +165,7 @@ include "../config.php";
                             <td> <?php echo $row['examcutoff']; ?> </td>
                             <td> <?php echo $row['gradecutoff']; ?> </td>
                             <td>
-                                <form action="../../php/editTW.php?id=<?= $row['timewindowid']; ?>" method="post">
+                                <form action="../../php/editTW.php" method="post">
                                     <input type="hidden" name="timewindowid" value="<?php echo $row['timewindowid']; ?>">
                                     <button type="submit" name="edit_window" class=" btn btn-warning">Edit</button>
                                 </form>

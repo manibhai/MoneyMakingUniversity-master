@@ -31,7 +31,7 @@ if (!isset($_SESSION['id'])) {
       <form action="dept_code.php" method="POST">
         <div class="form-group">
           <label>Department ID</label>
-          <input type="varchar(300)" name="deptid" disabled value="<?php echo $row['deptid'] ?>" class="form-control" placeholder=" Department ID">
+          <input type="hidden" name="deptid" value="<?php echo $row['deptid'] ?>" class="form-control" placeholder=" Department ID">
         </div>
 
         <div class="form-group">
