@@ -47,6 +47,7 @@ $row = mysqli_fetch_array($result);
               View Students
             </button>
             <ul ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="./facultyviewStudent.php">View Student</a></li>
               <li><a class="dropdown-item" href="./facultyviewUnPart.php">View Undergraduate Part-Time Students</a></li>
               <li><a class="dropdown-item" href="./facultyviewUnFull.php">View Undergraduate Full-Time Students</a></li>
               <li><a class="dropdown-item" href="./facultyviewGrPart.php">View Graduate Part-Time Students</a></li>
