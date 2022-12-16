@@ -274,6 +274,12 @@ if (isset($_POST['updateGrade_btn'])) {
 }
 
 //EDIT A GRADE FACULTY
+
+$tz = 'America/New_York';
+$timestamp = time();
+$dt = new DateTime("now", new DateTimeZone($tz)); //first argument "must" be a string
+$dt->setTimestamp($timestamp); //adjust the object to correct timestamp
+
 if (isset($_POST['btn_students'])) {
     $studentid = $_POST['studentid'];
     $query = "SELECT * FROM studenthistory WHERE studentid='$studentid'";
@@ -289,7 +295,7 @@ if (isset($_POST['updateGrade_faculty'])) {
     $query = "SELECT * from timewindow WHERE semyear = '$semyear'";
     $query_run = mysqli_query($connection, $query);
     $time = mysqli_fetch_array($query_run);
-    if (date("Y-m-d") > $time['examcutoff'] || date("Y-m-d") <= $time['gradecutoff']) {
+    if ($dt > $time['examcutoff'] || $dt <= $time['gradecutoff']) {
         $query = "DELETE FROM enrollment WHERE enrollment.studentid = '$studentid' AND enrollment.crn='$crn'";
         $query_run = mysqli_query($connection, $query);
         $_SESSION['status'] = "Time Window is not active or has expired";
