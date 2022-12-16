@@ -23,17 +23,13 @@ if (!isset($_SESSION['id'])) {
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3">
-    <div class="container">
+    <div class="container-fluid">
       <a href="index.php" class="navbar-brand">
-        <div class="bg-image text-center">
-          <div style="background-image: url('https://www.coolgenerator.com/Data/Textdesign/202212/1b7f9d7944d14153613a3187731dd543.png'); height: 100vh">
-          </div>
         </div>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navmenu">
         <ul class="navbar-nav ms-auto">
 
@@ -53,14 +49,14 @@ if (!isset($_SESSION['id'])) {
             <a href="#demographics" class="nav-link">Demographics</a>
           </li>
 
-          <li class="nav-item">
-            <a href="editProfile.php" class="btn btn-warning"><?php echo $row['fname'] ?> <?php echo $row['lname'] ?></a>
-            <a class="btn btn-primary but-lg" data-toggle="tab" href="../logout.php">logout</a>
-          </li>
-        </ul>
+    </ul>
+            <a href="editProfile.php" class="btn btn-warning "><?php echo $row['fname']?> <?php echo $row['lname'] ?></a>
+            <a class="btn btn-primary" data-toggle="tab" href="../logout.php">logout</a>
+        
       </div>
     </div>
   </nav>
+</body>
   <section class="bg-light text-dark p-5 text-center text-sm-start">
     <div class="container">
       <?php require_once 'institution.php'; ?>
