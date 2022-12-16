@@ -91,7 +91,8 @@ include "../config.php";
                         $query = "SELECT * FROM studenthistory INNER JOIN section ON studenthistory.crn=section.crn 
                                 WHERE section.facultyid = '$currUser' AND studenthistory.semyear='$get_semyear'";
                         $query_run = mysqli_query($connection, $query);
-                        while ($row = mysqli_fetch_array($query_run)) { ?>
+                        while ($row = mysqli_fetch_array($query_run)) {
+                    ?>
                             <tr>
                                 <td> <?php echo $row['studentid']; ?> </td>
                                 <td> <?php echo $row['crn']; ?> </td>
@@ -101,7 +102,7 @@ include "../config.php";
                                     <form action="../../php/viewStudents.php?id=<?= $row['studentid']; ?>&&crn=<?= $row['crn']; ?>" method="post">
                                         <input type="hidden" name="studentid" value="<?php echo $row['studentid']; ?>">
                                         <input type="hidden" name="crn" value="<?php echo $row['crn']; ?>">
-                                        <button type="submit" name="btn_students" class=" btn btn-primary" <?php if ($row['grade'] != 'IP') { ?> disabled <?php   } ?>>View
+                                        <button type="submit" name="btn_students" class=" btn btn-primary">View
                                     </form>
                                 </td>
                             </tr> <?php
