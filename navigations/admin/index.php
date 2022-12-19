@@ -113,14 +113,6 @@ $row = mysqli_fetch_array($result);
           <img src="https://cdn.pixabay.com/photo/2014/04/03/09/59/teacher-309533_960_720.png" style=" width: 85%;" alt="Faculty Image">
         </div>
       </div>
-
-      <div class="card h-25" style="width: 18rem;">
-        <div class="card-body text-center">
-          <h5 class="card-title">Researcher Count</h5>
-          <h4 class="card-text "><?php echo $Count['resCount']; ?></h4>
-          <img src="https://e7.pngegg.com/pngimages/973/504/png-clipart-computer-icons-research-chart-data-collection-marketing-graphic-combination-miscellaneous-text-thumbnail.png" style=" width: 99%;" alt="Researcher Image">
-        </div>
-      </div>
     </div>
   </section>
 </body>
