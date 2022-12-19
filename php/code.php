@@ -312,3 +312,21 @@ if (isset($_POST['updateGrade_faculty'])) {
         }
     }
 }
+
+if (isset($_POST['updateEvent_btn'])) {
+    $date = $_POST['date'];
+    $event = $_POST['event'];
+
+    $query = "UPDATE accal SET date = '$date', event = '$event' WHERE date = '$date' AND event = '$event'";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Event has been Updated";
+        header('Location: ../navigations/admin/adminviewCalendar.php');
+        exit(0);
+    } else {
+        $_SESSION['status'] = "Event was not Updated";
+        header('Location: ../navigations/admin/adminviewCalendar.php');
+        exit(0);
+    }
+}

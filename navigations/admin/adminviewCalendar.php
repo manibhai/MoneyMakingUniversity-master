@@ -88,6 +88,7 @@ if (!isset($_SESSION['id'])) {
                     <tr>
                         <td>Date</td>
                         <td>Event</td>
+                        <td>Edit</td>
                         <td>Delete</td>
                     </tr>
                 </thead>
@@ -100,6 +101,13 @@ if (!isset($_SESSION['id'])) {
                         <tr>
                             <td> <?php echo $row['date']; ?> </td>
                             <td> <?php echo $row['event']; ?> </td>
+                            <td>
+                                <form action="../../php/editEvent.php?id=<?= $row['date']; ?>&event=<?= $row['event']; ?>" method="post">
+                                    <input type="hidden" name="date" value="<?php echo $row['date']; ?>">
+                                    <input type="hidden" name="event" value="<?php echo $row['event']; ?>">
+                                    <button type="submit" name="edit_event" class=" btn btn-warning">Edit
+                                </form>
+                            </td>
                             <td>
                                 <button type="button" class="btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                     Delete

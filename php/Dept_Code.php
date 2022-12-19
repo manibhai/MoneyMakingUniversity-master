@@ -53,7 +53,7 @@ if (isset($_POST['update_dept'])) {
 
     $query = "UPDATE department SET deptid='$deptid', deptname='$deptname', deptemail='$deptemail', 
                 deptphone='$deptphone', buildingid = '$buildingid', roomid = '$roomid', deptchair = '$deptchair',
-                deptmg = '$deptchair' WHERE deptid='$deptid'";
+                deptmg = '$deptmg' WHERE deptid='$deptid'";
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {
