@@ -199,8 +199,17 @@ if (isset($_POST['enroll_btn'])) {
     $studentid = $_POST['studentid'];
     $crn = $_POST['crn'];
 
-    $query = "INSERT INTO enrollment (studentid, crn)
-    VALUES ('$studentid', '$crn')";
+    $q = "SELECT * FROM section WHERE crn = '$crn'";
+    $q_run = mysqli_query($connection, $q);
+    $row  = mysqli_fetch_array($q_run);
+
+    $courseid = $row['courseid'];
+    $semyear = $row['semyear'];
+    $dateenrolled = date("Y-m-d");
+    $grade = 'IP';
+
+    $query = "INSERT INTO enrollment (studentid, crn, courseid, dateenrolled, semyear, grade)
+    VALUES ('$studentid', '$crn', '$courseid', '$dateenrolled', '$semyear', '$grade')";
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {
