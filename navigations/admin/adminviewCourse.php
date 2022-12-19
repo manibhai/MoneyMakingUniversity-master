@@ -103,6 +103,7 @@ if (!isset($_SESSION['id'])) {
                         <td>Department</td>
                         <td>Description</td>
                         <td>Edit</td>
+                        <td>Delete</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,9 +122,13 @@ if (!isset($_SESSION['id'])) {
                                 <form action="../../php/editCourses.php" method="POST" class="text-center">
                                     <input type="hidden" name="editCourse" value="<?php echo $row['courseid']; ?>">
                                     <button type="submit" name="editCourse_btn" class="btn btn-warning"> Edit </button>
-
+                                </form>
                             </td>
-                            </form>
+                            <td>
+                                <button type="button" class="btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                                    Delete
+                                </button>
+                            </td>
                         </tr> <?php
                             }
                                 ?>
@@ -139,3 +144,28 @@ if (!isset($_SESSION['id'])) {
         $('#usersdata').DataTable();
     });
 </script>
+
+<div class="container-fluid">
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel1">Delete Confirmation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="../../php/mm_Code.php" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <p>Are you sure you want to delete this course: <?php echo $row['courseid']; ?> </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="deleteid" value="<?php echo $row['courseid']; ?>">
+                        <button type="submit" name="btn_delete_course" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
