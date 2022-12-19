@@ -49,8 +49,8 @@ if (!isset($_SESSION['id'])) {
                   <input type="varchar(300)" name="holdid" class="form-control" placeholder="residential / fees / tuition / health / grades / athletic / registration">
                 </div>
                 <div class="form-group">
-                  <label>Hold Type</label>
-                  <input type="varchar(300)" name="holdtype" class="form-control" placeholder="Enter Hold Type">
+                  <label>Date</label>
+                  <input type="date" name="dategiven" class="form-control" placeholder="">
                 </div>
               </div>
               <!--Footer button goes here-->
@@ -112,7 +112,7 @@ if (!isset($_SESSION['id'])) {
               <td> <?php echo $row['holddesc']; ?> </td>
               <td>
                 <form action="../../php/Hold_Code.php" method="POST">
-                  <input type="hidden" name="editDept" value=" <?php echo $row['deptid'] ?>">
+                  <input type="hidden" name="studentid" value=" <?php echo $row['studentid'] ?>">
                   <button type="submit" name="delete_hold_btn" class="btn btn-danger">Delete</button>
                 </form>
               </td>

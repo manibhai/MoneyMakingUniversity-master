@@ -26,7 +26,7 @@ if (isset($_POST['create_hold_btn'])) {
 
 //DROP A STUDENT HOLD
 if (isset($_POST['delete_hold_btn'])) {
-    $userid = $_POST['deleteid'];
+    $studentid = $_POST['studentid'];
     $query = "DELETE FROM studenthold WHERE studentid='$studentid' ";
     $query_run = mysqli_query($connection, $query);
 
